@@ -1,0 +1,51 @@
+.main-collection-left {
+  width: 20%;
+  padding-right: 25px;
+  position: sticky;
+  top: 10px;
+}
+.shop-filter-choose {
+  display: none;
+  margin-bottom: 15px;
+}
+.main-collection-left .shop-filter-wrap .shop-filter:not(:last-child) {
+  margin-bottom: 15px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #ccc;
+}
+.shop-filter-choose label {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: bold;
+}
+.shop-filter-choose label button {
+  background: transparent;
+  border: none;
+  outline: none;
+  padding: 0;
+  box-shadow: 0;
+  font-size: .85rem;
+  color: #aaa;
+  font-weight: normal;
+}
+ .shop-filter-choose ul {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 5px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  margin-top: 10px;
+}
+.shop-filter-choose ul li {
+  background: var(--color_main);
+  border-radius: var(--border_radius);
+  padding: 2.5px 5px;
+  color: var(--color2);
+  font-size: .9rem;
+  cursor: pointer;
+}
