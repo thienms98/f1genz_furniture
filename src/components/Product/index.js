@@ -104,7 +104,7 @@ const Product = ({ id, name, uri, tag, vendor, price, images, thumbs }) => {
           </h3>
           <div className="product-item-detail-price">
             <span>{price.current.toLocaleString('vi')}₫</span>
-            <del>{price.prev.toLocaleString('vi')}₫</del>
+            {price.prev && <del>{price.prev.toLocaleString('vi')}₫</del>}
           </div>
         </div>
       </div>

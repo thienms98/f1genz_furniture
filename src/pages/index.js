@@ -5,6 +5,7 @@ import Image from 'next/image';
 //components
 import Product from '~/components/Product';
 import ArticleItem from '~/components/ArticleItem';
+import FsaleTimer from '~/components/FsaleTimer';
 import HomeLayout from '~/layouts';
 import Slider from 'react-slick';
 // icon
@@ -20,10 +21,11 @@ import { products } from '~/data/products';
 import { fsaleTimer, remainingTime, zeroTen } from '~/utils';
 
 export default function Home() {
-  const [fsaling, setFsaling] = useState(() =>
-    flashSaleEvents.map((fsale) => fsaleTimer(fsale.start, fsale.end)).indexOf(0),
+  const [fsaling, setFsaling] = useState(
+    () => flashSaleEvents.map((fsale) => fsaleTimer(fsale.start, fsale.end)).indexOf(0) || 0,
   );
   const [prodTab, setProdtab] = useState(0);
+  const [prodPos, setProdPos] = useState(-1);
 
   var settings = {
     dots: true,
@@ -40,7 +42,7 @@ export default function Home() {
   return (
     <HomeLayout>
       <main>
-        <h1 class="d-none">F1GENZ Furniture</h1>
+        <h1 className="d-none">F1GENZ Furniture</h1>
         <Slider {...settings}>
           {homeSlider.map((item) => {
             return (
@@ -67,13 +69,13 @@ export default function Home() {
           })}
         </Slider>
 
-        <section class="home-four-banner">
-          <div class="container">
-            <div class="home-four-banner-main">
+        <section className="home-four-banner">
+          <div className="container">
+            <div className="home-four-banner-main">
               {homeBanner.map((banner) => {
                 return (
-                  <div class="home-four-banner-main-item has-spin" key={banner.id}>
-                    <h2 class="d-none">{banner.title}</h2>
+                  <div className="home-four-banner-main-item has-spin" key={banner.id}>
+                    <h2 className="d-none">{banner.title}</h2>
                     <Link href="/" title={banner.title}>
                       <picture>
                         <source
@@ -110,54 +112,20 @@ export default function Home() {
           </div>
         </section>
 
-        <section class="home-fsale">
-          <div class="container">
-            <div class="home-fsale-wrap">
-              <div class="home-fsale-head">
-                {flashSaleEvents.map((fsale) => {
-                  const fsaleType = fsaleTimer(fsale.start, fsale.end);
-                  const { hour, min, sec } = remainingTime(fsale.end);
-
-                  return (
-                    <div
-                      className={classNames(
-                        'home-fsale-head-item',
-                        { started: fsaleType !== -1 },
-                        { active: fsale.id === fsaling },
-                        { ended: fsaleType === 1 },
-                      )}
-                      key={fsale.id}
-                    >
-                      <Image title="Tủ quần áo" class="lazyload" alt="Flash Sale Icon" {...fsale.image} />
-                      <label>
-                        {fsaleType === -1 ? 'Sắp diễn ra' : fsaleType === 0 ? 'Đang diễn ra' : 'Đã kết thúc'}
-                      </label>
-                      <div class="home-fsale-head-item-countdown" data-start={fsale.start} data-end={fsale.end}>
-                        <span class="hours">
-                          <b>{fsaleType === 1 ? '00' : hour}</b>
-                          <strong>Giờ</strong>
-                        </span>
-                        <span class="minutes">
-                          <b>{fsaleType === 1 ? '00' : min}</b>
-                          <strong>Phút</strong>
-                        </span>
-                        <span class="seconds">
-                          <b>{fsaleType === 1 ? '00' : sec}</b>
-                          <strong>Giây</strong>
-                        </span>
-                      </div>
-                      <Link class="home-fsale-cta d-none d-sm-block" href={fsale.url} title={fsale.title}>
-                        Xem tất cả
-                      </Link>
-                    </div>
-                  );
-                })}
+        <section className="home-fsale">
+          <div className="container">
+            <div className="home-fsale-wrap">
+              <div className="home-fsale-head">
+                {/* {flashSaleEvents.map((fsale, index) => {
+                  return <FsaleTimer fsale={fsale} fsaling={fsaling} key={index} />;
+                })} */}
+                <FsaleTimer fsale={flashSaleEvents[fsaling] || flashSaleEvents[0]} fsaling={fsaling} />
               </div>
-              <div class="home-fsale-banner has-spin">
+              <div className="home-fsale-banner has-spin">
                 {flashSaleEvents.map((fsale) => {
                   return (
                     <picture
-                      class={classNames('home-fsale-banner-item', { active: fsale.id === fsaling })}
+                      className={classNames('home-fsale-banner-item', { active: fsale.id === fsaling })}
                       title={fsale.title}
                       key={fsale.id}
                     >
@@ -169,13 +137,13 @@ export default function Home() {
                   );
                 })}
               </div>
-              <div class="home-fsale-tab">
+              <div className="home-fsale-tab">
                 {flashSaleEvents.map((fsale) => {
                   const type = fsaleTimer(fsale.start, fsale.end);
 
                   return (
                     <div
-                      class={classNames(
+                      className={classNames(
                         'home-fsale-tab-item',
                         { started: type !== -1 },
                         { ended: type === 1 },
@@ -194,8 +162,8 @@ export default function Home() {
                   );
                 })}
               </div>
-              <div class="home-fsale-body">
-                <div class="home-fsale-body-item started active">
+              <div className="home-fsale-body">
+                <div className="home-fsale-body-item started active">
                   <Slider {...settings} draggable slidesToShow={4} slidesToScroll={1}>
                     {products
                       .filter((prod) => prod.group === fsaling && prod.flashSale)
@@ -203,7 +171,7 @@ export default function Home() {
                         return <Product {...product} key={product.id} />;
                       })}
                   </Slider>
-                  <Link class="home-fsale-cta d-block d-sm-none" href="/gia-treo" title="Giá treo">
+                  <Link className="home-fsale-cta d-block d-sm-none" href="/gia-treo" title="Giá treo">
                     Xem tất cả
                   </Link>
                 </div>
@@ -211,15 +179,15 @@ export default function Home() {
             </div>
           </div>
         </section>
-        <div class="home-six-banner">
-          <div class="container">
-            <div class="home-six-banner-head section-title-all">
+        <div className="home-six-banner">
+          <div className="container">
+            <div className="home-six-banner-head section-title-all">
               <h2>Bộ sưu tập</h2>
               <p>Sản phẩm bán chạy nhất tuần này!</p>
             </div>
-            <div class="home-six-banner-body">
-              <ul class="home-six-banner-body-main home-six-banner-body-main-left">
-                <li class="home-six-banner-item">
+            <div className="home-six-banner-body">
+              <ul className="home-six-banner-body-main home-six-banner-body-main-left">
+                <li className="home-six-banner-item">
                   <Link href="/collections/all" title="Khuyến mãi">
                     <picture>
                       <source
@@ -231,7 +199,7 @@ export default function Home() {
                         srcset="https://bizweb.dktcdn.net/100/482/001/themes/906081/assets/home_six_banner_item_image_1.png?1684771044770"
                       />
                       <img
-                        class="w-100"
+                        className="w-100"
                         loading="lazy"
                         width="450"
                         height="450"
@@ -242,7 +210,7 @@ export default function Home() {
                     <span>Khuyến mãi</span>
                   </Link>
                 </li>
-                <li class="home-six-banner-item">
+                <li className="home-six-banner-item">
                   <Link href="/collections/all" title="Sale Off">
                     <picture>
                       <source
@@ -254,7 +222,7 @@ export default function Home() {
                         srcset="https://bizweb.dktcdn.net/100/482/001/themes/906081/assets/home_six_banner_item_image_2.png?1684771044770"
                       />
                       <img
-                        class="w-100"
+                        className="w-100"
                         loading="lazy"
                         width="450"
                         height="450"
@@ -265,7 +233,7 @@ export default function Home() {
                     <span>Sale Off</span>
                   </Link>
                 </li>
-                <li class="home-six-banner-item">
+                <li className="home-six-banner-item">
                   <Link href="/collections/all" title="Mới nhất">
                     <picture>
                       <source
@@ -277,7 +245,7 @@ export default function Home() {
                         srcset="https://bizweb.dktcdn.net/100/482/001/themes/906081/assets/home_six_banner_item_image_3.png?1684771044770"
                       />
                       <img
-                        class="w-100"
+                        className="w-100"
                         loading="lazy"
                         width="450"
                         height="450"
@@ -289,8 +257,8 @@ export default function Home() {
                   </Link>
                 </li>
               </ul>
-              <ul class="home-six-banner-body-main home-six-banner-body-main-right">
-                <li class="home-six-banner-item">
+              <ul className="home-six-banner-body-main home-six-banner-body-main-right">
+                <li className="home-six-banner-item">
                   <Link href="/collections/all" title="New Sale">
                     <picture>
                       <source
@@ -302,7 +270,7 @@ export default function Home() {
                         srcset="https://bizweb.dktcdn.net/100/482/001/themes/906081/assets/home_six_banner_item_image_4.png?1684771044770"
                       />
                       <img
-                        class="w-100"
+                        className="w-100"
                         loading="lazy"
                         width="450"
                         height="450"
@@ -313,7 +281,7 @@ export default function Home() {
                     <span>New Sale</span>
                   </Link>
                 </li>
-                <li class="home-six-banner-item">
+                <li className="home-six-banner-item">
                   <Link href="/collections/all" title="Hot Trend">
                     <picture>
                       <source
@@ -325,7 +293,7 @@ export default function Home() {
                         srcset="https://bizweb.dktcdn.net/100/482/001/themes/906081/assets/home_six_banner_item_image_5.png?1684771044770"
                       />
                       <img
-                        class="w-100"
+                        className="w-100"
                         loading="lazy"
                         width="450"
                         height="450"
@@ -336,7 +304,7 @@ export default function Home() {
                     <span>Hot Trend</span>
                   </Link>
                 </li>
-                <li class="home-six-banner-item">
+                <li className="home-six-banner-item">
                   <Link href="/collections/all" title="Giảm giá">
                     <picture>
                       <source
@@ -348,7 +316,7 @@ export default function Home() {
                         srcset="https://bizweb.dktcdn.net/100/482/001/themes/906081/assets/home_six_banner_item_image_6.png?1684771044770"
                       />
                       <img
-                        class="w-100"
+                        className="w-100"
                         loading="lazy"
                         width="450"
                         height="450"
@@ -363,20 +331,20 @@ export default function Home() {
             </div>
           </div>
         </div>
-        <section class="home-product-pos">
+        <section className="home-product-pos">
           <picture title="F1GENZ Furniture">
             <source
               media="(max-width: 480px)"
-              srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAABCAQAAABeK7cBAAAAC0lEQVR42mNkAAIAAAoAAv/lxKUAAAAASUVORK5CYII="
+              srcset="https://bizweb.dktcdn.net/thumb/large/100/482/001/themes/906081/assets/home_product_pos_image.png?1684771044770"
               data-srcset="https://bizweb.dktcdn.net/thumb/large/100/482/001/themes/906081/assets/home_product_pos_image.png?1684771044770"
             />
             <source
               media="(min-width: 481px)"
-              srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAABCAQAAABeK7cBAAAAC0lEQVR42mNkAAIAAAoAAv/lxKUAAAAASUVORK5CYII="
+              srcset="https://bizweb.dktcdn.net/100/482/001/themes/906081/assets/home_product_pos_image.png?1684771044770"
               data-srcset="https://bizweb.dktcdn.net/100/482/001/themes/906081/assets/home_product_pos_image.png?1684771044770"
             />
             <img
-              class="lazyload w-100"
+              className="lazyload w-100"
               width="1920"
               height="960"
               alt="/"
@@ -384,30 +352,34 @@ export default function Home() {
               data-src="https://bizweb.dktcdn.net/100/482/001/themes/906081/assets/home_product_pos_image.png?1684771044770"
             />
           </picture>
-          <div class="home-product-pos-item" style={{ top: '25%', left: '5%' }}>
-            <span class="home-product-pos-item-dots"></span>
-            <div class="home-product-pos-item-contents">
+          <div
+            className={`home-product-pos-item ${prodPos === 0 ? 'left' : ''}`}
+            onClick={() => setProdPos(0)}
+            style={{ top: '25%', left: '5%' }}
+          >
+            <span className="home-product-pos-item-dots"></span>
+            <div className="home-product-pos-item-contents">
               <picture>
                 <source
                   media="(max-width: 480px)"
                   data-srcset="https://bizweb.dktcdn.net/thumb/large/100/482/001/products/1-5acd9b1760c24d398ebcfacdf7a29a2c-e92c34fb179e4b219283683d0714d7d8.png?v=1683881102413"
                   width="480"
                   height="480"
-                  srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAABCAQAAABA4oeyAAAADklEQVR42mP8L8mAFQAAGlkBGm3rIKMAAAAASUVORK5CYII="
+                  srcset="https://bizweb.dktcdn.net/thumb/large/100/482/001/products/1-5acd9b1760c24d398ebcfacdf7a29a2c-e92c34fb179e4b219283683d0714d7d8.png?v=1683881102413"
                 />
                 <source
                   media="(min-width: 481px)"
                   data-srcset="https://bizweb.dktcdn.net/thumb/compact/100/482/001/products/1-5acd9b1760c24d398ebcfacdf7a29a2c-e92c34fb179e4b219283683d0714d7d8.png?v=1683881102413"
                   width="160"
                   height="160"
-                  srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAABCAQAAABA4oeyAAAADklEQVR42mP8L8mAFQAAGlkBGm3rIKMAAAAASUVORK5CYII="
+                  srcset="https://bizweb.dktcdn.net/thumb/compact/100/482/001/products/1-5acd9b1760c24d398ebcfacdf7a29a2c-e92c34fb179e4b219283683d0714d7d8.png?v=1683881102413"
                 />
                 <img
-                  class="lazyload"
+                  className="lazyload"
                   alt="Bàn ăn 4 chân gia đình cao cấp"
                   width="480"
                   height="480"
-                  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAABCAQAAABA4oeyAAAADklEQVR42mP8L8mAFQAAGlkBGm3rIKMAAAAASUVORK5CYII="
+                  src="https://bizweb.dktcdn.net/thumb/compact/100/482/001/products/1-5acd9b1760c24d398ebcfacdf7a29a2c-e92c34fb179e4b219283683d0714d7d8.png?v=1683881102413"
                   data-src="https://bizweb.dktcdn.net/thumb/compact/100/482/001/products/1-5acd9b1760c24d398ebcfacdf7a29a2c-e92c34fb179e4b219283683d0714d7d8.png?v=1683881102413"
                 />
               </picture>
@@ -416,36 +388,40 @@ export default function Home() {
                   Bàn ăn 4 chân gia đình cao cấp
                   <br />
                   <small>Đen / Quả óc chó</small>
-                  <i class="fa fa-chevron-right"></i>
+                  <i className="fa fa-chevron-right"></i>
                 </h3>
                 <span>23.690.000₫</span>
               </Link>
             </div>
           </div>
-          <div class="home-product-pos-item" style={{ top: '66%', left: '27%' }}>
-            <span class="home-product-pos-item-dots"></span>
-            <div class="home-product-pos-item-contents">
+          <div
+            className={`home-product-pos-item ${prodPos === 1 ? 'left' : ''}`}
+            onClick={() => setProdPos(1)}
+            style={{ top: '66%', left: '27%' }}
+          >
+            <span className="home-product-pos-item-dots"></span>
+            <div className="home-product-pos-item-contents">
               <picture>
                 <source
                   media="(max-width: 480px)"
                   data-srcset="https://bizweb.dktcdn.net/thumb/large/100/482/001/products/1-d1d27878e84b497282e2c10780ab7d73-202bf7d605a14ee288aa401f9213d668.png?v=1683881056433"
                   width="480"
                   height="480"
-                  srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAABCAQAAABA4oeyAAAADklEQVR42mP8L8mAFQAAGlkBGm3rIKMAAAAASUVORK5CYII="
+                  srcset="https://bizweb.dktcdn.net/thumb/large/100/482/001/products/1-d1d27878e84b497282e2c10780ab7d73-202bf7d605a14ee288aa401f9213d668.png?v=1683881056433"
                 />
                 <source
                   media="(min-width: 481px)"
                   data-srcset="https://bizweb.dktcdn.net/thumb/compact/100/482/001/products/1-d1d27878e84b497282e2c10780ab7d73-202bf7d605a14ee288aa401f9213d668.png?v=1683881056433"
                   width="160"
                   height="160"
-                  srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAABCAQAAABA4oeyAAAADklEQVR42mP8L8mAFQAAGlkBGm3rIKMAAAAASUVORK5CYII="
+                  srcset="https://bizweb.dktcdn.net/thumb/compact/100/482/001/products/1-d1d27878e84b497282e2c10780ab7d73-202bf7d605a14ee288aa401f9213d668.png?v=1683881056433"
                 />
                 <img
-                  class="lazyload"
+                  className="lazyload"
                   alt="Đèn sàn F1GENZ cao cấp"
                   width="480"
                   height="480"
-                  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAABCAQAAABA4oeyAAAADklEQVR42mP8L8mAFQAAGlkBGm3rIKMAAAAASUVORK5CYII="
+                  src="https://bizweb.dktcdn.net/thumb/compact/100/482/001/products/1-d1d27878e84b497282e2c10780ab7d73-202bf7d605a14ee288aa401f9213d668.png?v=1683881056433"
                   data-src="https://bizweb.dktcdn.net/thumb/compact/100/482/001/products/1-d1d27878e84b497282e2c10780ab7d73-202bf7d605a14ee288aa401f9213d668.png?v=1683881056433"
                 />
               </picture>
@@ -454,36 +430,40 @@ export default function Home() {
                   Đèn sàn F1GENZ cao cấp
                   <br />
                   <small>Đồng thau</small>
-                  <i class="fa fa-chevron-right"></i>
+                  <i className="fa fa-chevron-right"></i>
                 </h3>
                 <span>4.990.000₫</span>
               </Link>
             </div>
           </div>
-          <div class="home-product-pos-item" style={{ top: '41%', left: '80%' }}>
-            <span class="home-product-pos-item-dots"></span>
-            <div class="home-product-pos-item-contents">
+          <div
+            className={`home-product-pos-item ${prodPos === 3 ? 'left' : ''}`}
+            onClick={() => setProdPos(3)}
+            style={{ top: '41%', left: '80%' }}
+          >
+            <span className="home-product-pos-item-dots"></span>
+            <div className="home-product-pos-item-contents">
               <picture>
                 <source
                   media="(max-width: 480px)"
                   data-srcset="https://bizweb.dktcdn.net/thumb/large/100/482/001/products/1-8856b3adac2b4c4793969785f43819b9-0fa9e8fa0a684cfeb70140f86ca90c41.png?v=1683881052893"
                   width="480"
                   height="480"
-                  srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAABCAQAAABA4oeyAAAADklEQVR42mP8L8mAFQAAGlkBGm3rIKMAAAAASUVORK5CYII="
+                  srcset="https://bizweb.dktcdn.net/thumb/large/100/482/001/products/1-8856b3adac2b4c4793969785f43819b9-0fa9e8fa0a684cfeb70140f86ca90c41.png?v=1683881052893"
                 />
                 <source
                   media="(min-width: 481px)"
                   data-srcset="https://bizweb.dktcdn.net/thumb/compact/100/482/001/products/1-8856b3adac2b4c4793969785f43819b9-0fa9e8fa0a684cfeb70140f86ca90c41.png?v=1683881052893"
                   width="160"
                   height="160"
-                  srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAABCAQAAABA4oeyAAAADklEQVR42mP8L8mAFQAAGlkBGm3rIKMAAAAASUVORK5CYII="
+                  srcset="https://bizweb.dktcdn.net/thumb/compact/100/482/001/products/1-8856b3adac2b4c4793969785f43819b9-0fa9e8fa0a684cfeb70140f86ca90c41.png?v=1683881052893"
                 />
                 <img
-                  class="lazyload"
+                  className="lazyload"
                   alt="Đèn sàn bằng đá cẩm thạch"
                   width="480"
                   height="480"
-                  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAABCAQAAABA4oeyAAAADklEQVR42mP8L8mAFQAAGlkBGm3rIKMAAAAASUVORK5CYII="
+                  src="https://bizweb.dktcdn.net/thumb/compact/100/482/001/products/1-8856b3adac2b4c4793969785f43819b9-0fa9e8fa0a684cfeb70140f86ca90c41.png?v=1683881052893"
                   data-src="https://bizweb.dktcdn.net/thumb/compact/100/482/001/products/1-8856b3adac2b4c4793969785f43819b9-0fa9e8fa0a684cfeb70140f86ca90c41.png?v=1683881052893"
                 />
               </picture>
@@ -492,15 +472,19 @@ export default function Home() {
                   Đèn sàn bằng đá cẩm thạch
                   <br />
                   <small>Trắng</small>
-                  <i class="fa fa-chevron-right"></i>
+                  <i className="fa fa-chevron-right"></i>
                 </h3>
                 <span>3.990.000₫</span>
               </Link>
             </div>
           </div>
-          <div class="home-product-pos-item" style={{ top: '75%', left: '60%' }}>
-            <span class="home-product-pos-item-dots"></span>
-            <div class="home-product-pos-item-contents">
+          <div
+            className={`home-product-pos-item ${prodPos === 4 ? 'left' : ''}`}
+            onClick={() => setProdPos(4)}
+            style={{ top: '75%', left: '60%' }}
+          >
+            <span className="home-product-pos-item-dots"></span>
+            <div className="home-product-pos-item-contents">
               <picture title="F1GENZ Furniture">
                 <source
                   media="(max-width: 480px)"
@@ -513,12 +497,12 @@ export default function Home() {
                   data-srcset="https://bizweb.dktcdn.net/100/482/001/themes/906081/assets/home_product_pos_image.png?1684771044770"
                 />
                 <Image
-                  class="w-100 lazyloaded"
+                  className="w-100 lazyloaded"
                   width="1920"
                   height="960"
                   alt="/"
-                  src="https://bizweb.dktcdn.net/100/482/001/themes/906081/assets/home_product_pos_image.png?1684771044770"
-                  data-src="https://bizweb.dktcdn.net/100/482/001/themes/906081/assets/home_product_pos_image.png?1684771044770"
+                  src="https://bizweb.dktcdn.net/thumb/compact/100/482/001/products/1-1aecf2e2a39a4f6f98a7841f0083c10a-5397b58f672b4090989562633ffbb294.png?v=1683881096573"
+                  data-src="https://bizweb.dktcdn.net/thumb/compact/100/482/001/products/1-1aecf2e2a39a4f6f98a7841f0083c10a-5397b58f672b4090989562633ffbb294.png?v=1683881096573"
                 />
               </picture>
               <Link href="/ban-an-da-thieu-ket" title="Bàn ăn đá thiêu kết">
@@ -526,20 +510,20 @@ export default function Home() {
                   Bàn ăn đá thiêu kết
                   <br />
                   <small>Trắng / Đá thiêu kết</small>
-                  <i class="fa fa-chevron-right"></i>
+                  <i className="fa fa-chevron-right"></i>
                 </h3>
                 <span>21.199.000₫</span>
               </Link>
             </div>
           </div>
         </section>
-        <section class="home-product-grid">
-          <div class="container">
-            <div class="home-product-grid-head section-title-all">
+        <section className="home-product-grid">
+          <div className="container">
+            <div className="home-product-grid-head section-title-all">
               <h2>Hot Trend</h2>
               <p>Cập nhật các sản phẩm bán chạy nhất trong tuần</p>
             </div>
-            <div class="home-product-grid-body">
+            <div className="home-product-grid-body">
               {products
                 .filter((prod) => prod.hotTrend)
                 .map((product) => {
@@ -548,13 +532,13 @@ export default function Home() {
             </div>
           </div>
         </section>
-        <section class="home-insta">
-          <div class="container">
-            <div class="home-insta-body">
-              <div class="home-insta-body-left">
+        <section className="home-insta">
+          <div className="container">
+            <div className="home-insta-body">
+              <div className="home-insta-body-left">
                 <Link
                   href="https://bizweb.dktcdn.net/100/482/001/themes/906081/assets/home_insta_item_image_1.png?1684771044770"
-                  class="home-insta-body-item"
+                  className="home-insta-body-item"
                   title="Banner"
                   data-fancybox="gallery"
                 >
@@ -568,7 +552,7 @@ export default function Home() {
                 </Link>
                 <Link
                   href="https://bizweb.dktcdn.net/100/482/001/themes/906081/assets/home_insta_item_image_2.png?1684771044770"
-                  class="home-insta-body-item"
+                  className="home-insta-body-item"
                   title="Banner"
                   data-fancybox="gallery"
                 >
@@ -582,7 +566,7 @@ export default function Home() {
                 </Link>
                 <Link
                   href="https://bizweb.dktcdn.net/100/482/001/themes/906081/assets/home_insta_item_image_3.png?1684771044770"
-                  class="home-insta-body-item"
+                  className="home-insta-body-item"
                   title="Banner"
                   data-fancybox="gallery"
                 >
@@ -596,7 +580,7 @@ export default function Home() {
                 </Link>
                 <Link
                   href="https://bizweb.dktcdn.net/100/482/001/themes/906081/assets/home_insta_item_image_4.png?1684771044770"
-                  class="home-insta-body-item"
+                  className="home-insta-body-item"
                   title="Banner"
                   data-fancybox="gallery"
                 >
@@ -610,7 +594,7 @@ export default function Home() {
                 </Link>
                 <Link
                   href="https://bizweb.dktcdn.net/100/482/001/themes/906081/assets/home_insta_item_image_5.png?1684771044770"
-                  class="home-insta-body-item"
+                  className="home-insta-body-item"
                   title="Banner"
                   data-fancybox="gallery"
                 >
@@ -624,7 +608,7 @@ export default function Home() {
                 </Link>
                 <Link
                   href="https://bizweb.dktcdn.net/100/482/001/themes/906081/assets/home_insta_item_image_6.png?1684771044770"
-                  class="home-insta-body-item"
+                  className="home-insta-body-item"
                   title="Banner"
                   data-fancybox="gallery"
                 >
@@ -637,10 +621,10 @@ export default function Home() {
                   />
                 </Link>
               </div>
-              <div class="home-insta-body-center section-title-all">
+              <div className="home-insta-body-center section-title-all">
                 <h2>Bộ sưu tập Instagram</h2>
                 <p>Chúng tôi luôn cập nhật những hình ảnh mới nhất từ các nhà sưu tập trên thế giới về nội thất.</p>
-                <div class="insta-logo" title="Insta">
+                <div className="insta-logo" title="Insta">
                   <img
                     loading="lazy"
                     width="450"
@@ -653,10 +637,10 @@ export default function Home() {
                   Xem ngay <span>›</span>
                 </Link>
               </div>
-              <div class="home-insta-body-right">
+              <div className="home-insta-body-right">
                 <Link
                   href="https://bizweb.dktcdn.net/100/482/001/themes/906081/assets/home_insta_item_image_7.png?1684771044770"
-                  class="home-insta-body-item"
+                  className="home-insta-body-item"
                   title="Banner"
                   data-fancybox="gallery"
                 >
@@ -670,7 +654,7 @@ export default function Home() {
                 </Link>
                 <Link
                   href="https://bizweb.dktcdn.net/100/482/001/themes/906081/assets/home_insta_item_image_8.png?1684771044770"
-                  class="home-insta-body-item"
+                  className="home-insta-body-item"
                   title="Banner"
                   data-fancybox="gallery"
                 >
@@ -684,7 +668,7 @@ export default function Home() {
                 </Link>
                 <Link
                   href="https://bizweb.dktcdn.net/100/482/001/themes/906081/assets/home_insta_item_image_9.png?1684771044770"
-                  class="home-insta-body-item"
+                  className="home-insta-body-item"
                   title="Banner"
                   data-fancybox="gallery"
                 >
@@ -698,7 +682,7 @@ export default function Home() {
                 </Link>
                 <Link
                   href="https://bizweb.dktcdn.net/100/482/001/themes/906081/assets/home_insta_item_image_10.png?1684771044770"
-                  class="home-insta-body-item"
+                  className="home-insta-body-item"
                   title="Banner"
                   data-fancybox="gallery"
                 >
@@ -712,7 +696,7 @@ export default function Home() {
                 </Link>
                 <Link
                   href="https://bizweb.dktcdn.net/100/482/001/themes/906081/assets/home_insta_item_image_11.png?1684771044770"
-                  class="home-insta-body-item"
+                  className="home-insta-body-item"
                   title="Banner"
                   data-fancybox="gallery"
                 >
@@ -726,7 +710,7 @@ export default function Home() {
                 </Link>
                 <Link
                   href="https://bizweb.dktcdn.net/100/482/001/themes/906081/assets/home_insta_item_image_12.png?1684771044770"
-                  class="home-insta-body-item"
+                  className="home-insta-body-item"
                   title="Banner"
                   data-fancybox="gallery"
                 >
@@ -742,10 +726,10 @@ export default function Home() {
             </div>
           </div>
         </section>
-        <section class="home-product-tab">
-          <div class="container">
-            <div class="home-product-tab-head">
-              <div class="home-product-tab-head-left">
+        <section className="home-product-tab">
+          <div className="container">
+            <div className="home-product-tab-head">
+              <div className="home-product-tab-head-left">
                 <ul>
                   {categories.map((category) => {
                     return (
@@ -761,7 +745,7 @@ export default function Home() {
                           title={category.name}
                         >
                           <Image
-                            class="lazyload w-100"
+                            className="lazyload w-100"
                             width="64"
                             height="64"
                             src={category.thumb}
@@ -774,7 +758,7 @@ export default function Home() {
                   })}
                 </ul>
               </div>
-              <div class="home-product-tab-head-right has-spin">
+              <div className="home-product-tab-head-right has-spin">
                 {categories.map((category) => {
                   return (
                     <Link
@@ -784,7 +768,7 @@ export default function Home() {
                       className={classNames({ active: category.id === prodTab })}
                     >
                       <Image
-                        class="lazyload w-100"
+                        className="lazyload w-100"
                         width="1920"
                         height="640"
                         src={category.banner}
@@ -796,8 +780,8 @@ export default function Home() {
                 })}
               </div>
             </div>
-            <div class="home-product-tab-body">
-              <div class="home-product-tab-body-item active">
+            <div className="home-product-tab-body">
+              <div className="home-product-tab-body-item active">
                 <Slider {...settings} slidesToShow={4}>
                   {products
                     .filter((prod) => prod.group === prodTab)
@@ -806,19 +790,19 @@ export default function Home() {
                     })}
                 </Slider>
               </div>
-              <div class="home-product-tab-body-item">
-                <div class="home-product-tab-body-item-data">
-                  <div class="product-item" data-id="87900655" data-handle="gia-treo-cau-thang-cao-cap">
-                    <div class="product-item-wrap">
-                      <div class="product-item-image hasThumbs hasThumbsIcon">
-                        <span class="product-item-discount">-23%</span>
+              <div className="home-product-tab-body-item">
+                <div className="home-product-tab-body-item-data">
+                  <div className="product-item" data-id="87900655" data-handle="gia-treo-cau-thang-cao-cap">
+                    <div className="product-item-wrap">
+                      <div className="product-item-image hasThumbs hasThumbsIcon">
+                        <span className="product-item-discount">-23%</span>
                         <Link
-                          class="product-item-link"
+                          className="product-item-link"
                           href="/gia-treo-cau-thang-cao-cap"
                           title="Giá treo cầu thang cao cấp"
                         >
                           <img
-                            class="w-auto"
+                            className="w-auto"
                             loading="lazy"
                             width="480"
                             height="480"
@@ -826,7 +810,7 @@ export default function Home() {
                             alt="Giá treo cầu thang cao cấp"
                           />
                           <img
-                            class="w-auto"
+                            className="w-auto"
                             loading="lazy"
                             width="480"
                             height="480"
@@ -834,11 +818,11 @@ export default function Home() {
                             alt="Giá treo cầu thang cao cấp"
                           />
                         </Link>
-                        <ul class="product-item-thumbs">
+                        <ul className="product-item-thumbs">
                           <li>
                             <Link href="/gia-treo-cau-thang-cao-cap" title="Giá treo cầu thang cao cấp">
                               <img
-                                class="w-auto lazyload"
+                                className="w-auto lazyload"
                                 width="50"
                                 height="50"
                                 src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
@@ -850,7 +834,7 @@ export default function Home() {
                           <li>
                             <Link href="/gia-treo-cau-thang-cao-cap" title="Giá treo cầu thang cao cấp">
                               <img
-                                class="w-auto lazyload"
+                                className="w-auto lazyload"
                                 width="50"
                                 height="50"
                                 src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
@@ -862,7 +846,7 @@ export default function Home() {
                           <li>
                             <Link href="/gia-treo-cau-thang-cao-cap" title="Giá treo cầu thang cao cấp">
                               <img
-                                class="w-auto lazyload"
+                                className="w-auto lazyload"
                                 width="50"
                                 height="50"
                                 src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
@@ -873,11 +857,11 @@ export default function Home() {
                           </li>
                         </ul>
                       </div>
-                      <div class="product-item-action">
+                      <div className="product-item-action">
                         <button
                           type="button"
                           title="Yêu thích"
-                          class="shop-wishlist-button-add"
+                          className="shop-wishlist-button-add"
                           data-type="shop-wishlist-button-add"
                         >
                           <HeartIcon />
@@ -885,7 +869,7 @@ export default function Home() {
                         <button
                           type="button"
                           title="Xem nhanh"
-                          class="shop-quickview-button"
+                          className="shop-quickview-button"
                           data-type="shop-quickview-button"
                         >
                           <CartIcon />
@@ -893,44 +877,44 @@ export default function Home() {
                         <button
                           type="button"
                           title="Thêm vào giỏ"
-                          class="shop-addLoop-button"
+                          className="shop-addLoop-button"
                           data-type="shop-addLoop-button"
                         >
                           <MagnifyingGlassIcon />
                         </button>
                       </div>
-                      <div class="product-item-detail">
-                        <div class="product-item-detail-info">
-                          <span class="product-item-detail-info-vendor">
+                      <div className="product-item-detail">
+                        <div className="product-item-detail-info">
+                          <span className="product-item-detail-info-vendor">
                             <Link href="/collections/vendors?query=F1GENZ" title="F1GENZ">
                               F1GENZ
                             </Link>
                           </span>
-                          <span class="product-item-detail-info-tag">Quà tặng</span>
+                          <span className="product-item-detail-info-tag">Quà tặng</span>
                         </div>
-                        <h3 class="product-item-detail-name">
+                        <h3 className="product-item-detail-name">
                           <Link href="/gia-treo-cau-thang-cao-cap" title="Giá treo cầu thang cao cấp">
                             Giá treo cầu thang cao cấp
                           </Link>
                         </h3>
-                        <div class="product-item-detail-price">
+                        <div className="product-item-detail-price">
                           <span>2.459.000₫</span>
                           <del>3.190.000₫</del>
                         </div>
                       </div>
                     </div>
                   </div>
-                  <div class="product-item" data-id="87900517" data-handle="gia-treo-quan-ao-f1genz-chan-tron">
-                    <div class="product-item-wrap">
-                      <div class="product-item-image hasThumbs hasThumbsIcon">
-                        <span class="product-item-discount">-11%</span>
+                  <div className="product-item" data-id="87900517" data-handle="gia-treo-quan-ao-f1genz-chan-tron">
+                    <div className="product-item-wrap">
+                      <div className="product-item-image hasThumbs hasThumbsIcon">
+                        <span className="product-item-discount">-11%</span>
                         <Link
-                          class="product-item-link"
+                          className="product-item-link"
                           href="/gia-treo-quan-ao-f1genz-chan-tron"
                           title="Giá treo quần áo F1GENZ chân tròn"
                         >
                           <img
-                            class="w-auto"
+                            className="w-auto"
                             loading="lazy"
                             width="480"
                             height="480"
@@ -938,7 +922,7 @@ export default function Home() {
                             alt="Giá treo quần áo F1GENZ chân tròn"
                           />
                           <img
-                            class="w-auto"
+                            className="w-auto"
                             loading="lazy"
                             width="480"
                             height="480"
@@ -946,11 +930,11 @@ export default function Home() {
                             alt="Giá treo quần áo F1GENZ chân tròn"
                           />
                         </Link>
-                        <ul class="product-item-thumbs">
+                        <ul className="product-item-thumbs">
                           <li>
                             <Link href="/gia-treo-quan-ao-f1genz-chan-tron" title="Giá treo quần áo F1GENZ chân tròn">
                               <img
-                                class="w-auto lazyload"
+                                className="w-auto lazyload"
                                 width="50"
                                 height="50"
                                 src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
@@ -962,7 +946,7 @@ export default function Home() {
                           <li>
                             <Link href="/gia-treo-quan-ao-f1genz-chan-tron" title="Giá treo quần áo F1GENZ chân tròn">
                               <img
-                                class="w-auto lazyload"
+                                className="w-auto lazyload"
                                 width="50"
                                 height="50"
                                 src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
@@ -974,7 +958,7 @@ export default function Home() {
                           <li>
                             <Link href="/gia-treo-quan-ao-f1genz-chan-tron" title="Giá treo quần áo F1GENZ chân tròn">
                               <img
-                                class="w-auto lazyload"
+                                className="w-auto lazyload"
                                 width="50"
                                 height="50"
                                 src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
@@ -985,11 +969,11 @@ export default function Home() {
                           </li>
                         </ul>
                       </div>
-                      <div class="product-item-action">
+                      <div className="product-item-action">
                         <button
                           type="button"
                           title="Yêu thích"
-                          class="shop-wishlist-button-add"
+                          className="shop-wishlist-button-add"
                           data-type="shop-wishlist-button-add"
                         >
                           <HeartIcon />
@@ -997,7 +981,7 @@ export default function Home() {
                         <button
                           type="button"
                           title="Xem nhanh"
-                          class="shop-quickview-button"
+                          className="shop-quickview-button"
                           data-type="shop-quickview-button"
                         >
                           <CartIcon />
@@ -1005,44 +989,44 @@ export default function Home() {
                         <button
                           type="button"
                           title="Thêm vào giỏ"
-                          class="shop-addLoop-button"
+                          className="shop-addLoop-button"
                           data-type="shop-addLoop-button"
                         >
                           <MagnifyingGlassIcon />
                         </button>
                       </div>
-                      <div class="product-item-detail">
-                        <div class="product-item-detail-info">
-                          <span class="product-item-detail-info-vendor">
+                      <div className="product-item-detail">
+                        <div className="product-item-detail-info">
+                          <span className="product-item-detail-info-vendor">
                             <Link href="/collections/vendors?query=F1GENZ" title="F1GENZ">
                               F1GENZ
                             </Link>
                           </span>
-                          <span class="product-item-detail-info-tag">Freeship</span>
+                          <span className="product-item-detail-info-tag">Freeship</span>
                         </div>
-                        <h3 class="product-item-detail-name">
+                        <h3 className="product-item-detail-name">
                           <Link href="/gia-treo-quan-ao-f1genz-chan-tron" title="Giá treo quần áo F1GENZ chân tròn">
                             Giá treo quần áo F1GENZ chân tròn
                           </Link>
                         </h3>
-                        <div class="product-item-detail-price">
+                        <div className="product-item-detail-price">
                           <span>5.490.000₫</span>
                           <del>6.199.000₫</del>
                         </div>
                       </div>
                     </div>
                   </div>
-                  <div class="product-item" data-id="87900418" data-handle="gia-treo-quan-ao-cao-cap-3-chan">
-                    <div class="product-item-wrap">
-                      <div class="product-item-image hasThumbs hasThumbsIcon">
-                        <span class="product-item-discount">-15%</span>
+                  <div className="product-item" data-id="87900418" data-handle="gia-treo-quan-ao-cao-cap-3-chan">
+                    <div className="product-item-wrap">
+                      <div className="product-item-image hasThumbs hasThumbsIcon">
+                        <span className="product-item-discount">-15%</span>
                         <Link
-                          class="product-item-link"
+                          className="product-item-link"
                           href="/gia-treo-quan-ao-cao-cap-3-chan"
                           title="Giá treo quần áo cao cấp 3 chân"
                         >
                           <img
-                            class="w-auto"
+                            className="w-auto"
                             loading="lazy"
                             width="480"
                             height="480"
@@ -1050,7 +1034,7 @@ export default function Home() {
                             alt="Giá treo quần áo cao cấp 3 chân"
                           />
                           <img
-                            class="w-auto"
+                            className="w-auto"
                             loading="lazy"
                             width="480"
                             height="480"
@@ -1058,11 +1042,11 @@ export default function Home() {
                             alt="Giá treo quần áo cao cấp 3 chân"
                           />
                         </Link>
-                        <ul class="product-item-thumbs">
+                        <ul className="product-item-thumbs">
                           <li>
                             <Link href="/gia-treo-quan-ao-cao-cap-3-chan" title="Giá treo quần áo cao cấp 3 chân">
                               <img
-                                class="w-auto lazyload"
+                                className="w-auto lazyload"
                                 width="50"
                                 height="50"
                                 src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
@@ -1074,7 +1058,7 @@ export default function Home() {
                           <li>
                             <Link href="/gia-treo-quan-ao-cao-cap-3-chan" title="Giá treo quần áo cao cấp 3 chân">
                               <img
-                                class="w-auto lazyload"
+                                className="w-auto lazyload"
                                 width="50"
                                 height="50"
                                 src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
@@ -1086,7 +1070,7 @@ export default function Home() {
                           <li>
                             <Link href="/gia-treo-quan-ao-cao-cap-3-chan" title="Giá treo quần áo cao cấp 3 chân">
                               <img
-                                class="w-auto lazyload"
+                                className="w-auto lazyload"
                                 width="50"
                                 height="50"
                                 src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
@@ -1097,11 +1081,11 @@ export default function Home() {
                           </li>
                         </ul>
                       </div>
-                      <div class="product-item-action">
+                      <div className="product-item-action">
                         <button
                           type="button"
                           title="Yêu thích"
-                          class="shop-wishlist-button-add"
+                          className="shop-wishlist-button-add"
                           data-type="shop-wishlist-button-add"
                         >
                           <HeartIcon />
@@ -1109,7 +1093,7 @@ export default function Home() {
                         <button
                           type="button"
                           title="Xem nhanh"
-                          class="shop-quickview-button"
+                          className="shop-quickview-button"
                           data-type="shop-quickview-button"
                         >
                           <CartIcon />
@@ -1117,44 +1101,44 @@ export default function Home() {
                         <button
                           type="button"
                           title="Thêm vào giỏ"
-                          class="shop-addLoop-button"
+                          className="shop-addLoop-button"
                           data-type="shop-addLoop-button"
                         >
                           <MagnifyingGlassIcon />
                         </button>
                       </div>
-                      <div class="product-item-detail">
-                        <div class="product-item-detail-info">
-                          <span class="product-item-detail-info-vendor">
+                      <div className="product-item-detail">
+                        <div className="product-item-detail-info">
+                          <span className="product-item-detail-info-vendor">
                             <Link href="/collections/vendors?query=F1GENZ" title="F1GENZ">
                               F1GENZ
                             </Link>
                           </span>
-                          <span class="product-item-detail-info-tag">Hot</span>
+                          <span className="product-item-detail-info-tag">Hot</span>
                         </div>
-                        <h3 class="product-item-detail-name">
+                        <h3 className="product-item-detail-name">
                           <Link href="/gia-treo-quan-ao-cao-cap-3-chan" title="Giá treo quần áo cao cấp 3 chân">
                             Giá treo quần áo cao cấp 3 chân
                           </Link>
                         </h3>
-                        <div class="product-item-detail-price">
+                        <div className="product-item-detail-price">
                           <span>6.199.000₫</span>
                           <del>7.299.000₫</del>
                         </div>
                       </div>
                     </div>
                   </div>
-                  <div class="product-item" data-id="87900298" data-handle="gia-treo-quan-ao-cao-cap-chan-tru">
-                    <div class="product-item-wrap">
-                      <div class="product-item-image hasThumbs ">
-                        <span class="product-item-discount">-7%</span>
+                  <div className="product-item" data-id="87900298" data-handle="gia-treo-quan-ao-cao-cap-chan-tru">
+                    <div className="product-item-wrap">
+                      <div className="product-item-image hasThumbs ">
+                        <span className="product-item-discount">-7%</span>
                         <Link
-                          class="product-item-link"
+                          className="product-item-link"
                           href="/gia-treo-quan-ao-cao-cap-chan-tru"
                           title="Giá treo quần áo cao cấp chân trụ"
                         >
                           <img
-                            class="w-auto"
+                            className="w-auto"
                             loading="lazy"
                             width="480"
                             height="480"
@@ -1162,7 +1146,7 @@ export default function Home() {
                             alt="Giá treo quần áo cao cấp chân trụ"
                           />
                           <img
-                            class="w-auto"
+                            className="w-auto"
                             loading="lazy"
                             width="480"
                             height="480"
@@ -1171,11 +1155,11 @@ export default function Home() {
                           />
                         </Link>
                       </div>
-                      <div class="product-item-action">
+                      <div className="product-item-action">
                         <button
                           type="button"
                           title="Yêu thích"
-                          class="shop-wishlist-button-add"
+                          className="shop-wishlist-button-add"
                           data-type="shop-wishlist-button-add"
                         >
                           <HeartIcon />
@@ -1183,7 +1167,7 @@ export default function Home() {
                         <button
                           type="button"
                           title="Xem nhanh"
-                          class="shop-quickview-button"
+                          className="shop-quickview-button"
                           data-type="shop-quickview-button"
                         >
                           <CartIcon />
@@ -1191,27 +1175,27 @@ export default function Home() {
                         <button
                           type="button"
                           title="Thêm vào giỏ"
-                          class="shop-addLoop-button"
+                          className="shop-addLoop-button"
                           data-type="shop-addLoop-button"
                         >
                           <MagnifyingGlassIcon />
                         </button>
                       </div>
-                      <div class="product-item-detail">
-                        <div class="product-item-detail-info">
-                          <span class="product-item-detail-info-vendor">
+                      <div className="product-item-detail">
+                        <div className="product-item-detail-info">
+                          <span className="product-item-detail-info-vendor">
                             <Link href="/collections/vendors?query=F1GENZ" title="F1GENZ">
                               F1GENZ
                             </Link>
                           </span>
-                          <span class="product-item-detail-info-tag">Flashsale</span>
+                          <span className="product-item-detail-info-tag">Flashsale</span>
                         </div>
-                        <h3 class="product-item-detail-name">
+                        <h3 className="product-item-detail-name">
                           <Link href="/gia-treo-quan-ao-cao-cap-chan-tru" title="Giá treo quần áo cao cấp chân trụ">
                             Giá treo quần áo cao cấp chân trụ
                           </Link>
                         </h3>
-                        <div class="product-item-detail-price">
+                        <div className="product-item-detail-price">
                           <span>4.219.000₫</span>
                           <del>4.560.000₫</del>
                         </div>
@@ -1220,15 +1204,19 @@ export default function Home() {
                   </div>
                 </div>
               </div>
-              <div class="home-product-tab-body-item">
-                <div class="home-product-tab-body-item-data">
-                  <div class="product-item" data-id="87902429" data-handle="den-ban-cao-cap-f1genz">
-                    <div class="product-item-wrap">
-                      <div class="product-item-image hasThumbs hasThumbsIcon">
-                        <span class="product-item-discount">-13%</span>
-                        <Link class="product-item-link" href="/den-ban-cao-cap-f1genz" title="Đèn bàn cao cấp F1GENZ">
+              <div className="home-product-tab-body-item">
+                <div className="home-product-tab-body-item-data">
+                  <div className="product-item" data-id="87902429" data-handle="den-ban-cao-cap-f1genz">
+                    <div className="product-item-wrap">
+                      <div className="product-item-image hasThumbs hasThumbsIcon">
+                        <span className="product-item-discount">-13%</span>
+                        <Link
+                          className="product-item-link"
+                          href="/den-ban-cao-cap-f1genz"
+                          title="Đèn bàn cao cấp F1GENZ"
+                        >
                           <img
-                            class="w-auto"
+                            className="w-auto"
                             loading="lazy"
                             width="480"
                             height="480"
@@ -1236,7 +1224,7 @@ export default function Home() {
                             alt="Đèn bàn cao cấp F1GENZ"
                           />
                           <img
-                            class="w-auto"
+                            className="w-auto"
                             loading="lazy"
                             width="480"
                             height="480"
@@ -1244,11 +1232,11 @@ export default function Home() {
                             alt="Đèn bàn cao cấp F1GENZ"
                           />
                         </Link>
-                        <ul class="product-item-thumbs">
+                        <ul className="product-item-thumbs">
                           <li>
                             <Link href="/den-ban-cao-cap-f1genz" title="Đèn bàn cao cấp F1GENZ">
                               <img
-                                class="w-auto lazyload"
+                                className="w-auto lazyload"
                                 width="50"
                                 height="50"
                                 src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
@@ -1260,7 +1248,7 @@ export default function Home() {
                           <li>
                             <Link href="/den-ban-cao-cap-f1genz" title="Đèn bàn cao cấp F1GENZ">
                               <img
-                                class="w-auto lazyload"
+                                className="w-auto lazyload"
                                 width="50"
                                 height="50"
                                 src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
@@ -1272,7 +1260,7 @@ export default function Home() {
                           <li>
                             <Link href="/den-ban-cao-cap-f1genz" title="Đèn bàn cao cấp F1GENZ">
                               <img
-                                class="w-auto lazyload"
+                                className="w-auto lazyload"
                                 width="50"
                                 height="50"
                                 src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
@@ -1283,11 +1271,11 @@ export default function Home() {
                           </li>
                         </ul>
                       </div>
-                      <div class="product-item-action">
+                      <div className="product-item-action">
                         <button
                           type="button"
                           title="Yêu thích"
-                          class="shop-wishlist-button-add"
+                          className="shop-wishlist-button-add"
                           data-type="shop-wishlist-button-add"
                         >
                           <HeartIcon />
@@ -1295,7 +1283,7 @@ export default function Home() {
                         <button
                           type="button"
                           title="Xem nhanh"
-                          class="shop-quickview-button"
+                          className="shop-quickview-button"
                           data-type="shop-quickview-button"
                         >
                           <CartIcon />
@@ -1303,44 +1291,44 @@ export default function Home() {
                         <button
                           type="button"
                           title="Thêm vào giỏ"
-                          class="shop-addLoop-button"
+                          className="shop-addLoop-button"
                           data-type="shop-addLoop-button"
                         >
                           <MagnifyingGlassIcon />
                         </button>
                       </div>
-                      <div class="product-item-detail">
-                        <div class="product-item-detail-info">
-                          <span class="product-item-detail-info-vendor">
+                      <div className="product-item-detail">
+                        <div className="product-item-detail-info">
+                          <span className="product-item-detail-info-vendor">
                             <Link href="/collections/vendors?query=F1GENZ" title="F1GENZ">
                               F1GENZ
                             </Link>
                           </span>
-                          <span class="product-item-detail-info-tag">Hot</span>
+                          <span className="product-item-detail-info-tag">Hot</span>
                         </div>
-                        <h3 class="product-item-detail-name">
+                        <h3 className="product-item-detail-name">
                           <Link href="/den-ban-cao-cap-f1genz" title="Đèn bàn cao cấp F1GENZ">
                             Đèn bàn cao cấp F1GENZ
                           </Link>
                         </h3>
-                        <div class="product-item-detail-price">
+                        <div className="product-item-detail-price">
                           <span>1.290.000₫</span>
                           <del>1.490.000₫</del>
                         </div>
                       </div>
                     </div>
                   </div>
-                  <div class="product-item" data-id="87902340" data-handle="den-ban-dong-thau-cao-cap">
-                    <div class="product-item-wrap">
-                      <div class="product-item-image hasThumbs hasThumbsIcon">
-                        <span class="product-item-discount">-12%</span>
+                  <div className="product-item" data-id="87902340" data-handle="den-ban-dong-thau-cao-cap">
+                    <div className="product-item-wrap">
+                      <div className="product-item-image hasThumbs hasThumbsIcon">
+                        <span className="product-item-discount">-12%</span>
                         <Link
-                          class="product-item-link"
+                          className="product-item-link"
                           href="/den-ban-dong-thau-cao-cap"
                           title="Đèn bàn đồng thau cao cấp"
                         >
                           <img
-                            class="w-auto"
+                            className="w-auto"
                             loading="lazy"
                             width="480"
                             height="480"
@@ -1348,7 +1336,7 @@ export default function Home() {
                             alt="Đèn bàn đồng thau cao cấp"
                           />
                           <img
-                            class="w-auto"
+                            className="w-auto"
                             loading="lazy"
                             width="480"
                             height="480"
@@ -1356,11 +1344,11 @@ export default function Home() {
                             alt="Đèn bàn đồng thau cao cấp"
                           />
                         </Link>
-                        <ul class="product-item-thumbs">
+                        <ul className="product-item-thumbs">
                           <li>
                             <Link href="/den-ban-dong-thau-cao-cap" title="Đèn bàn đồng thau cao cấp">
                               <img
-                                class="w-auto lazyload"
+                                className="w-auto lazyload"
                                 width="50"
                                 height="50"
                                 src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
@@ -1372,7 +1360,7 @@ export default function Home() {
                           <li>
                             <Link href="/den-ban-dong-thau-cao-cap" title="Đèn bàn đồng thau cao cấp">
                               <img
-                                class="w-auto lazyload"
+                                className="w-auto lazyload"
                                 width="50"
                                 height="50"
                                 src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
@@ -1384,7 +1372,7 @@ export default function Home() {
                           <li>
                             <Link href="/den-ban-dong-thau-cao-cap" title="Đèn bàn đồng thau cao cấp">
                               <img
-                                class="w-auto lazyload"
+                                className="w-auto lazyload"
                                 width="50"
                                 height="50"
                                 src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
@@ -1395,11 +1383,11 @@ export default function Home() {
                           </li>
                         </ul>
                       </div>
-                      <div class="product-item-action">
+                      <div className="product-item-action">
                         <button
                           type="button"
                           title="Yêu thích"
-                          class="shop-wishlist-button-add"
+                          className="shop-wishlist-button-add"
                           data-type="shop-wishlist-button-add"
                         >
                           <HeartIcon />
@@ -1407,7 +1395,7 @@ export default function Home() {
                         <button
                           type="button"
                           title="Xem nhanh"
-                          class="shop-quickview-button"
+                          className="shop-quickview-button"
                           data-type="shop-quickview-button"
                         >
                           <CartIcon />
@@ -1415,44 +1403,44 @@ export default function Home() {
                         <button
                           type="button"
                           title="Thêm vào giỏ"
-                          class="shop-addLoop-button"
+                          className="shop-addLoop-button"
                           data-type="shop-addLoop-button"
                         >
                           <MagnifyingGlassIcon />
                         </button>
                       </div>
-                      <div class="product-item-detail">
-                        <div class="product-item-detail-info">
-                          <span class="product-item-detail-info-vendor">
+                      <div className="product-item-detail">
+                        <div className="product-item-detail-info">
+                          <span className="product-item-detail-info-vendor">
                             <Link href="/collections/vendors?query=F1GENZ" title="F1GENZ">
                               F1GENZ
                             </Link>
                           </span>
-                          <span class="product-item-detail-info-tag">Freeship</span>
+                          <span className="product-item-detail-info-tag">Freeship</span>
                         </div>
-                        <h3 class="product-item-detail-name">
+                        <h3 className="product-item-detail-name">
                           <Link href="/den-ban-dong-thau-cao-cap" title="Đèn bàn đồng thau cao cấp">
                             Đèn bàn đồng thau cao cấp
                           </Link>
                         </h3>
-                        <div class="product-item-detail-price">
+                        <div className="product-item-detail-price">
                           <span>2.819.000₫</span>
                           <del>3.199.000₫</del>
                         </div>
                       </div>
                     </div>
                   </div>
-                  <div class="product-item" data-id="87902289" data-handle="den-ban-pooping-dog-f1genz">
-                    <div class="product-item-wrap">
-                      <div class="product-item-image hasThumbs hasThumbsIcon">
-                        <span class="product-item-discount">-7%</span>
+                  <div className="product-item" data-id="87902289" data-handle="den-ban-pooping-dog-f1genz">
+                    <div className="product-item-wrap">
+                      <div className="product-item-image hasThumbs hasThumbsIcon">
+                        <span className="product-item-discount">-7%</span>
                         <Link
-                          class="product-item-link"
+                          className="product-item-link"
                           href="/den-ban-pooping-dog-f1genz"
                           title="Đèn bàn Pooping Dog F1GENZ"
                         >
                           <img
-                            class="w-auto"
+                            className="w-auto"
                             loading="lazy"
                             width="480"
                             height="480"
@@ -1460,7 +1448,7 @@ export default function Home() {
                             alt="Đèn bàn Pooping Dog F1GENZ"
                           />
                           <img
-                            class="w-auto"
+                            className="w-auto"
                             loading="lazy"
                             width="480"
                             height="480"
@@ -1468,11 +1456,11 @@ export default function Home() {
                             alt="Đèn bàn Pooping Dog F1GENZ"
                           />
                         </Link>
-                        <ul class="product-item-thumbs">
+                        <ul className="product-item-thumbs">
                           <li>
                             <Link href="/den-ban-pooping-dog-f1genz" title="Đèn bàn Pooping Dog F1GENZ">
                               <img
-                                class="w-auto lazyload"
+                                className="w-auto lazyload"
                                 width="50"
                                 height="50"
                                 src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
@@ -1484,7 +1472,7 @@ export default function Home() {
                           <li>
                             <Link href="/den-ban-pooping-dog-f1genz" title="Đèn bàn Pooping Dog F1GENZ">
                               <img
-                                class="w-auto lazyload"
+                                className="w-auto lazyload"
                                 width="50"
                                 height="50"
                                 src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
@@ -1496,7 +1484,7 @@ export default function Home() {
                           <li>
                             <Link href="/den-ban-pooping-dog-f1genz" title="Đèn bàn Pooping Dog F1GENZ">
                               <img
-                                class="w-auto lazyload"
+                                className="w-auto lazyload"
                                 width="50"
                                 height="50"
                                 src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
@@ -1507,11 +1495,11 @@ export default function Home() {
                           </li>
                         </ul>
                       </div>
-                      <div class="product-item-action">
+                      <div className="product-item-action">
                         <button
                           type="button"
                           title="Yêu thích"
-                          class="shop-wishlist-button-add"
+                          className="shop-wishlist-button-add"
                           data-type="shop-wishlist-button-add"
                         >
                           <HeartIcon />
@@ -1519,7 +1507,7 @@ export default function Home() {
                         <button
                           type="button"
                           title="Xem nhanh"
-                          class="shop-quickview-button"
+                          className="shop-quickview-button"
                           data-type="shop-quickview-button"
                         >
                           <CartIcon />
@@ -1527,40 +1515,44 @@ export default function Home() {
                         <button
                           type="button"
                           title="Thêm vào giỏ"
-                          class="shop-addLoop-button"
+                          className="shop-addLoop-button"
                           data-type="shop-addLoop-button"
                         >
                           <MagnifyingGlassIcon />
                         </button>
                       </div>
-                      <div class="product-item-detail">
-                        <div class="product-item-detail-info">
-                          <span class="product-item-detail-info-vendor">
+                      <div className="product-item-detail">
+                        <div className="product-item-detail-info">
+                          <span className="product-item-detail-info-vendor">
                             <Link href="/collections/vendors?query=F1GENZ" title="F1GENZ">
                               F1GENZ
                             </Link>
                           </span>
-                          <span class="product-item-detail-info-tag">Flashsale</span>
+                          <span className="product-item-detail-info-tag">Flashsale</span>
                         </div>
-                        <h3 class="product-item-detail-name">
+                        <h3 className="product-item-detail-name">
                           <Link href="/den-ban-pooping-dog-f1genz" title="Đèn bàn Pooping Dog F1GENZ">
                             Đèn bàn Pooping Dog F1GENZ
                           </Link>
                         </h3>
-                        <div class="product-item-detail-price">
+                        <div className="product-item-detail-price">
                           <span>3.529.000₫</span>
                           <del>3.789.000₫</del>
                         </div>
                       </div>
                     </div>
                   </div>
-                  <div class="product-item" data-id="87902188" data-handle="den-san-f1genz-cao-cap">
-                    <div class="product-item-wrap">
-                      <div class="product-item-image hasThumbs hasThumbsIcon">
-                        <span class="product-item-discount">-6%</span>
-                        <Link class="product-item-link" href="/den-san-f1genz-cao-cap" title="Đèn sàn F1GENZ cao cấp">
+                  <div className="product-item" data-id="87902188" data-handle="den-san-f1genz-cao-cap">
+                    <div className="product-item-wrap">
+                      <div className="product-item-image hasThumbs hasThumbsIcon">
+                        <span className="product-item-discount">-6%</span>
+                        <Link
+                          className="product-item-link"
+                          href="/den-san-f1genz-cao-cap"
+                          title="Đèn sàn F1GENZ cao cấp"
+                        >
                           <img
-                            class="w-auto"
+                            className="w-auto"
                             loading="lazy"
                             width="480"
                             height="480"
@@ -1568,7 +1560,7 @@ export default function Home() {
                             alt="Đèn sàn F1GENZ cao cấp"
                           />
                           <img
-                            class="w-auto"
+                            className="w-auto"
                             loading="lazy"
                             width="480"
                             height="480"
@@ -1576,11 +1568,11 @@ export default function Home() {
                             alt="Đèn sàn F1GENZ cao cấp"
                           />
                         </Link>
-                        <ul class="product-item-thumbs">
+                        <ul className="product-item-thumbs">
                           <li>
                             <Link href="/den-san-f1genz-cao-cap" title="Đèn sàn F1GENZ cao cấp">
                               <img
-                                class="w-auto lazyload"
+                                className="w-auto lazyload"
                                 width="50"
                                 height="50"
                                 src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
@@ -1592,7 +1584,7 @@ export default function Home() {
                           <li>
                             <Link href="/den-san-f1genz-cao-cap" title="Đèn sàn F1GENZ cao cấp">
                               <img
-                                class="w-auto lazyload"
+                                className="w-auto lazyload"
                                 width="50"
                                 height="50"
                                 src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
@@ -1604,7 +1596,7 @@ export default function Home() {
                           <li>
                             <Link href="/den-san-f1genz-cao-cap" title="Đèn sàn F1GENZ cao cấp">
                               <img
-                                class="w-auto lazyload"
+                                className="w-auto lazyload"
                                 width="50"
                                 height="50"
                                 src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
@@ -1615,11 +1607,11 @@ export default function Home() {
                           </li>
                         </ul>
                       </div>
-                      <div class="product-item-action">
+                      <div className="product-item-action">
                         <button
                           type="button"
                           title="Yêu thích"
-                          class="shop-wishlist-button-add"
+                          className="shop-wishlist-button-add"
                           data-type="shop-wishlist-button-add"
                         >
                           <HeartIcon />
@@ -1627,7 +1619,7 @@ export default function Home() {
                         <button
                           type="button"
                           title="Xem nhanh"
-                          class="shop-quickview-button"
+                          className="shop-quickview-button"
                           data-type="shop-quickview-button"
                         >
                           <CartIcon />
@@ -1635,44 +1627,44 @@ export default function Home() {
                         <button
                           type="button"
                           title="Thêm vào giỏ"
-                          class="shop-addLoop-button"
+                          className="shop-addLoop-button"
                           data-type="shop-addLoop-button"
                         >
                           <MagnifyingGlassIcon />
                         </button>
                       </div>
-                      <div class="product-item-detail">
-                        <div class="product-item-detail-info">
-                          <span class="product-item-detail-info-vendor">
+                      <div className="product-item-detail">
+                        <div className="product-item-detail-info">
+                          <span className="product-item-detail-info-vendor">
                             <Link href="/collections/vendors?query=F1GENZ" title="F1GENZ">
                               F1GENZ
                             </Link>
                           </span>
-                          <span class="product-item-detail-info-tag">Best seller</span>
+                          <span className="product-item-detail-info-tag">Best seller</span>
                         </div>
-                        <h3 class="product-item-detail-name">
+                        <h3 className="product-item-detail-name">
                           <Link href="/den-san-f1genz-cao-cap" title="Đèn sàn F1GENZ cao cấp">
                             Đèn sàn F1GENZ cao cấp
                           </Link>
                         </h3>
-                        <div class="product-item-detail-price">
+                        <div className="product-item-detail-price">
                           <span>4.990.000₫</span>
                           <del>5.290.000₫</del>
                         </div>
                       </div>
                     </div>
                   </div>
-                  <div class="product-item" data-id="87902104" data-handle="den-san-bang-da-cam-thach">
-                    <div class="product-item-wrap">
-                      <div class="product-item-image hasThumbs hasThumbsIcon">
-                        <span class="product-item-discount">-5%</span>
+                  <div className="product-item" data-id="87902104" data-handle="den-san-bang-da-cam-thach">
+                    <div className="product-item-wrap">
+                      <div className="product-item-image hasThumbs hasThumbsIcon">
+                        <span className="product-item-discount">-5%</span>
                         <Link
-                          class="product-item-link"
+                          className="product-item-link"
                           href="/den-san-bang-da-cam-thach"
                           title="Đèn sàn bằng đá cẩm thạch"
                         >
                           <img
-                            class="w-auto"
+                            className="w-auto"
                             loading="lazy"
                             width="480"
                             height="480"
@@ -1680,7 +1672,7 @@ export default function Home() {
                             alt="Đèn sàn bằng đá cẩm thạch"
                           />
                           <img
-                            class="w-auto"
+                            className="w-auto"
                             loading="lazy"
                             width="480"
                             height="480"
@@ -1688,11 +1680,11 @@ export default function Home() {
                             alt="Đèn sàn bằng đá cẩm thạch"
                           />
                         </Link>
-                        <ul class="product-item-thumbs">
+                        <ul className="product-item-thumbs">
                           <li>
                             <Link href="/den-san-bang-da-cam-thach" title="Đèn sàn bằng đá cẩm thạch">
                               <img
-                                class="w-auto lazyload"
+                                className="w-auto lazyload"
                                 width="50"
                                 height="50"
                                 src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
@@ -1704,7 +1696,7 @@ export default function Home() {
                           <li>
                             <Link href="/den-san-bang-da-cam-thach" title="Đèn sàn bằng đá cẩm thạch">
                               <img
-                                class="w-auto lazyload"
+                                className="w-auto lazyload"
                                 width="50"
                                 height="50"
                                 src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
@@ -1716,7 +1708,7 @@ export default function Home() {
                           <li>
                             <Link href="/den-san-bang-da-cam-thach" title="Đèn sàn bằng đá cẩm thạch">
                               <img
-                                class="w-auto lazyload"
+                                className="w-auto lazyload"
                                 width="50"
                                 height="50"
                                 src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
@@ -1727,11 +1719,11 @@ export default function Home() {
                           </li>
                         </ul>
                       </div>
-                      <div class="product-item-action">
+                      <div className="product-item-action">
                         <button
                           type="button"
                           title="Yêu thích"
-                          class="shop-wishlist-button-add"
+                          className="shop-wishlist-button-add"
                           data-type="shop-wishlist-button-add"
                         >
                           <HeartIcon />
@@ -1739,7 +1731,7 @@ export default function Home() {
                         <button
                           type="button"
                           title="Xem nhanh"
-                          class="shop-quickview-button"
+                          className="shop-quickview-button"
                           data-type="shop-quickview-button"
                         >
                           <CartIcon />
@@ -1747,44 +1739,44 @@ export default function Home() {
                         <button
                           type="button"
                           title="Thêm vào giỏ"
-                          class="shop-addLoop-button"
+                          className="shop-addLoop-button"
                           data-type="shop-addLoop-button"
                         >
                           <MagnifyingGlassIcon />
                         </button>
                       </div>
-                      <div class="product-item-detail">
-                        <div class="product-item-detail-info">
-                          <span class="product-item-detail-info-vendor">
+                      <div className="product-item-detail">
+                        <div className="product-item-detail-info">
+                          <span className="product-item-detail-info-vendor">
                             <Link href="/collections/vendors?query=F1GENZ" title="F1GENZ">
                               F1GENZ
                             </Link>
                           </span>
-                          <span class="product-item-detail-info-tag">Trả góp</span>
+                          <span className="product-item-detail-info-tag">Trả góp</span>
                         </div>
-                        <h3 class="product-item-detail-name">
+                        <h3 className="product-item-detail-name">
                           <Link href="/den-san-bang-da-cam-thach" title="Đèn sàn bằng đá cẩm thạch">
                             Đèn sàn bằng đá cẩm thạch
                           </Link>
                         </h3>
-                        <div class="product-item-detail-price">
+                        <div className="product-item-detail-price">
                           <span>3.990.000₫</span>
                           <del>4.190.000₫</del>
                         </div>
                       </div>
                     </div>
                   </div>
-                  <div class="product-item" data-id="87902035" data-handle="den-san-cao-cap-tu-f1genz">
-                    <div class="product-item-wrap">
-                      <div class="product-item-image hasThumbs hasThumbsIcon">
-                        <span class="product-item-discount">-5%</span>
+                  <div className="product-item" data-id="87902035" data-handle="den-san-cao-cap-tu-f1genz">
+                    <div className="product-item-wrap">
+                      <div className="product-item-image hasThumbs hasThumbsIcon">
+                        <span className="product-item-discount">-5%</span>
                         <Link
-                          class="product-item-link"
+                          className="product-item-link"
                           href="/den-san-cao-cap-tu-f1genz"
                           title="Đèn sàn cao cấp từ F1GENZ"
                         >
                           <img
-                            class="w-auto"
+                            className="w-auto"
                             loading="lazy"
                             width="480"
                             height="480"
@@ -1792,7 +1784,7 @@ export default function Home() {
                             alt="Đèn sàn cao cấp từ F1GENZ"
                           />
                           <img
-                            class="w-auto"
+                            className="w-auto"
                             loading="lazy"
                             width="480"
                             height="480"
@@ -1800,11 +1792,11 @@ export default function Home() {
                             alt="Đèn sàn cao cấp từ F1GENZ"
                           />
                         </Link>
-                        <ul class="product-item-thumbs">
+                        <ul className="product-item-thumbs">
                           <li>
                             <Link href="/den-san-cao-cap-tu-f1genz" title="Đèn sàn cao cấp từ F1GENZ">
                               <img
-                                class="w-auto lazyload"
+                                className="w-auto lazyload"
                                 width="50"
                                 height="50"
                                 src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
@@ -1816,7 +1808,7 @@ export default function Home() {
                           <li>
                             <Link href="/den-san-cao-cap-tu-f1genz" title="Đèn sàn cao cấp từ F1GENZ">
                               <img
-                                class="w-auto lazyload"
+                                className="w-auto lazyload"
                                 width="50"
                                 height="50"
                                 src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
@@ -1828,7 +1820,7 @@ export default function Home() {
                           <li>
                             <Link href="/den-san-cao-cap-tu-f1genz" title="Đèn sàn cao cấp từ F1GENZ">
                               <img
-                                class="w-auto lazyload"
+                                className="w-auto lazyload"
                                 width="50"
                                 height="50"
                                 src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
@@ -1839,11 +1831,11 @@ export default function Home() {
                           </li>
                         </ul>
                       </div>
-                      <div class="product-item-action">
+                      <div className="product-item-action">
                         <button
                           type="button"
                           title="Yêu thích"
-                          class="shop-wishlist-button-add"
+                          className="shop-wishlist-button-add"
                           data-type="shop-wishlist-button-add"
                         >
                           <HeartIcon />
@@ -1851,7 +1843,7 @@ export default function Home() {
                         <button
                           type="button"
                           title="Xem nhanh"
-                          class="shop-quickview-button"
+                          className="shop-quickview-button"
                           data-type="shop-quickview-button"
                         >
                           <CartIcon />
@@ -1859,27 +1851,27 @@ export default function Home() {
                         <button
                           type="button"
                           title="Thêm vào giỏ"
-                          class="shop-addLoop-button"
+                          className="shop-addLoop-button"
                           data-type="shop-addLoop-button"
                         >
                           <MagnifyingGlassIcon />
                         </button>
                       </div>
-                      <div class="product-item-detail">
-                        <div class="product-item-detail-info">
-                          <span class="product-item-detail-info-vendor">
+                      <div className="product-item-detail">
+                        <div className="product-item-detail-info">
+                          <span className="product-item-detail-info-vendor">
                             <Link href="/collections/vendors?query=F1GENZ" title="F1GENZ">
                               F1GENZ
                             </Link>
                           </span>
-                          <span class="product-item-detail-info-tag">Độc quyền</span>
+                          <span className="product-item-detail-info-tag">Độc quyền</span>
                         </div>
-                        <h3 class="product-item-detail-name">
+                        <h3 className="product-item-detail-name">
                           <Link href="/den-san-cao-cap-tu-f1genz" title="Đèn sàn cao cấp từ F1GENZ">
                             Đèn sàn cao cấp từ F1GENZ
                           </Link>
                         </h3>
-                        <div class="product-item-detail-price">
+                        <div className="product-item-detail-price">
                           <span>3.998.000₫</span>
                           <del>4.210.000₫</del>
                         </div>
@@ -1888,19 +1880,19 @@ export default function Home() {
                   </div>
                 </div>
               </div>
-              <div class="home-product-tab-body-item">
-                <div class="home-product-tab-body-item-data">
-                  <div class="product-item" data-id="87901931" data-handle="ghe-an-4-chan-f1genz-cao-cap-3">
-                    <div class="product-item-wrap">
-                      <div class="product-item-image hasThumbs hasThumbsIcon">
-                        <span class="product-item-discount">-14%</span>
+              <div className="home-product-tab-body-item">
+                <div className="home-product-tab-body-item-data">
+                  <div className="product-item" data-id="87901931" data-handle="ghe-an-4-chan-f1genz-cao-cap-3">
+                    <div className="product-item-wrap">
+                      <div className="product-item-image hasThumbs hasThumbsIcon">
+                        <span className="product-item-discount">-14%</span>
                         <Link
-                          class="product-item-link"
+                          className="product-item-link"
                           href="/ghe-an-4-chan-f1genz-cao-cap-3"
                           title="Ghế ăn 4 chân F1GENZ cao cấp"
                         >
                           <img
-                            class="w-auto"
+                            className="w-auto"
                             loading="lazy"
                             width="480"
                             height="480"
@@ -1908,7 +1900,7 @@ export default function Home() {
                             alt="Ghế ăn 4 chân F1GENZ cao cấp"
                           />
                           <img
-                            class="w-auto"
+                            className="w-auto"
                             loading="lazy"
                             width="480"
                             height="480"
@@ -1916,11 +1908,11 @@ export default function Home() {
                             alt="Ghế ăn 4 chân F1GENZ cao cấp"
                           />
                         </Link>
-                        <ul class="product-item-thumbs">
+                        <ul className="product-item-thumbs">
                           <li>
                             <Link href="/ghe-an-4-chan-f1genz-cao-cap-3" title="Ghế ăn 4 chân F1GENZ cao cấp">
                               <img
-                                class="w-auto lazyload"
+                                className="w-auto lazyload"
                                 width="50"
                                 height="50"
                                 src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
@@ -1932,7 +1924,7 @@ export default function Home() {
                           <li>
                             <Link href="/ghe-an-4-chan-f1genz-cao-cap-3" title="Ghế ăn 4 chân F1GENZ cao cấp">
                               <img
-                                class="w-auto lazyload"
+                                className="w-auto lazyload"
                                 width="50"
                                 height="50"
                                 src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
@@ -1944,7 +1936,7 @@ export default function Home() {
                           <li>
                             <Link href="/ghe-an-4-chan-f1genz-cao-cap-3" title="Ghế ăn 4 chân F1GENZ cao cấp">
                               <img
-                                class="w-auto lazyload"
+                                className="w-auto lazyload"
                                 width="50"
                                 height="50"
                                 src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
@@ -1955,11 +1947,11 @@ export default function Home() {
                           </li>
                         </ul>
                       </div>
-                      <div class="product-item-action">
+                      <div className="product-item-action">
                         <button
                           type="button"
                           title="Yêu thích"
-                          class="shop-wishlist-button-add"
+                          className="shop-wishlist-button-add"
                           data-type="shop-wishlist-button-add"
                         >
                           <HeartIcon />
@@ -1967,7 +1959,7 @@ export default function Home() {
                         <button
                           type="button"
                           title="Xem nhanh"
-                          class="shop-quickview-button"
+                          className="shop-quickview-button"
                           data-type="shop-quickview-button"
                         >
                           <CartIcon />
@@ -1975,40 +1967,44 @@ export default function Home() {
                         <button
                           type="button"
                           title="Thêm vào giỏ"
-                          class="shop-addLoop-button"
+                          className="shop-addLoop-button"
                           data-type="shop-addLoop-button"
                         >
                           <MagnifyingGlassIcon />
                         </button>
                       </div>
-                      <div class="product-item-detail">
-                        <div class="product-item-detail-info">
-                          <span class="product-item-detail-info-vendor">
+                      <div className="product-item-detail">
+                        <div className="product-item-detail-info">
+                          <span className="product-item-detail-info-vendor">
                             <Link href="/collections/vendors?query=F1GENZ" title="F1GENZ">
                               F1GENZ
                             </Link>
                           </span>
-                          <span class="product-item-detail-info-tag">Trả góp</span>
+                          <span className="product-item-detail-info-tag">Trả góp</span>
                         </div>
-                        <h3 class="product-item-detail-name">
+                        <h3 className="product-item-detail-name">
                           <Link href="/ghe-an-4-chan-f1genz-cao-cap-3" title="Ghế ăn 4 chân F1GENZ cao cấp">
                             Ghế ăn 4 chân F1GENZ cao cấp
                           </Link>
                         </h3>
-                        <div class="product-item-detail-price">
+                        <div className="product-item-detail-price">
                           <span>2.819.000₫</span>
                           <del>3.290.000₫</del>
                         </div>
                       </div>
                     </div>
                   </div>
-                  <div class="product-item" data-id="87901666" data-handle="ghe-an-4-chan-cao-cap-1">
-                    <div class="product-item-wrap">
-                      <div class="product-item-image hasThumbs hasThumbsIcon">
-                        <span class="product-item-discount">-25%</span>
-                        <Link class="product-item-link" href="/ghe-an-4-chan-cao-cap-1" title="Ghế ăn 4 chân cao cấp">
+                  <div className="product-item" data-id="87901666" data-handle="ghe-an-4-chan-cao-cap-1">
+                    <div className="product-item-wrap">
+                      <div className="product-item-image hasThumbs hasThumbsIcon">
+                        <span className="product-item-discount">-25%</span>
+                        <Link
+                          className="product-item-link"
+                          href="/ghe-an-4-chan-cao-cap-1"
+                          title="Ghế ăn 4 chân cao cấp"
+                        >
                           <img
-                            class="w-auto"
+                            className="w-auto"
                             loading="lazy"
                             width="480"
                             height="480"
@@ -2016,7 +2012,7 @@ export default function Home() {
                             alt="Ghế ăn 4 chân cao cấp"
                           />
                           <img
-                            class="w-auto"
+                            className="w-auto"
                             loading="lazy"
                             width="480"
                             height="480"
@@ -2024,11 +2020,11 @@ export default function Home() {
                             alt="Ghế ăn 4 chân cao cấp"
                           />
                         </Link>
-                        <ul class="product-item-thumbs">
+                        <ul className="product-item-thumbs">
                           <li>
                             <Link href="/ghe-an-4-chan-cao-cap-1" title="Ghế ăn 4 chân cao cấp">
                               <img
-                                class="w-auto lazyload"
+                                className="w-auto lazyload"
                                 width="50"
                                 height="50"
                                 src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
@@ -2040,7 +2036,7 @@ export default function Home() {
                           <li>
                             <Link href="/ghe-an-4-chan-cao-cap-1" title="Ghế ăn 4 chân cao cấp">
                               <img
-                                class="w-auto lazyload"
+                                className="w-auto lazyload"
                                 width="50"
                                 height="50"
                                 src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
@@ -2052,7 +2048,7 @@ export default function Home() {
                           <li>
                             <Link href="/ghe-an-4-chan-cao-cap-1" title="Ghế ăn 4 chân cao cấp">
                               <img
-                                class="w-auto lazyload"
+                                className="w-auto lazyload"
                                 width="50"
                                 height="50"
                                 src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
@@ -2063,11 +2059,11 @@ export default function Home() {
                           </li>
                         </ul>
                       </div>
-                      <div class="product-item-action">
+                      <div className="product-item-action">
                         <button
                           type="button"
                           title="Yêu thích"
-                          class="shop-wishlist-button-add"
+                          className="shop-wishlist-button-add"
                           data-type="shop-wishlist-button-add"
                         >
                           <HeartIcon />
@@ -2075,7 +2071,7 @@ export default function Home() {
                         <button
                           type="button"
                           title="Xem nhanh"
-                          class="shop-quickview-button"
+                          className="shop-quickview-button"
                           data-type="shop-quickview-button"
                         >
                           <CartIcon />
@@ -2083,40 +2079,44 @@ export default function Home() {
                         <button
                           type="button"
                           title="Thêm vào giỏ"
-                          class="shop-addLoop-button"
+                          className="shop-addLoop-button"
                           data-type="shop-addLoop-button"
                         >
                           <MagnifyingGlassIcon />
                         </button>
                       </div>
-                      <div class="product-item-detail">
-                        <div class="product-item-detail-info">
-                          <span class="product-item-detail-info-vendor">
+                      <div className="product-item-detail">
+                        <div className="product-item-detail-info">
+                          <span className="product-item-detail-info-vendor">
                             <Link href="/collections/vendors?query=F1GENZ" title="F1GENZ">
                               F1GENZ
                             </Link>
                           </span>
-                          <span class="product-item-detail-info-tag">Quà tặng</span>
+                          <span className="product-item-detail-info-tag">Quà tặng</span>
                         </div>
-                        <h3 class="product-item-detail-name">
+                        <h3 className="product-item-detail-name">
                           <Link href="/ghe-an-4-chan-cao-cap-1" title="Ghế ăn 4 chân cao cấp">
                             Ghế ăn 4 chân cao cấp
                           </Link>
                         </h3>
-                        <div class="product-item-detail-price">
+                        <div className="product-item-detail-price">
                           <span>11.199.000₫</span>
                           <del>14.900.000₫</del>
                         </div>
                       </div>
                     </div>
                   </div>
-                  <div class="product-item" data-id="87901526" data-handle="ghe-an-f1genz-cao-cap-1">
-                    <div class="product-item-wrap">
-                      <div class="product-item-image hasThumbs hasThumbsIcon">
-                        <span class="product-item-discount">-14%</span>
-                        <Link class="product-item-link" href="/ghe-an-f1genz-cao-cap-1" title="Ghế ăn F1GENZ cao cấp">
+                  <div className="product-item" data-id="87901526" data-handle="ghe-an-f1genz-cao-cap-1">
+                    <div className="product-item-wrap">
+                      <div className="product-item-image hasThumbs hasThumbsIcon">
+                        <span className="product-item-discount">-14%</span>
+                        <Link
+                          className="product-item-link"
+                          href="/ghe-an-f1genz-cao-cap-1"
+                          title="Ghế ăn F1GENZ cao cấp"
+                        >
                           <img
-                            class="w-auto"
+                            className="w-auto"
                             loading="lazy"
                             width="480"
                             height="480"
@@ -2124,7 +2124,7 @@ export default function Home() {
                             alt="Ghế ăn F1GENZ cao cấp"
                           />
                           <img
-                            class="w-auto"
+                            className="w-auto"
                             loading="lazy"
                             width="480"
                             height="480"
@@ -2132,11 +2132,11 @@ export default function Home() {
                             alt="Ghế ăn F1GENZ cao cấp"
                           />
                         </Link>
-                        <ul class="product-item-thumbs">
+                        <ul className="product-item-thumbs">
                           <li>
                             <Link href="/ghe-an-f1genz-cao-cap-1" title="Ghế ăn F1GENZ cao cấp">
                               <img
-                                class="w-auto lazyload"
+                                className="w-auto lazyload"
                                 width="50"
                                 height="50"
                                 src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
@@ -2148,7 +2148,7 @@ export default function Home() {
                           <li>
                             <Link href="/ghe-an-f1genz-cao-cap-1" title="Ghế ăn F1GENZ cao cấp">
                               <img
-                                class="w-auto lazyload"
+                                className="w-auto lazyload"
                                 width="50"
                                 height="50"
                                 src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
@@ -2160,7 +2160,7 @@ export default function Home() {
                           <li>
                             <Link href="/ghe-an-f1genz-cao-cap-1" title="Ghế ăn F1GENZ cao cấp">
                               <img
-                                class="w-auto lazyload"
+                                className="w-auto lazyload"
                                 width="50"
                                 height="50"
                                 src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
@@ -2171,11 +2171,11 @@ export default function Home() {
                           </li>
                         </ul>
                       </div>
-                      <div class="product-item-action">
+                      <div className="product-item-action">
                         <button
                           type="button"
                           title="Yêu thích"
-                          class="shop-wishlist-button-add"
+                          className="shop-wishlist-button-add"
                           data-type="shop-wishlist-button-add"
                         >
                           <HeartIcon />
@@ -2183,7 +2183,7 @@ export default function Home() {
                         <button
                           type="button"
                           title="Xem nhanh"
-                          class="shop-quickview-button"
+                          className="shop-quickview-button"
                           data-type="shop-quickview-button"
                         >
                           <CartIcon />
@@ -2191,43 +2191,43 @@ export default function Home() {
                         <button
                           type="button"
                           title="Thêm vào giỏ"
-                          class="shop-addLoop-button"
+                          className="shop-addLoop-button"
                           data-type="shop-addLoop-button"
                         >
                           <MagnifyingGlassIcon />
                         </button>
                       </div>
-                      <div class="product-item-detail">
-                        <div class="product-item-detail-info">
-                          <span class="product-item-detail-info-vendor">
+                      <div className="product-item-detail">
+                        <div className="product-item-detail-info">
+                          <span className="product-item-detail-info-vendor">
                             <Link href="/collections/vendors?query=F1GENZ" title="F1GENZ">
                               F1GENZ
                             </Link>
                           </span>
-                          <span class="product-item-detail-info-tag">Giá tốt</span>
+                          <span className="product-item-detail-info-tag">Giá tốt</span>
                         </div>
-                        <h3 class="product-item-detail-name">
+                        <h3 className="product-item-detail-name">
                           <Link href="/ghe-an-f1genz-cao-cap-1" title="Ghế ăn F1GENZ cao cấp">
                             Ghế ăn F1GENZ cao cấp
                           </Link>
                         </h3>
-                        <div class="product-item-detail-price">
+                        <div className="product-item-detail-price">
                           <span>2.819.000₫</span>
                           <del>3.290.000₫</del>
                         </div>
                       </div>
                     </div>
                   </div>
-                  <div class="product-item" data-id="87901387" data-handle="ghe-an-f1genz-cao-cap-loai-dac-biet">
-                    <div class="product-item-wrap">
-                      <div class="product-item-image hasThumbs hasThumbsIcon">
+                  <div className="product-item" data-id="87901387" data-handle="ghe-an-f1genz-cao-cap-loai-dac-biet">
+                    <div className="product-item-wrap">
+                      <div className="product-item-image hasThumbs hasThumbsIcon">
                         <Link
-                          class="product-item-link"
+                          className="product-item-link"
                           href="/ghe-an-f1genz-cao-cap-loai-dac-biet"
                           title="Ghế ăn F1GENZ cao cấp loại đặc biệt"
                         >
                           <img
-                            class="w-auto"
+                            className="w-auto"
                             loading="lazy"
                             width="480"
                             height="480"
@@ -2235,7 +2235,7 @@ export default function Home() {
                             alt="Ghế ăn F1GENZ cao cấp loại đặc biệt"
                           />
                           <img
-                            class="w-auto"
+                            className="w-auto"
                             loading="lazy"
                             width="480"
                             height="480"
@@ -2243,14 +2243,14 @@ export default function Home() {
                             alt="Ghế ăn F1GENZ cao cấp loại đặc biệt"
                           />
                         </Link>
-                        <ul class="product-item-thumbs">
+                        <ul className="product-item-thumbs">
                           <li>
                             <Link
                               href="/ghe-an-f1genz-cao-cap-loai-dac-biet"
                               title="Ghế ăn F1GENZ cao cấp loại đặc biệt"
                             >
                               <img
-                                class="w-auto lazyload"
+                                className="w-auto lazyload"
                                 width="50"
                                 height="50"
                                 src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
@@ -2265,7 +2265,7 @@ export default function Home() {
                               title="Ghế ăn F1GENZ cao cấp loại đặc biệt"
                             >
                               <img
-                                class="w-auto lazyload"
+                                className="w-auto lazyload"
                                 width="50"
                                 height="50"
                                 src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
@@ -2280,7 +2280,7 @@ export default function Home() {
                               title="Ghế ăn F1GENZ cao cấp loại đặc biệt"
                             >
                               <img
-                                class="w-auto lazyload"
+                                className="w-auto lazyload"
                                 width="50"
                                 height="50"
                                 src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
@@ -2291,11 +2291,11 @@ export default function Home() {
                           </li>
                         </ul>
                       </div>
-                      <div class="product-item-action">
+                      <div className="product-item-action">
                         <button
                           type="button"
                           title="Yêu thích"
-                          class="shop-wishlist-button-add"
+                          className="shop-wishlist-button-add"
                           data-type="shop-wishlist-button-add"
                         >
                           <HeartIcon />
@@ -2303,7 +2303,7 @@ export default function Home() {
                         <button
                           type="button"
                           title="Xem nhanh"
-                          class="shop-quickview-button"
+                          className="shop-quickview-button"
                           data-type="shop-quickview-button"
                         >
                           <CartIcon />
@@ -2311,39 +2311,43 @@ export default function Home() {
                         <button
                           type="button"
                           title="Thêm vào giỏ"
-                          class="shop-addLoop-button"
+                          className="shop-addLoop-button"
                           data-type="shop-addLoop-button"
                         >
                           <MagnifyingGlassIcon />
                         </button>
                       </div>
-                      <div class="product-item-detail">
-                        <div class="product-item-detail-info">
-                          <span class="product-item-detail-info-vendor">
+                      <div className="product-item-detail">
+                        <div className="product-item-detail-info">
+                          <span className="product-item-detail-info-vendor">
                             <Link href="/collections/vendors?query=F1GENZ" title="F1GENZ">
                               F1GENZ
                             </Link>
                           </span>
-                          <span class="product-item-detail-info-tag">New</span>
+                          <span className="product-item-detail-info-tag">New</span>
                         </div>
-                        <h3 class="product-item-detail-name">
+                        <h3 className="product-item-detail-name">
                           <Link href="/ghe-an-f1genz-cao-cap-loai-dac-biet" title="Ghế ăn F1GENZ cao cấp loại đặc biệt">
                             Ghế ăn F1GENZ cao cấp loại đặc biệt
                           </Link>
                         </h3>
-                        <div class="product-item-detail-price">
+                        <div className="product-item-detail-price">
                           <span>5.199.000₫</span>
                         </div>
                       </div>
                     </div>
                   </div>
-                  <div class="product-item" data-id="87901233" data-handle="ghe-cay-4-chan-cao-cap">
-                    <div class="product-item-wrap">
-                      <div class="product-item-image hasThumbs hasThumbsIcon">
-                        <span class="product-item-discount">-21%</span>
-                        <Link class="product-item-link" href="/ghe-cay-4-chan-cao-cap" title="Ghế cây 4 chân cao cấp">
+                  <div className="product-item" data-id="87901233" data-handle="ghe-cay-4-chan-cao-cap">
+                    <div className="product-item-wrap">
+                      <div className="product-item-image hasThumbs hasThumbsIcon">
+                        <span className="product-item-discount">-21%</span>
+                        <Link
+                          className="product-item-link"
+                          href="/ghe-cay-4-chan-cao-cap"
+                          title="Ghế cây 4 chân cao cấp"
+                        >
                           <img
-                            class="w-auto"
+                            className="w-auto"
                             loading="lazy"
                             width="480"
                             height="480"
@@ -2351,7 +2355,7 @@ export default function Home() {
                             alt="Ghế cây 4 chân cao cấp"
                           />
                           <img
-                            class="w-auto"
+                            className="w-auto"
                             loading="lazy"
                             width="480"
                             height="480"
@@ -2359,11 +2363,11 @@ export default function Home() {
                             alt="Ghế cây 4 chân cao cấp"
                           />
                         </Link>
-                        <ul class="product-item-thumbs">
+                        <ul className="product-item-thumbs">
                           <li>
                             <Link href="/ghe-cay-4-chan-cao-cap" title="Ghế cây 4 chân cao cấp">
                               <img
-                                class="w-auto lazyload"
+                                className="w-auto lazyload"
                                 width="50"
                                 height="50"
                                 src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
@@ -2375,7 +2379,7 @@ export default function Home() {
                           <li>
                             <Link href="/ghe-cay-4-chan-cao-cap" title="Ghế cây 4 chân cao cấp">
                               <img
-                                class="w-auto lazyload"
+                                className="w-auto lazyload"
                                 width="50"
                                 height="50"
                                 src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
@@ -2387,7 +2391,7 @@ export default function Home() {
                           <li>
                             <Link href="/ghe-cay-4-chan-cao-cap" title="Ghế cây 4 chân cao cấp">
                               <img
-                                class="w-auto lazyload"
+                                className="w-auto lazyload"
                                 width="50"
                                 height="50"
                                 src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
@@ -2398,11 +2402,11 @@ export default function Home() {
                           </li>
                         </ul>
                       </div>
-                      <div class="product-item-action">
+                      <div className="product-item-action">
                         <button
                           type="button"
                           title="Yêu thích"
-                          class="shop-wishlist-button-add"
+                          className="shop-wishlist-button-add"
                           data-type="shop-wishlist-button-add"
                         >
                           <HeartIcon />
@@ -2410,7 +2414,7 @@ export default function Home() {
                         <button
                           type="button"
                           title="Xem nhanh"
-                          class="shop-quickview-button"
+                          className="shop-quickview-button"
                           data-type="shop-quickview-button"
                         >
                           <CartIcon />
@@ -2418,44 +2422,44 @@ export default function Home() {
                         <button
                           type="button"
                           title="Thêm vào giỏ"
-                          class="shop-addLoop-button"
+                          className="shop-addLoop-button"
                           data-type="shop-addLoop-button"
                         >
                           <MagnifyingGlassIcon />
                         </button>
                       </div>
-                      <div class="product-item-detail">
-                        <div class="product-item-detail-info">
-                          <span class="product-item-detail-info-vendor">
+                      <div className="product-item-detail">
+                        <div className="product-item-detail-info">
+                          <span className="product-item-detail-info-vendor">
                             <Link href="/collections/vendors?query=F1GENZ" title="F1GENZ">
                               F1GENZ
                             </Link>
                           </span>
-                          <span class="product-item-detail-info-tag">Freeship</span>
+                          <span className="product-item-detail-info-tag">Freeship</span>
                         </div>
-                        <h3 class="product-item-detail-name">
+                        <h3 className="product-item-detail-name">
                           <Link href="/ghe-cay-4-chan-cao-cap" title="Ghế cây 4 chân cao cấp">
                             Ghế cây 4 chân cao cấp
                           </Link>
                         </h3>
-                        <div class="product-item-detail-price">
+                        <div className="product-item-detail-price">
                           <span>8.900.000₫</span>
                           <del>11.290.000₫</del>
                         </div>
                       </div>
                     </div>
                   </div>
-                  <div class="product-item" data-id="87901113" data-handle="ghe-dua-cao-cap-phong-an">
-                    <div class="product-item-wrap">
-                      <div class="product-item-image hasThumbs hasThumbsIcon">
-                        <span class="product-item-discount">-13%</span>
+                  <div className="product-item" data-id="87901113" data-handle="ghe-dua-cao-cap-phong-an">
+                    <div className="product-item-wrap">
+                      <div className="product-item-image hasThumbs hasThumbsIcon">
+                        <span className="product-item-discount">-13%</span>
                         <Link
-                          class="product-item-link"
+                          className="product-item-link"
                           href="/ghe-dua-cao-cap-phong-an"
                           title="Ghế dựa cao cấp phòng ăn"
                         >
                           <img
-                            class="w-auto"
+                            className="w-auto"
                             loading="lazy"
                             width="480"
                             height="480"
@@ -2463,7 +2467,7 @@ export default function Home() {
                             alt="Ghế dựa cao cấp phòng ăn"
                           />
                           <img
-                            class="w-auto"
+                            className="w-auto"
                             loading="lazy"
                             width="480"
                             height="480"
@@ -2471,11 +2475,11 @@ export default function Home() {
                             alt="Ghế dựa cao cấp phòng ăn"
                           />
                         </Link>
-                        <ul class="product-item-thumbs">
+                        <ul className="product-item-thumbs">
                           <li>
                             <Link href="/ghe-dua-cao-cap-phong-an" title="Ghế dựa cao cấp phòng ăn">
                               <img
-                                class="w-auto lazyload"
+                                className="w-auto lazyload"
                                 width="50"
                                 height="50"
                                 src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
@@ -2487,7 +2491,7 @@ export default function Home() {
                           <li>
                             <Link href="/ghe-dua-cao-cap-phong-an" title="Ghế dựa cao cấp phòng ăn">
                               <img
-                                class="w-auto lazyload"
+                                className="w-auto lazyload"
                                 width="50"
                                 height="50"
                                 src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
@@ -2499,7 +2503,7 @@ export default function Home() {
                           <li>
                             <Link href="/ghe-dua-cao-cap-phong-an" title="Ghế dựa cao cấp phòng ăn">
                               <img
-                                class="w-auto lazyload"
+                                className="w-auto lazyload"
                                 width="50"
                                 height="50"
                                 src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
@@ -2510,11 +2514,11 @@ export default function Home() {
                           </li>
                         </ul>
                       </div>
-                      <div class="product-item-action">
+                      <div className="product-item-action">
                         <button
                           type="button"
                           title="Yêu thích"
-                          class="shop-wishlist-button-add"
+                          className="shop-wishlist-button-add"
                           data-type="shop-wishlist-button-add"
                         >
                           <HeartIcon />
@@ -2522,7 +2526,7 @@ export default function Home() {
                         <button
                           type="button"
                           title="Xem nhanh"
-                          class="shop-quickview-button"
+                          className="shop-quickview-button"
                           data-type="shop-quickview-button"
                         >
                           <CartIcon />
@@ -2530,40 +2534,44 @@ export default function Home() {
                         <button
                           type="button"
                           title="Thêm vào giỏ"
-                          class="shop-addLoop-button"
+                          className="shop-addLoop-button"
                           data-type="shop-addLoop-button"
                         >
                           <MagnifyingGlassIcon />
                         </button>
                       </div>
-                      <div class="product-item-detail">
-                        <div class="product-item-detail-info">
-                          <span class="product-item-detail-info-vendor">
+                      <div className="product-item-detail">
+                        <div className="product-item-detail-info">
+                          <span className="product-item-detail-info-vendor">
                             <Link href="/collections/vendors?query=F1GENZ" title="F1GENZ">
                               F1GENZ
                             </Link>
                           </span>
-                          <span class="product-item-detail-info-tag">Saleoff</span>
+                          <span className="product-item-detail-info-tag">Saleoff</span>
                         </div>
-                        <h3 class="product-item-detail-name">
+                        <h3 className="product-item-detail-name">
                           <Link href="/ghe-dua-cao-cap-phong-an" title="Ghế dựa cao cấp phòng ăn">
                             Ghế dựa cao cấp phòng ăn
                           </Link>
                         </h3>
-                        <div class="product-item-detail-price">
+                        <div className="product-item-detail-price">
                           <span>1.399.000₫</span>
                           <del>1.599.000₫</del>
                         </div>
                       </div>
                     </div>
                   </div>
-                  <div class="product-item" data-id="87901033" data-handle="ghe-kieu-hien-dai-2022">
-                    <div class="product-item-wrap">
-                      <div class="product-item-image hasThumbs hasThumbsIcon">
-                        <span class="product-item-discount">-21%</span>
-                        <Link class="product-item-link" href="/ghe-kieu-hien-dai-2022" title="Ghế kiểu hiện đại 2022">
+                  <div className="product-item" data-id="87901033" data-handle="ghe-kieu-hien-dai-2022">
+                    <div className="product-item-wrap">
+                      <div className="product-item-image hasThumbs hasThumbsIcon">
+                        <span className="product-item-discount">-21%</span>
+                        <Link
+                          className="product-item-link"
+                          href="/ghe-kieu-hien-dai-2022"
+                          title="Ghế kiểu hiện đại 2022"
+                        >
                           <img
-                            class="w-auto"
+                            className="w-auto"
                             loading="lazy"
                             width="480"
                             height="480"
@@ -2571,7 +2579,7 @@ export default function Home() {
                             alt="Ghế kiểu hiện đại 2022"
                           />
                           <img
-                            class="w-auto"
+                            className="w-auto"
                             loading="lazy"
                             width="480"
                             height="480"
@@ -2579,11 +2587,11 @@ export default function Home() {
                             alt="Ghế kiểu hiện đại 2022"
                           />
                         </Link>
-                        <ul class="product-item-thumbs">
+                        <ul className="product-item-thumbs">
                           <li>
                             <Link href="/ghe-kieu-hien-dai-2022" title="Ghế kiểu hiện đại 2022">
                               <img
-                                class="w-auto lazyload"
+                                className="w-auto lazyload"
                                 width="50"
                                 height="50"
                                 src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
@@ -2595,7 +2603,7 @@ export default function Home() {
                           <li>
                             <Link href="/ghe-kieu-hien-dai-2022" title="Ghế kiểu hiện đại 2022">
                               <img
-                                class="w-auto lazyload"
+                                className="w-auto lazyload"
                                 width="50"
                                 height="50"
                                 src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
@@ -2607,7 +2615,7 @@ export default function Home() {
                           <li>
                             <Link href="/ghe-kieu-hien-dai-2022" title="Ghế kiểu hiện đại 2022">
                               <img
-                                class="w-auto lazyload"
+                                className="w-auto lazyload"
                                 width="50"
                                 height="50"
                                 src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
@@ -2618,11 +2626,11 @@ export default function Home() {
                           </li>
                         </ul>
                       </div>
-                      <div class="product-item-action">
+                      <div className="product-item-action">
                         <button
                           type="button"
                           title="Yêu thích"
-                          class="shop-wishlist-button-add"
+                          className="shop-wishlist-button-add"
                           data-type="shop-wishlist-button-add"
                         >
                           <HeartIcon />
@@ -2630,7 +2638,7 @@ export default function Home() {
                         <button
                           type="button"
                           title="Xem nhanh"
-                          class="shop-quickview-button"
+                          className="shop-quickview-button"
                           data-type="shop-quickview-button"
                         >
                           <CartIcon />
@@ -2638,44 +2646,44 @@ export default function Home() {
                         <button
                           type="button"
                           title="Thêm vào giỏ"
-                          class="shop-addLoop-button"
+                          className="shop-addLoop-button"
                           data-type="shop-addLoop-button"
                         >
                           <MagnifyingGlassIcon />
                         </button>
                       </div>
-                      <div class="product-item-detail">
-                        <div class="product-item-detail-info">
-                          <span class="product-item-detail-info-vendor">
+                      <div className="product-item-detail">
+                        <div className="product-item-detail-info">
+                          <span className="product-item-detail-info-vendor">
                             <Link href="/collections/vendors?query=F1GENZ" title="F1GENZ">
                               F1GENZ
                             </Link>
                           </span>
-                          <span class="product-item-detail-info-tag">Best seller</span>
+                          <span className="product-item-detail-info-tag">Best seller</span>
                         </div>
-                        <h3 class="product-item-detail-name">
+                        <h3 className="product-item-detail-name">
                           <Link href="/ghe-kieu-hien-dai-2022" title="Ghế kiểu hiện đại 2022">
                             Ghế kiểu hiện đại 2022
                           </Link>
                         </h3>
-                        <div class="product-item-detail-price">
+                        <div className="product-item-detail-price">
                           <span>1.899.000₫</span>
                           <del>2.390.000₫</del>
                         </div>
                       </div>
                     </div>
                   </div>
-                  <div class="product-item" data-id="87900949" data-handle="ghe-tron-4-chan-cao-cap-3">
-                    <div class="product-item-wrap">
-                      <div class="product-item-image hasThumbs hasThumbsIcon">
-                        <span class="product-item-discount">-42%</span>
+                  <div className="product-item" data-id="87900949" data-handle="ghe-tron-4-chan-cao-cap-3">
+                    <div className="product-item-wrap">
+                      <div className="product-item-image hasThumbs hasThumbsIcon">
+                        <span className="product-item-discount">-42%</span>
                         <Link
-                          class="product-item-link"
+                          className="product-item-link"
                           href="/ghe-tron-4-chan-cao-cap-3"
                           title="Ghế trơn 4 chân cao cấp"
                         >
                           <img
-                            class="w-auto"
+                            className="w-auto"
                             loading="lazy"
                             width="480"
                             height="480"
@@ -2683,7 +2691,7 @@ export default function Home() {
                             alt="Ghế trơn 4 chân cao cấp"
                           />
                           <img
-                            class="w-auto"
+                            className="w-auto"
                             loading="lazy"
                             width="480"
                             height="480"
@@ -2691,11 +2699,11 @@ export default function Home() {
                             alt="Ghế trơn 4 chân cao cấp"
                           />
                         </Link>
-                        <ul class="product-item-thumbs">
+                        <ul className="product-item-thumbs">
                           <li>
                             <Link href="/ghe-tron-4-chan-cao-cap-3" title="Ghế trơn 4 chân cao cấp">
                               <img
-                                class="w-auto lazyload"
+                                className="w-auto lazyload"
                                 width="50"
                                 height="50"
                                 src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
@@ -2707,7 +2715,7 @@ export default function Home() {
                           <li>
                             <Link href="/ghe-tron-4-chan-cao-cap-3" title="Ghế trơn 4 chân cao cấp">
                               <img
-                                class="w-auto lazyload"
+                                className="w-auto lazyload"
                                 width="50"
                                 height="50"
                                 src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
@@ -2719,7 +2727,7 @@ export default function Home() {
                           <li>
                             <Link href="/ghe-tron-4-chan-cao-cap-3" title="Ghế trơn 4 chân cao cấp">
                               <img
-                                class="w-auto lazyload"
+                                className="w-auto lazyload"
                                 width="50"
                                 height="50"
                                 src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
@@ -2730,11 +2738,11 @@ export default function Home() {
                           </li>
                         </ul>
                       </div>
-                      <div class="product-item-action">
+                      <div className="product-item-action">
                         <button
                           type="button"
                           title="Yêu thích"
-                          class="shop-wishlist-button-add"
+                          className="shop-wishlist-button-add"
                           data-type="shop-wishlist-button-add"
                         >
                           <HeartIcon />
@@ -2742,7 +2750,7 @@ export default function Home() {
                         <button
                           type="button"
                           title="Xem nhanh"
-                          class="shop-quickview-button"
+                          className="shop-quickview-button"
                           data-type="shop-quickview-button"
                         >
                           <CartIcon />
@@ -2750,27 +2758,27 @@ export default function Home() {
                         <button
                           type="button"
                           title="Thêm vào giỏ"
-                          class="shop-addLoop-button"
+                          className="shop-addLoop-button"
                           data-type="shop-addLoop-button"
                         >
                           <MagnifyingGlassIcon />
                         </button>
                       </div>
-                      <div class="product-item-detail">
-                        <div class="product-item-detail-info">
-                          <span class="product-item-detail-info-vendor">
+                      <div className="product-item-detail">
+                        <div className="product-item-detail-info">
+                          <span className="product-item-detail-info-vendor">
                             <Link href="/collections/vendors?query=F1GENZ" title="F1GENZ">
                               F1GENZ
                             </Link>
                           </span>
-                          <span class="product-item-detail-info-tag">Flashsale</span>
+                          <span className="product-item-detail-info-tag">Flashsale</span>
                         </div>
-                        <h3 class="product-item-detail-name">
+                        <h3 className="product-item-detail-name">
                           <Link href="/ghe-tron-4-chan-cao-cap-3" title="Ghế trơn 4 chân cao cấp">
                             Ghế trơn 4 chân cao cấp
                           </Link>
                         </h3>
-                        <div class="product-item-detail-price">
+                        <div className="product-item-detail-price">
                           <span>1.380.000₫</span>
                           <del>2.359.000₫</del>
                         </div>
@@ -2779,19 +2787,19 @@ export default function Home() {
                   </div>
                 </div>
               </div>
-              <div class="home-product-tab-body-item">
-                <div class="home-product-tab-body-item-data">
-                  <div class="product-item" data-id="87903177" data-handle="ban-an-4-chan-gia-dinh-cao-cap">
-                    <div class="product-item-wrap">
-                      <div class="product-item-image hasThumbs hasThumbsIcon">
-                        <span class="product-item-discount">-9%</span>
+              <div className="home-product-tab-body-item">
+                <div className="home-product-tab-body-item-data">
+                  <div className="product-item" data-id="87903177" data-handle="ban-an-4-chan-gia-dinh-cao-cap">
+                    <div className="product-item-wrap">
+                      <div className="product-item-image hasThumbs hasThumbsIcon">
+                        <span className="product-item-discount">-9%</span>
                         <Link
-                          class="product-item-link"
+                          className="product-item-link"
                           href="/ban-an-4-chan-gia-dinh-cao-cap"
                           title="Bàn ăn 4 chân gia đình cao cấp"
                         >
                           <img
-                            class="w-auto"
+                            className="w-auto"
                             loading="lazy"
                             width="480"
                             height="480"
@@ -2799,7 +2807,7 @@ export default function Home() {
                             alt="Bàn ăn 4 chân gia đình cao cấp"
                           />
                           <img
-                            class="w-auto"
+                            className="w-auto"
                             loading="lazy"
                             width="480"
                             height="480"
@@ -2807,11 +2815,11 @@ export default function Home() {
                             alt="Bàn ăn 4 chân gia đình cao cấp"
                           />
                         </Link>
-                        <ul class="product-item-thumbs">
+                        <ul className="product-item-thumbs">
                           <li>
                             <Link href="/ban-an-4-chan-gia-dinh-cao-cap" title="Bàn ăn 4 chân gia đình cao cấp">
                               <img
-                                class="w-auto lazyload"
+                                className="w-auto lazyload"
                                 width="50"
                                 height="50"
                                 src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
@@ -2823,7 +2831,7 @@ export default function Home() {
                           <li>
                             <Link href="/ban-an-4-chan-gia-dinh-cao-cap" title="Bàn ăn 4 chân gia đình cao cấp">
                               <img
-                                class="w-auto lazyload"
+                                className="w-auto lazyload"
                                 width="50"
                                 height="50"
                                 src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
@@ -2835,7 +2843,7 @@ export default function Home() {
                           <li>
                             <Link href="/ban-an-4-chan-gia-dinh-cao-cap" title="Bàn ăn 4 chân gia đình cao cấp">
                               <img
-                                class="w-auto lazyload"
+                                className="w-auto lazyload"
                                 width="50"
                                 height="50"
                                 src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
@@ -2846,11 +2854,11 @@ export default function Home() {
                           </li>
                         </ul>
                       </div>
-                      <div class="product-item-action">
+                      <div className="product-item-action">
                         <button
                           type="button"
                           title="Yêu thích"
-                          class="shop-wishlist-button-add"
+                          className="shop-wishlist-button-add"
                           data-type="shop-wishlist-button-add"
                         >
                           <HeartIcon />
@@ -2858,7 +2866,7 @@ export default function Home() {
                         <button
                           type="button"
                           title="Xem nhanh"
-                          class="shop-quickview-button"
+                          className="shop-quickview-button"
                           data-type="shop-quickview-button"
                         >
                           <CartIcon />
@@ -2866,40 +2874,40 @@ export default function Home() {
                         <button
                           type="button"
                           title="Thêm vào giỏ"
-                          class="shop-addLoop-button"
+                          className="shop-addLoop-button"
                           data-type="shop-addLoop-button"
                         >
                           <MagnifyingGlassIcon />
                         </button>
                       </div>
-                      <div class="product-item-detail">
-                        <div class="product-item-detail-info">
-                          <span class="product-item-detail-info-vendor">
+                      <div className="product-item-detail">
+                        <div className="product-item-detail-info">
+                          <span className="product-item-detail-info-vendor">
                             <Link href="/collections/vendors?query=F1GENZ" title="F1GENZ">
                               F1GENZ
                             </Link>
                           </span>
-                          <span class="product-item-detail-info-tag">F1GENZMall</span>
+                          <span className="product-item-detail-info-tag">F1GENZMall</span>
                         </div>
-                        <h3 class="product-item-detail-name">
+                        <h3 className="product-item-detail-name">
                           <Link href="/ban-an-4-chan-gia-dinh-cao-cap" title="Bàn ăn 4 chân gia đình cao cấp">
                             Bàn ăn 4 chân gia đình cao cấp
                           </Link>
                         </h3>
-                        <div class="product-item-detail-price">
+                        <div className="product-item-detail-price">
                           <span>23.690.000₫</span>
                           <del>25.900.000₫</del>
                         </div>
                       </div>
                     </div>
                   </div>
-                  <div class="product-item" data-id="87903043" data-handle="ban-an-da-thieu-ket">
-                    <div class="product-item-wrap">
-                      <div class="product-item-image hasThumbs hasThumbsIcon">
-                        <span class="product-item-discount">-5%</span>
-                        <Link class="product-item-link" href="/ban-an-da-thieu-ket" title="Bàn ăn đá thiêu kết">
+                  <div className="product-item" data-id="87903043" data-handle="ban-an-da-thieu-ket">
+                    <div className="product-item-wrap">
+                      <div className="product-item-image hasThumbs hasThumbsIcon">
+                        <span className="product-item-discount">-5%</span>
+                        <Link className="product-item-link" href="/ban-an-da-thieu-ket" title="Bàn ăn đá thiêu kết">
                           <img
-                            class="w-auto"
+                            className="w-auto"
                             loading="lazy"
                             width="480"
                             height="480"
@@ -2907,7 +2915,7 @@ export default function Home() {
                             alt="Bàn ăn đá thiêu kết"
                           />
                           <img
-                            class="w-auto"
+                            className="w-auto"
                             loading="lazy"
                             width="480"
                             height="480"
@@ -2915,11 +2923,11 @@ export default function Home() {
                             alt="Bàn ăn đá thiêu kết"
                           />
                         </Link>
-                        <ul class="product-item-thumbs">
+                        <ul className="product-item-thumbs">
                           <li>
                             <Link href="/ban-an-da-thieu-ket" title="Bàn ăn đá thiêu kết">
                               <img
-                                class="w-auto lazyload"
+                                className="w-auto lazyload"
                                 width="50"
                                 height="50"
                                 src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
@@ -2931,7 +2939,7 @@ export default function Home() {
                           <li>
                             <Link href="/ban-an-da-thieu-ket" title="Bàn ăn đá thiêu kết">
                               <img
-                                class="w-auto lazyload"
+                                className="w-auto lazyload"
                                 width="50"
                                 height="50"
                                 src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
@@ -2943,7 +2951,7 @@ export default function Home() {
                           <li>
                             <Link href="/ban-an-da-thieu-ket" title="Bàn ăn đá thiêu kết">
                               <img
-                                class="w-auto lazyload"
+                                className="w-auto lazyload"
                                 width="50"
                                 height="50"
                                 src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
@@ -2954,11 +2962,11 @@ export default function Home() {
                           </li>
                         </ul>
                       </div>
-                      <div class="product-item-action">
+                      <div className="product-item-action">
                         <button
                           type="button"
                           title="Yêu thích"
-                          class="shop-wishlist-button-add"
+                          className="shop-wishlist-button-add"
                           data-type="shop-wishlist-button-add"
                         >
                           <HeartIcon />
@@ -2966,7 +2974,7 @@ export default function Home() {
                         <button
                           type="button"
                           title="Xem nhanh"
-                          class="shop-quickview-button"
+                          className="shop-quickview-button"
                           data-type="shop-quickview-button"
                         >
                           <CartIcon />
@@ -2974,44 +2982,44 @@ export default function Home() {
                         <button
                           type="button"
                           title="Thêm vào giỏ"
-                          class="shop-addLoop-button"
+                          className="shop-addLoop-button"
                           data-type="shop-addLoop-button"
                         >
                           <MagnifyingGlassIcon />
                         </button>
                       </div>
-                      <div class="product-item-detail">
-                        <div class="product-item-detail-info">
-                          <span class="product-item-detail-info-vendor">
+                      <div className="product-item-detail">
+                        <div className="product-item-detail-info">
+                          <span className="product-item-detail-info-vendor">
                             <Link href="/collections/vendors?query=F1GENZ" title="F1GENZ">
                               F1GENZ
                             </Link>
                           </span>
-                          <span class="product-item-detail-info-tag">Độc quyền</span>
+                          <span className="product-item-detail-info-tag">Độc quyền</span>
                         </div>
-                        <h3 class="product-item-detail-name">
+                        <h3 className="product-item-detail-name">
                           <Link href="/ban-an-da-thieu-ket" title="Bàn ăn đá thiêu kết">
                             Bàn ăn đá thiêu kết
                           </Link>
                         </h3>
-                        <div class="product-item-detail-price">
+                        <div className="product-item-detail-price">
                           <span>21.199.000₫</span>
                           <del>22.390.000₫</del>
                         </div>
                       </div>
                     </div>
                   </div>
-                  <div class="product-item" data-id="87902947" data-handle="ban-an-maeve-cao-cap-tu-f1genz">
-                    <div class="product-item-wrap">
-                      <div class="product-item-image hasThumbs hasThumbsIcon">
-                        <span class="product-item-discount">-7%</span>
+                  <div className="product-item" data-id="87902947" data-handle="ban-an-maeve-cao-cap-tu-f1genz">
+                    <div className="product-item-wrap">
+                      <div className="product-item-image hasThumbs hasThumbsIcon">
+                        <span className="product-item-discount">-7%</span>
                         <Link
-                          class="product-item-link"
+                          className="product-item-link"
                           href="/ban-an-maeve-cao-cap-tu-f1genz"
                           title="Bàn ăn Maeve cao cấp từ F1GENZ"
                         >
                           <img
-                            class="w-auto"
+                            className="w-auto"
                             loading="lazy"
                             width="480"
                             height="480"
@@ -3019,7 +3027,7 @@ export default function Home() {
                             alt="Bàn ăn Maeve cao cấp từ F1GENZ"
                           />
                           <img
-                            class="w-auto"
+                            className="w-auto"
                             loading="lazy"
                             width="480"
                             height="480"
@@ -3027,11 +3035,11 @@ export default function Home() {
                             alt="Bàn ăn Maeve cao cấp từ F1GENZ"
                           />
                         </Link>
-                        <ul class="product-item-thumbs">
+                        <ul className="product-item-thumbs">
                           <li>
                             <Link href="/ban-an-maeve-cao-cap-tu-f1genz" title="Bàn ăn Maeve cao cấp từ F1GENZ">
                               <img
-                                class="w-auto lazyload"
+                                className="w-auto lazyload"
                                 width="50"
                                 height="50"
                                 src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
@@ -3043,7 +3051,7 @@ export default function Home() {
                           <li>
                             <Link href="/ban-an-maeve-cao-cap-tu-f1genz" title="Bàn ăn Maeve cao cấp từ F1GENZ">
                               <img
-                                class="w-auto lazyload"
+                                className="w-auto lazyload"
                                 width="50"
                                 height="50"
                                 src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
@@ -3055,7 +3063,7 @@ export default function Home() {
                           <li>
                             <Link href="/ban-an-maeve-cao-cap-tu-f1genz" title="Bàn ăn Maeve cao cấp từ F1GENZ">
                               <img
-                                class="w-auto lazyload"
+                                className="w-auto lazyload"
                                 width="50"
                                 height="50"
                                 src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
@@ -3066,11 +3074,11 @@ export default function Home() {
                           </li>
                         </ul>
                       </div>
-                      <div class="product-item-action">
+                      <div className="product-item-action">
                         <button
                           type="button"
                           title="Yêu thích"
-                          class="shop-wishlist-button-add"
+                          className="shop-wishlist-button-add"
                           data-type="shop-wishlist-button-add"
                         >
                           <HeartIcon />
@@ -3078,7 +3086,7 @@ export default function Home() {
                         <button
                           type="button"
                           title="Xem nhanh"
-                          class="shop-quickview-button"
+                          className="shop-quickview-button"
                           data-type="shop-quickview-button"
                         >
                           <CartIcon />
@@ -3086,44 +3094,44 @@ export default function Home() {
                         <button
                           type="button"
                           title="Thêm vào giỏ"
-                          class="shop-addLoop-button"
+                          className="shop-addLoop-button"
                           data-type="shop-addLoop-button"
                         >
                           <MagnifyingGlassIcon />
                         </button>
                       </div>
-                      <div class="product-item-detail">
-                        <div class="product-item-detail-info">
-                          <span class="product-item-detail-info-vendor">
+                      <div className="product-item-detail">
+                        <div className="product-item-detail-info">
+                          <span className="product-item-detail-info-vendor">
                             <Link href="/collections/vendors?query=F1GENZ" title="F1GENZ">
                               F1GENZ
                             </Link>
                           </span>
-                          <span class="product-item-detail-info-tag">Quà tặng</span>
+                          <span className="product-item-detail-info-tag">Quà tặng</span>
                         </div>
-                        <h3 class="product-item-detail-name">
+                        <h3 className="product-item-detail-name">
                           <Link href="/ban-an-maeve-cao-cap-tu-f1genz" title="Bàn ăn Maeve cao cấp từ F1GENZ">
                             Bàn ăn Maeve cao cấp từ F1GENZ
                           </Link>
                         </h3>
-                        <div class="product-item-detail-price">
+                        <div className="product-item-detail-price">
                           <span>25.900.000₫</span>
                           <del>27.950.000₫</del>
                         </div>
                       </div>
                     </div>
                   </div>
-                  <div class="product-item" data-id="87902799" data-handle="ban-an-mo-rong-f1genz-cao-cap-2">
-                    <div class="product-item-wrap">
-                      <div class="product-item-image hasThumbs hasThumbsIcon">
-                        <span class="product-item-discount">-7%</span>
+                  <div className="product-item" data-id="87902799" data-handle="ban-an-mo-rong-f1genz-cao-cap-2">
+                    <div className="product-item-wrap">
+                      <div className="product-item-image hasThumbs hasThumbsIcon">
+                        <span className="product-item-discount">-7%</span>
                         <Link
-                          class="product-item-link"
+                          className="product-item-link"
                           href="/ban-an-mo-rong-f1genz-cao-cap-2"
                           title="Bàn ăn mở rộng F1GENZ cao cấp"
                         >
                           <img
-                            class="w-auto"
+                            className="w-auto"
                             loading="lazy"
                             width="480"
                             height="480"
@@ -3131,7 +3139,7 @@ export default function Home() {
                             alt="Bàn ăn mở rộng F1GENZ cao cấp"
                           />
                           <img
-                            class="w-auto"
+                            className="w-auto"
                             loading="lazy"
                             width="480"
                             height="480"
@@ -3139,11 +3147,11 @@ export default function Home() {
                             alt="Bàn ăn mở rộng F1GENZ cao cấp"
                           />
                         </Link>
-                        <ul class="product-item-thumbs">
+                        <ul className="product-item-thumbs">
                           <li>
                             <Link href="/ban-an-mo-rong-f1genz-cao-cap-2" title="Bàn ăn mở rộng F1GENZ cao cấp">
                               <img
-                                class="w-auto lazyload"
+                                className="w-auto lazyload"
                                 width="50"
                                 height="50"
                                 src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
@@ -3155,7 +3163,7 @@ export default function Home() {
                           <li>
                             <Link href="/ban-an-mo-rong-f1genz-cao-cap-2" title="Bàn ăn mở rộng F1GENZ cao cấp">
                               <img
-                                class="w-auto lazyload"
+                                className="w-auto lazyload"
                                 width="50"
                                 height="50"
                                 src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
@@ -3167,7 +3175,7 @@ export default function Home() {
                           <li>
                             <Link href="/ban-an-mo-rong-f1genz-cao-cap-2" title="Bàn ăn mở rộng F1GENZ cao cấp">
                               <img
-                                class="w-auto lazyload"
+                                className="w-auto lazyload"
                                 width="50"
                                 height="50"
                                 src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
@@ -3178,11 +3186,11 @@ export default function Home() {
                           </li>
                         </ul>
                       </div>
-                      <div class="product-item-action">
+                      <div className="product-item-action">
                         <button
                           type="button"
                           title="Yêu thích"
-                          class="shop-wishlist-button-add"
+                          className="shop-wishlist-button-add"
                           data-type="shop-wishlist-button-add"
                         >
                           <HeartIcon />
@@ -3190,7 +3198,7 @@ export default function Home() {
                         <button
                           type="button"
                           title="Xem nhanh"
-                          class="shop-quickview-button"
+                          className="shop-quickview-button"
                           data-type="shop-quickview-button"
                         >
                           <CartIcon />
@@ -3198,44 +3206,44 @@ export default function Home() {
                         <button
                           type="button"
                           title="Thêm vào giỏ"
-                          class="shop-addLoop-button"
+                          className="shop-addLoop-button"
                           data-type="shop-addLoop-button"
                         >
                           <MagnifyingGlassIcon />
                         </button>
                       </div>
-                      <div class="product-item-detail">
-                        <div class="product-item-detail-info">
-                          <span class="product-item-detail-info-vendor">
+                      <div className="product-item-detail">
+                        <div className="product-item-detail-info">
+                          <span className="product-item-detail-info-vendor">
                             <Link href="/collections/vendors?query=F1GENZ" title="F1GENZ">
                               F1GENZ
                             </Link>
                           </span>
-                          <span class="product-item-detail-info-tag">Freeship</span>
+                          <span className="product-item-detail-info-tag">Freeship</span>
                         </div>
-                        <h3 class="product-item-detail-name">
+                        <h3 className="product-item-detail-name">
                           <Link href="/ban-an-mo-rong-f1genz-cao-cap-2" title="Bàn ăn mở rộng F1GENZ cao cấp">
                             Bàn ăn mở rộng F1GENZ cao cấp
                           </Link>
                         </h3>
-                        <div class="product-item-detail-price">
+                        <div className="product-item-detail-price">
                           <span>17.590.000₫</span>
                           <del>18.900.000₫</del>
                         </div>
                       </div>
                     </div>
                   </div>
-                  <div class="product-item" data-id="87902553" data-handle="ban-go-cao-cap-4-chan-haynes">
-                    <div class="product-item-wrap">
-                      <div class="product-item-image hasThumbs hasThumbsIcon">
-                        <span class="product-item-discount">-10%</span>
+                  <div className="product-item" data-id="87902553" data-handle="ban-go-cao-cap-4-chan-haynes">
+                    <div className="product-item-wrap">
+                      <div className="product-item-image hasThumbs hasThumbsIcon">
+                        <span className="product-item-discount">-10%</span>
                         <Link
-                          class="product-item-link"
+                          className="product-item-link"
                           href="/ban-go-cao-cap-4-chan-haynes"
                           title="Bàn gỗ cao cấp 4 chân Haynes"
                         >
                           <img
-                            class="w-auto"
+                            className="w-auto"
                             loading="lazy"
                             width="480"
                             height="480"
@@ -3243,7 +3251,7 @@ export default function Home() {
                             alt="Bàn gỗ cao cấp 4 chân Haynes"
                           />
                           <img
-                            class="w-auto"
+                            className="w-auto"
                             loading="lazy"
                             width="480"
                             height="480"
@@ -3251,11 +3259,11 @@ export default function Home() {
                             alt="Bàn gỗ cao cấp 4 chân Haynes"
                           />
                         </Link>
-                        <ul class="product-item-thumbs">
+                        <ul className="product-item-thumbs">
                           <li>
                             <Link href="/ban-go-cao-cap-4-chan-haynes" title="Bàn gỗ cao cấp 4 chân Haynes">
                               <img
-                                class="w-auto lazyload"
+                                className="w-auto lazyload"
                                 width="50"
                                 height="50"
                                 src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
@@ -3267,7 +3275,7 @@ export default function Home() {
                           <li>
                             <Link href="/ban-go-cao-cap-4-chan-haynes" title="Bàn gỗ cao cấp 4 chân Haynes">
                               <img
-                                class="w-auto lazyload"
+                                className="w-auto lazyload"
                                 width="50"
                                 height="50"
                                 src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
@@ -3279,7 +3287,7 @@ export default function Home() {
                           <li>
                             <Link href="/ban-go-cao-cap-4-chan-haynes" title="Bàn gỗ cao cấp 4 chân Haynes">
                               <img
-                                class="w-auto lazyload"
+                                className="w-auto lazyload"
                                 width="50"
                                 height="50"
                                 src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
@@ -3290,11 +3298,11 @@ export default function Home() {
                           </li>
                         </ul>
                       </div>
-                      <div class="product-item-action">
+                      <div className="product-item-action">
                         <button
                           type="button"
                           title="Yêu thích"
-                          class="shop-wishlist-button-add"
+                          className="shop-wishlist-button-add"
                           data-type="shop-wishlist-button-add"
                         >
                           <HeartIcon />
@@ -3302,7 +3310,7 @@ export default function Home() {
                         <button
                           type="button"
                           title="Xem nhanh"
-                          class="shop-quickview-button"
+                          className="shop-quickview-button"
                           data-type="shop-quickview-button"
                         >
                           <CartIcon />
@@ -3310,40 +3318,40 @@ export default function Home() {
                         <button
                           type="button"
                           title="Thêm vào giỏ"
-                          class="shop-addLoop-button"
+                          className="shop-addLoop-button"
                           data-type="shop-addLoop-button"
                         >
                           <MagnifyingGlassIcon />
                         </button>
                       </div>
-                      <div class="product-item-detail">
-                        <div class="product-item-detail-info">
-                          <span class="product-item-detail-info-vendor">
+                      <div className="product-item-detail">
+                        <div className="product-item-detail-info">
+                          <span className="product-item-detail-info-vendor">
                             <Link href="/collections/vendors?query=F1GENZ" title="F1GENZ">
                               F1GENZ
                             </Link>
                           </span>
-                          <span class="product-item-detail-info-tag">Giá tốt</span>
+                          <span className="product-item-detail-info-tag">Giá tốt</span>
                         </div>
-                        <h3 class="product-item-detail-name">
+                        <h3 className="product-item-detail-name">
                           <Link href="/ban-go-cao-cap-4-chan-haynes" title="Bàn gỗ cao cấp 4 chân Haynes">
                             Bàn gỗ cao cấp 4 chân Haynes
                           </Link>
                         </h3>
-                        <div class="product-item-detail-price">
+                        <div className="product-item-detail-price">
                           <span>17.900.000₫</span>
                           <del>19.890.000₫</del>
                         </div>
                       </div>
                     </div>
                   </div>
-                  <div class="product-item" data-id="87899137" data-handle="ban-an-4-chan-cao-cap">
-                    <div class="product-item-wrap">
-                      <div class="product-item-image hasThumbs hasThumbsIcon">
-                        <span class="product-item-discount">-14%</span>
-                        <Link class="product-item-link" href="/ban-an-4-chan-cao-cap" title="Bàn ăn 4 chân cao cấp">
+                  <div className="product-item" data-id="87899137" data-handle="ban-an-4-chan-cao-cap">
+                    <div className="product-item-wrap">
+                      <div className="product-item-image hasThumbs hasThumbsIcon">
+                        <span className="product-item-discount">-14%</span>
+                        <Link className="product-item-link" href="/ban-an-4-chan-cao-cap" title="Bàn ăn 4 chân cao cấp">
                           <img
-                            class="w-auto"
+                            className="w-auto"
                             loading="lazy"
                             width="480"
                             height="480"
@@ -3351,7 +3359,7 @@ export default function Home() {
                             alt="Bàn ăn 4 chân cao cấp"
                           />
                           <img
-                            class="w-auto"
+                            className="w-auto"
                             loading="lazy"
                             width="480"
                             height="480"
@@ -3359,11 +3367,11 @@ export default function Home() {
                             alt="Bàn ăn 4 chân cao cấp"
                           />
                         </Link>
-                        <ul class="product-item-thumbs">
+                        <ul className="product-item-thumbs">
                           <li>
                             <Link href="/ban-an-4-chan-cao-cap" title="Bàn ăn 4 chân cao cấp">
                               <img
-                                class="w-auto lazyload"
+                                className="w-auto lazyload"
                                 width="50"
                                 height="50"
                                 src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
@@ -3375,7 +3383,7 @@ export default function Home() {
                           <li>
                             <Link href="/ban-an-4-chan-cao-cap" title="Bàn ăn 4 chân cao cấp">
                               <img
-                                class="w-auto lazyload"
+                                className="w-auto lazyload"
                                 width="50"
                                 height="50"
                                 src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
@@ -3387,7 +3395,7 @@ export default function Home() {
                           <li>
                             <Link href="/ban-an-4-chan-cao-cap" title="Bàn ăn 4 chân cao cấp">
                               <img
-                                class="w-auto lazyload"
+                                className="w-auto lazyload"
                                 width="50"
                                 height="50"
                                 src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
@@ -3398,11 +3406,11 @@ export default function Home() {
                           </li>
                         </ul>
                       </div>
-                      <div class="product-item-action">
+                      <div className="product-item-action">
                         <button
                           type="button"
                           title="Yêu thích"
-                          class="shop-wishlist-button-add"
+                          className="shop-wishlist-button-add"
                           data-type="shop-wishlist-button-add"
                         >
                           <HeartIcon />
@@ -3410,7 +3418,7 @@ export default function Home() {
                         <button
                           type="button"
                           title="Xem nhanh"
-                          class="shop-quickview-button"
+                          className="shop-quickview-button"
                           data-type="shop-quickview-button"
                         >
                           <CartIcon />
@@ -3418,27 +3426,27 @@ export default function Home() {
                         <button
                           type="button"
                           title="Thêm vào giỏ"
-                          class="shop-addLoop-button"
+                          className="shop-addLoop-button"
                           data-type="shop-addLoop-button"
                         >
                           <MagnifyingGlassIcon />
                         </button>
                       </div>
-                      <div class="product-item-detail">
-                        <div class="product-item-detail-info">
-                          <span class="product-item-detail-info-vendor">
+                      <div className="product-item-detail">
+                        <div className="product-item-detail-info">
+                          <span className="product-item-detail-info-vendor">
                             <Link href="/collections/vendors?query=F1GENZ" title="F1GENZ">
                               F1GENZ
                             </Link>
                           </span>
-                          <span class="product-item-detail-info-tag">Hot</span>
+                          <span className="product-item-detail-info-tag">Hot</span>
                         </div>
-                        <h3 class="product-item-detail-name">
+                        <h3 className="product-item-detail-name">
                           <Link href="/ban-an-4-chan-cao-cap" title="Bàn ăn 4 chân cao cấp">
                             Bàn ăn 4 chân cao cấp
                           </Link>
                         </h3>
-                        <div class="product-item-detail-price">
+                        <div className="product-item-detail-price">
                           <span>11.990.000₫</span>
                           <del>13.990.000₫</del>
                         </div>
@@ -3450,18 +3458,18 @@ export default function Home() {
             </div>
           </div>
         </section>
-        <section class="home-blog">
-          <div class="container">
-            <div class="home-blog-wrap">
-              <div class="home-blog-left">
-                <div class="section-title-all">
+        <section className="home-blog">
+          <div className="container">
+            <div className="home-blog-wrap">
+              <div className="home-blog-left">
+                <div className="section-title-all">
                   <h2>Kiến thức mua hàng</h2>
                   <p>
                     Cùng tìm hiểu kiến thức về mua hàng: định nghĩa của trang sản phẩm nội thất, các loại nội thất sẽ
                     như thế nào nhé!
                   </p>
                 </div>
-                <div class="home-blog-data">
+                <div className="home-blog-data">
                   <ArticleItem
                     title={'Kinh nghiệm lựa chọn nội thất chung cư'}
                     url={'/kinh-nghiem-lua-chon-noi-that-chung-cu'}
@@ -3475,8 +3483,8 @@ export default function Home() {
                   />
                 </div>
               </div>
-              <div class="home-blog-right">
-                <div class="home-blog-data">
+              <div className="home-blog-right">
+                <div className="home-blog-data">
                   <ArticleItem
                     layoutSmall={true}
                     url={'/kinh-nghiem-chon-den-led-trang-tri-noi-that'}
@@ -3518,9 +3526,9 @@ export default function Home() {
             </div>
           </div>
         </section>
-        <section class="home-store">
-          <div class="home-store-wrap">
-            <div class="home-store-wrap-left section-title-all">
+        <section className="home-store">
+          <div className="home-store-wrap">
+            <div className="home-store-wrap-left section-title-all">
               <h2>Showroom Nội thất F1genz</h2>
               <p>
                 Luôn cập nhật những xu hướng mới nhất của thị trường nội thất, mang đến các sản phẩm chất lượng cho
@@ -3530,7 +3538,7 @@ export default function Home() {
                 Xem ngay
               </Link>
             </div>
-            <div class="home-store-wrap-right">
+            <div className="home-store-wrap-right">
               <picture title="Showroom Nội thất F1genz">
                 <source
                   media="(max-width: 480px)"
@@ -3538,7 +3546,7 @@ export default function Home() {
                   data-srcset="https://bizweb.dktcdn.net/thumb/large/100/482/001/themes/906081/assets/home_store_image.png?1684771044770"
                 />
                 <img
-                  class="lazyload w-100"
+                  className="lazyload w-100"
                   width="1200"
                   height="800"
                   src="https://bizweb.dktcdn.net/100/482/001/themes/906081/assets/home_store_image.png?1684771044770"
@@ -3549,13 +3557,13 @@ export default function Home() {
             </div>
           </div>
         </section>
-        <section class="home-policy">
-          <div class="container">
-            <ul class="home-policy-wrap">
-              <li class="home-policy-item">
-                <h4 class="d-none">Giao hàng nhanh, miễn phí</h4>
+        <section className="home-policy">
+          <div className="container">
+            <ul className="home-policy-wrap">
+              <li className="home-policy-item">
+                <h4 className="d-none">Giao hàng nhanh, miễn phí</h4>
                 <img
-                  class="lazyload w-100"
+                  className="lazyload w-100"
                   title="Giao hàng nhanh, miễn phí"
                   src="https://bizweb.dktcdn.net/100/482/001/themes/906081/assets/home_policy_item_image_1.png?1684771044770"
                   BF
@@ -3568,10 +3576,10 @@ export default function Home() {
                   Xem chi tiết
                 </Link>
               </li>
-              <li class="home-policy-item">
-                <h4 class="d-none">Trả hàng, Bảo hành</h4>
+              <li className="home-policy-item">
+                <h4 className="d-none">Trả hàng, Bảo hành</h4>
                 <img
-                  class="lazyload w-100"
+                  className="lazyload w-100"
                   title="Trả hàng, Bảo hành"
                   src="https://bizweb.dktcdn.net/100/482/001/themes/906081/assets/home_policy_item_image_2.png?1684771044770"
                   BF
@@ -3584,10 +3592,10 @@ export default function Home() {
                   Xem chi tiết
                 </Link>
               </li>
-              <li class="home-policy-item">
-                <h4 class="d-none">Thành viên</h4>
+              <li className="home-policy-item">
+                <h4 className="d-none">Thành viên</h4>
                 <img
-                  class="lazyload w-100"
+                  className="lazyload w-100"
                   title="Thành viên"
                   src="https://bizweb.dktcdn.net/100/482/001/themes/906081/assets/home_policy_item_image_3.png?1684771044770"
                   BF
@@ -3600,10 +3608,10 @@ export default function Home() {
                   Xem chi tiết
                 </Link>
               </li>
-              <li class="home-policy-item">
-                <h4 class="d-none">Chính hãng</h4>
+              <li className="home-policy-item">
+                <h4 className="d-none">Chính hãng</h4>
                 <img
-                  class="lazyload w-100"
+                  className="lazyload w-100"
                   title="Chính hãng"
                   src="https://bizweb.dktcdn.net/100/482/001/themes/906081/assets/home_policy_item_image_4.png?1684771044770"
                   BF

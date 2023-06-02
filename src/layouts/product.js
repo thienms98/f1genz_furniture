@@ -29,7 +29,7 @@ const Product = ({ children }) => {
                   <input required="" type="text" name="contact[name]" value="" placeholder="Họ tên của bạn" />
                   <input required="" type="email" name="contact[email]" value="" placeholder="Email của bạn" />
                   <input required="" type="number" name="contact[phone]" value="" placeholder="Số điện thoại của bạn" />
-                  <input type="text" readonly="" value="" id="preOrder-hard" />
+                  <input type="text" readOnly="" value="" id="preOrder-hard" />
                   <textarea name="contact[body]" placeholder="Nhập nội dung bạn cần tư vấn"></textarea>
                   <button type="submit" title="Đăng ký">
                     Đăng ký

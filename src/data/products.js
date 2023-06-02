@@ -1,5 +1,5 @@
 export const products = [
-  // group 0
+  // group 0 - Tủ quần áo
 
   {
     id: 87899731,
@@ -242,7 +242,7 @@ export const products = [
     group: 0,
   },
 
-  // group 1
+  // group 1 - Giá treo
 
   {
     id: 87900655,
@@ -437,202 +437,286 @@ export const products = [
     group: 1,
   },
 
-  //group 2
+  //group 2 - Đèn để bàn
 
   {
-    id: 87900201,
-    uri: 'ke-treo-tuong-f1genz-xu-huong-moi',
-    name: 'Kệ treo tường F1GENZ xu hướng mới',
+    id: 87902429,
+    name: 'Đèn để bàn cao cấp F1genz',
+    uri: 'den-de-ban-cao-cap-f1genz',
     images: [
       {
         width: '480',
         height: '480',
-        src: 'https://bizweb.dktcdn.net/thumb/large/100/482/001/products/1-49867a86910c43c5a94628aa1218d5d6-5bf6d14c4fd045aba8cc706eeebee014.png?v=1683880970047',
+        src: 'https://bizweb.dktcdn.net/thumb/large/100/482/001/products/1-88a5914f173a452384a997ee258d23db-2e585f9a3c514f8790f580c7d75f4314.png?v=1683881068243',
       },
       {
         width: '480',
         height: '480',
-        src: 'https://bizweb.dktcdn.net/thumb/large/100/482/001/products/2-49ec9593fef549b4a08a9310ba25133b-797482d4b07b469490b8f57592345c9b.png?v=1683880970047',
+        src: 'https://bizweb.dktcdn.net/thumb/large/100/482/001/products/2-cd3711d9836f4b33b5b4e92f6c5ac719-7e2f8801668b4c4d8ed4825847b2f230.png?v=1683881068243',
       },
     ],
     thumbs: [
       {
-        width: '50',
-        height: '50',
+        width: 50,
+        height: 50,
+        src: 'https://bizweb.dktcdn.net/thumb/thumb/100/482/001/products/2-cd3711d9836f4b33b5b4e92f6c5ac719-7e2f8801668b4c4d8ed4825847b2f230.png?v=1683881068243',
         dataSrc:
-          'https://bizweb.dktcdn.net/thumb/thumb/100/482/001/products/2-49ec9593fef549b4a08a9310ba25133b-797482d4b07b469490b8f57592345c9b.png?v=1683880970047',
-        src: 'https://bizweb.dktcdn.net/thumb/thumb/100/482/001/products/2-49ec9593fef549b4a08a9310ba25133b-797482d4b07b469490b8f57592345c9b.png?v=1683880970047',
+          'https://bizweb.dktcdn.net/thumb/thumb/100/482/001/products/2-cd3711d9836f4b33b5b4e92f6c5ac719-7e2f8801668b4c4d8ed4825847b2f230.png?v=1683881068243',
       },
       {
-        width: '50',
-        height: '50',
+        width: 50,
+        height: 50,
+        src: 'https://bizweb.dktcdn.net/thumb/thumb/100/482/001/products/3-ebcca6a30c3742459452eded51d6a594-7de5957af9b74ad18103e8404f80f3b7.png?v=1683881068243',
         dataSrc:
-          'https://bizweb.dktcdn.net/thumb/thumb/100/482/001/products/3-b2a3689da67c4fd2a440b62b43575cd0-58f0a37645344e948ddb93fd2bdbeb65.png?v=1683880970047',
-        src: 'https://bizweb.dktcdn.net/thumb/thumb/100/482/001/products/3-b2a3689da67c4fd2a440b62b43575cd0-58f0a37645344e948ddb93fd2bdbeb65.png?v=1683880970047',
+          'https://bizweb.dktcdn.net/thumb/thumb/100/482/001/products/3-ebcca6a30c3742459452eded51d6a594-7de5957af9b74ad18103e8404f80f3b7.png?v=1683881068243',
       },
       {
-        width: '50',
-        height: '50',
+        width: 50,
+        height: 50,
+        src: 'https://bizweb.dktcdn.net/thumb/thumb/100/482/001/products/4-e7f3a6a5607f46c9b083eea2ee27c4e7-5e041b6dd8384f97beb0d099e25121b5.png?v=1683881068243',
         dataSrc:
-          'https://bizweb.dktcdn.net/thumb/thumb/100/482/001/products/4-c3a269aaa7a14d69b300190380715864-c80a455d689f480ba64617fb9ad9c367.png?v=1683880970047',
-        src: 'https://bizweb.dktcdn.net/thumb/thumb/100/482/001/products/4-c3a269aaa7a14d69b300190380715864-c80a455d689f480ba64617fb9ad9c367.png?v=1683880970047',
+          'https://bizweb.dktcdn.net/thumb/thumb/100/482/001/products/4-e7f3a6a5607f46c9b083eea2ee27c4e7-5e041b6dd8384f97beb0d099e25121b5.png?v=1683881068243',
       },
     ],
+    tag: 'Hot',
     price: {
-      current: 679000,
-      prev: 779000,
+      current: 1290000,
+      prev: 2490000,
     },
-    vendor: 'F1GENZ',
-    tag: 'Saleoff',
-    flashSale: true,
     group: 2,
   },
   {
-    id: 87900124,
-    uri: 'ke-treo-tuong-cao-cap',
-    name: 'Kệ treo tường cao cấp',
+    id: 87902340,
+    name: 'Đèn bàn đồng thau cao cấp',
+    uri: 'den-ban-dong-thau-cao-cap',
     images: [
       {
         width: '480',
         height: '480',
-        src: 'https://bizweb.dktcdn.net/thumb/large/100/482/001/products/1-5eef04a246654d3fb10d444a6996b0dd-f56a314a734a4efa80e0c2a8ff945bb9.png?v=1683880966707',
+        src: 'https://bizweb.dktcdn.net/thumb/large/100/482/001/products/1-8dbf7792d23e476d917d0f58963d51e6-e70389703abc4a33992abae4d772a574.png?v=1683881064127',
       },
       {
         width: '480',
         height: '480',
-        src: 'https://bizweb.dktcdn.net/thumb/large/100/482/001/products/2-786c4d2d49724d538fd3be88415403f0-2565e48f5c3646688b7e12c7bc75126e.png?v=1683880966707',
+        src: 'https://bizweb.dktcdn.net/thumb/large/100/482/001/products/2-aad7314dc7794b41a78ef833aaef1af6-4e5651bd0c7f496f9f2a0526a9585b99.png?v=1683881064127',
       },
     ],
     thumbs: [
       {
-        width: '50',
-        height: '50',
+        width: 50,
+        height: 50,
+        src: 'https://bizweb.dktcdn.net/thumb/thumb/100/482/001/products/2-aad7314dc7794b41a78ef833aaef1af6-4e5651bd0c7f496f9f2a0526a9585b99.png?v=1683881064127',
         dataSrc:
-          'https://bizweb.dktcdn.net/thumb/thumb/100/482/001/products/2-786c4d2d49724d538fd3be88415403f0-2565e48f5c3646688b7e12c7bc75126e.png?v=1683880966707',
-        src: 'https://bizweb.dktcdn.net/thumb/thumb/100/482/001/products/2-786c4d2d49724d538fd3be88415403f0-2565e48f5c3646688b7e12c7bc75126e.png?v=1683880966707',
+          'https://bizweb.dktcdn.net/thumb/thumb/100/482/001/products/2-aad7314dc7794b41a78ef833aaef1af6-4e5651bd0c7f496f9f2a0526a9585b99.png?v=1683881064127',
       },
       {
-        width: '50',
-        height: '50',
+        width: 50,
+        height: 50,
+        src: 'https://bizweb.dktcdn.net/thumb/thumb/100/482/001/products/3-72abc83bb4b94056ae969535931094d4-f989b7583f9e484690d84ac9a5810148.png?v=1683881064127',
         dataSrc:
-          'https://bizweb.dktcdn.net/thumb/thumb/100/482/001/products/3-cb434824e48446c68ec6c57679ab9ee7-c2d792a65d2149f09fa1c40c8b864e1a.png?v=1683880966707',
-        src: 'https://bizweb.dktcdn.net/thumb/thumb/100/482/001/products/3-cb434824e48446c68ec6c57679ab9ee7-c2d792a65d2149f09fa1c40c8b864e1a.png?v=1683880966707',
+          'https://bizweb.dktcdn.net/thumb/thumb/100/482/001/products/3-72abc83bb4b94056ae969535931094d4-f989b7583f9e484690d84ac9a5810148.png?v=1683881064127',
       },
       {
-        width: '50',
-        height: '50',
+        width: 50,
+        height: 50,
+        src: 'https://bizweb.dktcdn.net/thumb/thumb/100/482/001/products/4-8f6a82fbd4ae41ff827599f4ce98afe8-1f4c8c394797400784fde34e7133c5f5.png?v=1683881064127',
         dataSrc:
-          'https://bizweb.dktcdn.net/thumb/thumb/100/482/001/products/4-7deeba3142e34969b659538fa48eedcc-b0ac3dfede164fcfb151ff5aa4c4293c.png?v=1683880966707',
-        src: 'https://bizweb.dktcdn.net/thumb/thumb/100/482/001/products/4-7deeba3142e34969b659538fa48eedcc-b0ac3dfede164fcfb151ff5aa4c4293c.png?v=1683880966707',
+          'https://bizweb.dktcdn.net/thumb/thumb/100/482/001/products/4-8f6a82fbd4ae41ff827599f4ce98afe8-1f4c8c394797400784fde34e7133c5f5.png?v=1683881064127',
       },
     ],
+    tag: 'Freeship',
     price: {
-      current: 980000,
-      prev: 1129000,
+      current: 2819000,
+      prev: 3199000,
     },
-    vendor: 'F1GENZ',
-    tag: 'Quà tặng',
-    flashSale: true,
     group: 2,
   },
   {
-    id: 87900014,
-    uri: 'ke-treo-tuong-cao-cap-hinh-luoi',
-    name: 'Kệ treo tường cao cấp hình lưới',
+    id: 87902289,
+    name: 'Đèn bàn Pooping Dog F1GENZ',
+    uri: 'den-ban-pooping-dog-f1genz',
     images: [
       {
         width: '480',
         height: '480',
-        src: 'https://bizweb.dktcdn.net/thumb/large/100/482/001/products/1-6115b1d6540a4e6297a76ede1b4aaca1-6d135f9f66f74bb18c913fc345f68562.png?v=1683880961847',
+        src: 'https://bizweb.dktcdn.net/thumb/large/100/482/001/products/1-d8b7d0d1c773449bbbba8abe74a0157d-4147d239898a4b8a80b8bfa51847c0e6.png?v=1683881061000',
       },
       {
         width: '480',
         height: '480',
-        src: 'https://bizweb.dktcdn.net/thumb/large/100/482/001/products/2-18622e30413b43748b8417a30e6a451a-83f17795f1af4f17afbf3f67466c7774.png?v=1683880961847',
+        src: 'https://bizweb.dktcdn.net/thumb/large/100/482/001/products/2-7c4a4e6dcc8b49098540d50ce3a89735-44c31c5b7bd441c28fc613395abe6ab8.png?v=1683881061000',
       },
     ],
     thumbs: [
       {
-        width: '50',
-        height: '50',
+        width: 50,
+        height: 50,
+        src: 'https://bizweb.dktcdn.net/thumb/thumb/100/482/001/products/2-7c4a4e6dcc8b49098540d50ce3a89735-44c31c5b7bd441c28fc613395abe6ab8.png?v=1683881061000',
         dataSrc:
-          'https://bizweb.dktcdn.net/thumb/thumb/100/482/001/products/2-18622e30413b43748b8417a30e6a451a-83f17795f1af4f17afbf3f67466c7774.png?v=1683880961847',
-        src: 'https://bizweb.dktcdn.net/thumb/thumb/100/482/001/products/2-18622e30413b43748b8417a30e6a451a-83f17795f1af4f17afbf3f67466c7774.png?v=1683880961847',
+          'https://bizweb.dktcdn.net/thumb/thumb/100/482/001/products/2-7c4a4e6dcc8b49098540d50ce3a89735-44c31c5b7bd441c28fc613395abe6ab8.png?v=1683881061000',
       },
       {
-        width: '50',
-        height: '50',
+        width: 50,
+        height: 50,
+        src: 'https://bizweb.dktcdn.net/thumb/thumb/100/482/001/products/3-cc67f0197e6e40a994a9cbd3514ac16d-b52bf8ecb7e64cefb1035aae24b5782b.png?v=1683881061000',
         dataSrc:
-          'https://bizweb.dktcdn.net/thumb/thumb/100/482/001/products/3-35fd63dbe12f415ba42daf1764fe89d5-e5902f979a8b4ae4adec5c69140abde9.png?v=1683880961847',
-        src: 'https://bizweb.dktcdn.net/thumb/thumb/100/482/001/products/3-35fd63dbe12f415ba42daf1764fe89d5-e5902f979a8b4ae4adec5c69140abde9.png?v=1683880961847',
+          'https://bizweb.dktcdn.net/thumb/thumb/100/482/001/products/3-cc67f0197e6e40a994a9cbd3514ac16d-b52bf8ecb7e64cefb1035aae24b5782b.png?v=1683881061000',
       },
       {
-        width: '50',
-        height: '50',
+        width: 50,
+        height: 50,
+        src: 'https://bizweb.dktcdn.net/thumb/thumb/100/482/001/products/4-cdaf861c82424286b5a54a87a0d73921-682d7309c8e8442f9961c87d8307debf.png?v=1683881061000',
         dataSrc:
-          'https://bizweb.dktcdn.net/thumb/thumb/100/482/001/products/4-df1e3ec68aee4b2fa88677399db975e7-0cd7466b491448dba28a7e490570ed20.png?v=1683880961847',
-        src: 'https://bizweb.dktcdn.net/thumb/thumb/100/482/001/products/4-df1e3ec68aee4b2fa88677399db975e7-0cd7466b491448dba28a7e490570ed20.png?v=1683880961847',
+          'https://bizweb.dktcdn.net/thumb/thumb/100/482/001/products/4-cdaf861c82424286b5a54a87a0d73921-682d7309c8e8442f9961c87d8307debf.png?v=1683881061000',
       },
     ],
+    tag: 'Flashsale',
     price: {
-      current: 890000,
-      prev: 1120000,
+      current: 3529000,
+      prev: 3789000,
     },
-    vendor: 'F1GENZ',
-    tag: 'Giá tốt',
-    flashSale: true,
     group: 2,
   },
   {
-    id: 87899926,
-    uri: 'ke-treo-tuong-nghe-thuat-cao-cap',
-    name: 'Kệ treo tường nghệ thuật cao cấp',
+    id: 87902188,
+    name: 'Đèn sàn F1GENZ cao cấp',
+    uri: 'den-san-f1genz-cao-cap',
     images: [
       {
         width: '480',
         height: '480',
-        src: 'https://bizweb.dktcdn.net/thumb/large/100/482/001/products/1-5c8749f4094641a3b58160a05d5738e6-793e8f984f6e4bee8fad111a12e54277.png?v=1683880958173',
+        src: 'https://bizweb.dktcdn.net/thumb/large/100/482/001/products/1-d1d27878e84b497282e2c10780ab7d73-202bf7d605a14ee288aa401f9213d668.png?v=1683881056433',
       },
       {
         width: '480',
         height: '480',
-        src: 'https://bizweb.dktcdn.net/thumb/large/100/482/001/products/2-a2b1391daa47469db78e14a29ce05a97-aa576835c8bc4ab58d3ebfe0b60f7322.png?v=1683880958173',
+        src: 'https://bizweb.dktcdn.net/thumb/large/100/482/001/products/2-e359d34ae6cf492e9c3d625ca59236fd-f8f9b68097224122a77891c13a171c23.png?v=1683881056433',
       },
     ],
     thumbs: [
       {
-        width: '50',
-        height: '50',
+        width: 50,
+        height: 50,
+        src: 'https://bizweb.dktcdn.net/thumb/thumb/100/482/001/products/2-e359d34ae6cf492e9c3d625ca59236fd-f8f9b68097224122a77891c13a171c23.png?v=1683881056433',
         dataSrc:
-          'https://bizweb.dktcdn.net/thumb/thumb/100/482/001/products/2-a2b1391daa47469db78e14a29ce05a97-aa576835c8bc4ab58d3ebfe0b60f7322.png?v=1683880958173',
-        src: 'https://bizweb.dktcdn.net/thumb/thumb/100/482/001/products/2-a2b1391daa47469db78e14a29ce05a97-aa576835c8bc4ab58d3ebfe0b60f7322.png?v=1683880958173',
+          'https://bizweb.dktcdn.net/thumb/thumb/100/482/001/products/2-e359d34ae6cf492e9c3d625ca59236fd-f8f9b68097224122a77891c13a171c23.png?v=1683881056433',
       },
       {
-        width: '50',
-        height: '50',
+        width: 50,
+        height: 50,
+        src: 'https://bizweb.dktcdn.net/thumb/thumb/100/482/001/products/4-c9ef801af5954b7f9487225920a38e84-acef636d069048cabb325db6b9c4fe11.png?v=1683881056433',
         dataSrc:
-          'https://bizweb.dktcdn.net/thumb/thumb/100/482/001/products/3-a326007152cd4c728438ad4006c3c0a8-94f5326c92df41be9f1d2674d8fffb86.png?v=1683880958173',
-        src: 'https://bizweb.dktcdn.net/thumb/thumb/100/482/001/products/3-a326007152cd4c728438ad4006c3c0a8-94f5326c92df41be9f1d2674d8fffb86.png?v=1683880958173',
+          'https://bizweb.dktcdn.net/thumb/thumb/100/482/001/products/4-c9ef801af5954b7f9487225920a38e84-acef636d069048cabb325db6b9c4fe11.png?v=1683881056433',
       },
       {
-        width: '50',
-        height: '50',
+        width: 50,
+        height: 50,
+        src: 'https://bizweb.dktcdn.net/thumb/thumb/100/482/001/products/5-2776589ed41b4047a1f75410c514830f-914f81216da340cb84125c046ab63c5f.png?v=1683881056433',
         dataSrc:
-          'https://bizweb.dktcdn.net/thumb/thumb/100/482/001/products/4-c693819763d9438abd44e605d3ae8e04-dad615c44efe4c58bf00427c3ca99afa.png?v=1683880958173',
-        src: 'https://bizweb.dktcdn.net/thumb/thumb/100/482/001/products/4-c693819763d9438abd44e605d3ae8e04-dad615c44efe4c58bf00427c3ca99afa.png?v=1683880958173',
+          'https://bizweb.dktcdn.net/thumb/thumb/100/482/001/products/5-2776589ed41b4047a1f75410c514830f-914f81216da340cb84125c046ab63c5f.png?v=1683881056433',
       },
     ],
+    tag: 'Bestseller',
     price: {
-      current: 4129000,
-      prev: 4890000,
+      current: 4990000,
+      prev: 5290000,
     },
-    vendor: 'F1GENZ',
-    tag: 'NEW',
-    flashSale: true,
+    group: 2,
+  },
+  {
+    id: 87902104,
+    name: 'Đèn sàn bằng đá cẩm thạch',
+    uri: 'den-san-bang-da-cam-thach',
+    images: [
+      {
+        width: '480',
+        height: '480',
+        src: 'https://bizweb.dktcdn.net/thumb/large/100/482/001/products/1-8856b3adac2b4c4793969785f43819b9-0fa9e8fa0a684cfeb70140f86ca90c41.png?v=1683881052893',
+      },
+      {
+        width: '480',
+        height: '480',
+        src: 'https://bizweb.dktcdn.net/thumb/large/100/482/001/products/2-67130494f95e49c68ec9466831827a12-9df68d8bfd5e4bae9919cdc1a0516f79.png?v=1683881052893',
+      },
+    ],
+    thumbs: [
+      {
+        width: 50,
+        height: 50,
+        src: 'https://bizweb.dktcdn.net/thumb/thumb/100/482/001/products/2-67130494f95e49c68ec9466831827a12-9df68d8bfd5e4bae9919cdc1a0516f79.png?v=1683881052893',
+        dataSrc:
+          'https://bizweb.dktcdn.net/thumb/thumb/100/482/001/products/2-67130494f95e49c68ec9466831827a12-9df68d8bfd5e4bae9919cdc1a0516f79.png?v=1683881052893',
+      },
+      {
+        width: 50,
+        height: 50,
+        src: 'https://bizweb.dktcdn.net/thumb/thumb/100/482/001/products/3-0a82fbd2ebea4e5daef497271ce48faa-9b49312c42b14dcdbec60f361e641292.png?v=1683881052893',
+        dataSrc:
+          'https://bizweb.dktcdn.net/thumb/thumb/100/482/001/products/3-0a82fbd2ebea4e5daef497271ce48faa-9b49312c42b14dcdbec60f361e641292.png?v=1683881052893',
+      },
+      {
+        width: 50,
+        height: 50,
+        src: 'https://bizweb.dktcdn.net/thumb/thumb/100/482/001/products/4-f9f1619929b040578c001470414f6737-18a8a4beba1542d093190be53c940ef6.png?v=1683881052893',
+        dataSrc:
+          'https://bizweb.dktcdn.net/thumb/thumb/100/482/001/products/4-f9f1619929b040578c001470414f6737-18a8a4beba1542d093190be53c940ef6.png?v=1683881052893',
+      },
+    ],
+    tag: 'Trả góp',
+    price: {
+      current: 3990000,
+      prev: 4190000,
+    },
+    group: 2,
+  },
+  {
+    id: 87902035,
+    name: 'Đèn sàn cao cấp từ F1GENZ',
+    uri: 'den-san-cao-cap-tu-f1genz',
+    images: [
+      {
+        width: 480,
+        height: 480,
+        src: 'https://bizweb.dktcdn.net/thumb/large/100/482/001/products/1-fbd5653f65fb49cfaf9743a7c0d012df-e6bc2bc37bc94eb198fd8dce0620e999.png?v=1683881049763',
+      },
+      {
+        width: 480,
+        height: 480,
+        src: 'https://bizweb.dktcdn.net/thumb/large/100/482/001/products/2-d22ab689affd4a0382d90631d5e22274-3075bf2e74e04f8a869b15a9ca64b447.png?v=1683881049763',
+      },
+    ],
+    thumbs: [
+      {
+        width: 50,
+        height: 50,
+        src: 'https://bizweb.dktcdn.net/thumb/thumb/100/482/001/products/2-d22ab689affd4a0382d90631d5e22274-3075bf2e74e04f8a869b15a9ca64b447.png?v=1683881049763',
+        dataSrc:
+          'https://bizweb.dktcdn.net/thumb/thumb/100/482/001/products/2-d22ab689affd4a0382d90631d5e22274-3075bf2e74e04f8a869b15a9ca64b447.png?v=1683881049763',
+      },
+      {
+        width: 50,
+        height: 50,
+        src: 'https://bizweb.dktcdn.net/thumb/thumb/100/482/001/products/3-8a789d53dbfe4a10809d513fcd086a69-8cc818c0b217415d80c9bc2ef9b39da4.png?v=1683881049763',
+        dataSrc:
+          'https://bizweb.dktcdn.net/thumb/thumb/100/482/001/products/3-8a789d53dbfe4a10809d513fcd086a69-8cc818c0b217415d80c9bc2ef9b39da4.png?v=1683881049763',
+      },
+      {
+        width: 50,
+        height: 50,
+        src: 'https://bizweb.dktcdn.net/thumb/thumb/100/482/001/products/4-fb837f9969534af3bf6aa026f2e78f7f-02429989b0f146b780245df15976e67f.png?v=1683881049763',
+        dataSrc:
+          'https://bizweb.dktcdn.net/thumb/thumb/100/482/001/products/4-fb837f9969534af3bf6aa026f2e78f7f-02429989b0f146b780245df15976e67f.png?v=1683881049763',
+      },
+    ],
+    tag: 'Độc quyền',
+    price: {
+      current: 3998000,
+      prev: 4210000,
+    },
     group: 2,
   },
 
-  // group 3
+  // group 3 - ghế ăn
 
   {
     id: 87901931,
@@ -823,15 +907,248 @@ export const products = [
         height: '50',
         dataSrc:
           'https://bizweb.dktcdn.net/thumb/thumb/100/482/001/products/10-a1e1765eb2474dc29cc0b99547a29207-4c3db7361f724259b51abe0c0e5c473b.png?v=1683881027370',
-        src: 'https://bizweb.dktcdn.net/thumb/thumb/100/482/001/products/10-a1e1765eb2474dc29cc0b99547a29207-4c3db7361f724259b51abe0c0e5c473b.png?v=1683881027370',
+        src: '',
       },
     ],
-    hotTrend: true,
-    flashSale: true,
+    group: 3,
+  },
+  {
+    id: 87901387,
+    uri: 'ghe-an-f1genz-cao-cap-loai-dac-biet',
+    name: 'Ghế ăn F1GENZ cao cấp loại đặc biệt',
+    price: {
+      current: 5199000,
+      prev: null,
+    },
+    vendor: 'F1GENZ',
+    tag: 'Giá tốt',
+    images: [
+      {
+        width: '480',
+        height: '480',
+        src: 'https://bizweb.dktcdn.net/thumb/large/100/482/001/products/1-a5ec45bc87c2439782bee53b0e27c508-737c055b25a24e95bc40bfd4796104ce.png?v=1683881021203',
+      },
+      {
+        width: '480',
+        height: '480',
+        src: 'https://bizweb.dktcdn.net/thumb/large/100/482/001/products/2-51f5c1dccd8a4dd9a4dd0e81151ce6ce-579e8431a63944719f322fd6a653d609.png?v=1683881021203',
+      },
+    ],
+    thumbs: [
+      {
+        width: '50',
+        height: '50',
+        dataSrc:
+          'https://bizweb.dktcdn.net/thumb/thumb/100/482/001/products/2-51f5c1dccd8a4dd9a4dd0e81151ce6ce-579e8431a63944719f322fd6a653d609.png?v=1683881021203',
+        src: 'https://bizweb.dktcdn.net/thumb/thumb/100/482/001/products/2-51f5c1dccd8a4dd9a4dd0e81151ce6ce-579e8431a63944719f322fd6a653d609.png?v=1683881021203',
+      },
+      {
+        width: '50',
+        height: '50',
+        dataSrc:
+          'https://bizweb.dktcdn.net/thumb/thumb/100/482/001/products/3-b5ff76a3f4b54cc28d20c9536fa59ab9-5ba88c3067384a1ebc3646912b0515a5.png?v=1683881021203',
+        src: 'https://bizweb.dktcdn.net/thumb/thumb/100/482/001/products/3-b5ff76a3f4b54cc28d20c9536fa59ab9-5ba88c3067384a1ebc3646912b0515a5.png?v=1683881021203',
+      },
+      {
+        width: '50',
+        height: '50',
+        dataSrc:
+          'https://bizweb.dktcdn.net/thumb/thumb/100/482/001/products/4-7c0f7e12b4804990a7257d608f58ed86-64e4ae95c0194c739b77aef2ad85ada0.png?v=1683881021203',
+        src: 'https://bizweb.dktcdn.net/thumb/thumb/100/482/001/products/4-7c0f7e12b4804990a7257d608f58ed86-64e4ae95c0194c739b77aef2ad85ada0.png?v=1683881021203',
+      },
+    ],
+    group: 3,
+  },
+  {
+    id: 87901113,
+    uri: 'ghe-dua-cao-cap-phong-an',
+    name: 'Ghế dựa cao cấp phòng ăn',
+    price: {
+      current: 1399000,
+      prev: 1599000,
+    },
+    vendor: 'F1GENZ',
+    tag: 'Saleoff',
+    images: [
+      {
+        width: '480',
+        height: '480',
+        src: 'https://bizweb.dktcdn.net/thumb/large/100/482/001/products/1-3205635d45b748d195f97c41a8abd0bd-ac0e9bac8a5d42ccba9253acd65531f4.png?v=1683881009470',
+      },
+      {
+        width: '480',
+        height: '480',
+        src: 'https://bizweb.dktcdn.net/thumb/large/100/482/001/products/2-d6b80505107c44fa96f141c061b28a70-643e7b2e7e354d089a9dc4b2282c8373.png?v=1683881009470',
+      },
+    ],
+    thumbs: [
+      {
+        width: '50',
+        height: '50',
+        dataSrc:
+          'https://bizweb.dktcdn.net/thumb/thumb/100/482/001/products/2-d6b80505107c44fa96f141c061b28a70-643e7b2e7e354d089a9dc4b2282c8373.png?v=1683881009470',
+        src: 'https://bizweb.dktcdn.net/thumb/thumb/100/482/001/products/2-d6b80505107c44fa96f141c061b28a70-643e7b2e7e354d089a9dc4b2282c8373.png?v=1683881009470',
+      },
+      {
+        width: '50',
+        height: '50',
+        dataSrc:
+          'https://bizweb.dktcdn.net/thumb/thumb/100/482/001/products/3-95461e910d7b4f9fa57f34cb31f5d31d-8ef634ad4d284a3891021cb1818322e3.png?v=1683881009470',
+        src: 'https://bizweb.dktcdn.net/thumb/thumb/100/482/001/products/3-95461e910d7b4f9fa57f34cb31f5d31d-8ef634ad4d284a3891021cb1818322e3.png?v=1683881009470',
+      },
+      {
+        width: '50',
+        height: '50',
+        dataSrc:
+          'https://bizweb.dktcdn.net/thumb/thumb/100/482/001/products/4-53ada3b93c0e40fd902959480216c74a-957ba38b360544acaa0d918fa660765e.png?v=1683881009470',
+        src: 'https://bizweb.dktcdn.net/thumb/thumb/100/482/001/products/4-53ada3b93c0e40fd902959480216c74a-957ba38b360544acaa0d918fa660765e.png?v=1683881009470',
+      },
+    ],
+    group: 3,
+  },
+  {
+    id: 87901033,
+    uri: 'ghe-kieu-hien-dai-2022',
+    name: 'Ghế kiểu hiện đại 2022',
+    price: {
+      current: 1899000,
+      prev: 2390000,
+    },
+    vendor: 'F1GENZ',
+    tag: 'Bestseller',
+    images: [
+      {
+        width: '480',
+        height: '480',
+        src: 'https://bizweb.dktcdn.net/thumb/large/100/482/001/products/1-caa7df09ccc1437a89ffeb6499b27cb8-7c7e8148b4f54252bd16f00c014328d3.png?v=1683881006230',
+      },
+      {
+        width: '480',
+        height: '480',
+        src: 'https://bizweb.dktcdn.net/thumb/large/100/482/001/products/2-410112266dea4cadb4eeaa73261a49d0-4b05099cf4554e53bf5498afc4196afd.png?v=1683881006230',
+      },
+    ],
+    thumbs: [
+      {
+        width: '50',
+        height: '50',
+        dataSrc:
+          'https://bizweb.dktcdn.net/thumb/thumb/100/482/001/products/2-410112266dea4cadb4eeaa73261a49d0-4b05099cf4554e53bf5498afc4196afd.png?v=1683881006230',
+        src: 'https://bizweb.dktcdn.net/thumb/thumb/100/482/001/products/2-410112266dea4cadb4eeaa73261a49d0-4b05099cf4554e53bf5498afc4196afd.png?v=1683881006230',
+      },
+      {
+        width: '50',
+        height: '50',
+        dataSrc:
+          'https://bizweb.dktcdn.net/thumb/thumb/100/482/001/products/3-7ca10f446cb74e15a09b036581aaf5ad-7bb38acbdb154fd19dc24ee871ffc295.png?v=1683881006230',
+        src: 'https://bizweb.dktcdn.net/thumb/thumb/100/482/001/products/3-7ca10f446cb74e15a09b036581aaf5ad-7bb38acbdb154fd19dc24ee871ffc295.png?v=1683881006230',
+      },
+      {
+        width: '50',
+        height: '50',
+        dataSrc:
+          'https://bizweb.dktcdn.net/thumb/thumb/100/482/001/products/4-1e5d1019b5c94f1fa6617862c90678ae-959f902b70a046ea824f3aafc701ef23.png?v=1683881006230',
+        src: 'https://bizweb.dktcdn.net/thumb/thumb/100/482/001/products/4-1e5d1019b5c94f1fa6617862c90678ae-959f902b70a046ea824f3aafc701ef23.png?v=1683881006230',
+      },
+    ],
+    group: 3,
+  },
+  {
+    id: 87900949,
+    uri: 'ghe-tron-4-chan-cao-cap-3',
+    name: 'Ghế trơn 4 chân cao cấp',
+    price: {
+      current: 1380000,
+      prev: 2359000,
+    },
+    vendor: 'F1GENZ',
+    tag: 'Flashsale',
+    images: [
+      {
+        width: '480',
+        height: '480',
+        src: 'https://bizweb.dktcdn.net/thumb/large/100/482/001/products/7-2f06c085cb084d15954234920131ae23-1fbf13e8b40248abbd385fc42dc26f21.png?v=1683881002767',
+      },
+      {
+        width: '480',
+        height: '480',
+        src: 'https://bizweb.dktcdn.net/thumb/large/100/482/001/products/15-32c5f7f1181c43698d60ad6cdbe45c3a-6e576bf0203c4355bcb38fa9dbe34201.png?v=1683881002767',
+      },
+    ],
+    thumbs: [
+      {
+        width: '50',
+        height: '50',
+        dataSrc:
+          'https://bizweb.dktcdn.net/thumb/thumb/100/482/001/products/15-32c5f7f1181c43698d60ad6cdbe45c3a-6e576bf0203c4355bcb38fa9dbe34201.png?v=1683881002767',
+        src: 'https://bizweb.dktcdn.net/thumb/thumb/100/482/001/products/15-32c5f7f1181c43698d60ad6cdbe45c3a-6e576bf0203c4355bcb38fa9dbe34201.png?v=1683881002767',
+      },
+      {
+        width: '50',
+        height: '50',
+        dataSrc:
+          'https://bizweb.dktcdn.net/thumb/thumb/100/482/001/products/14-f8969d6bf3ec45f59e2ca4c7ec89aafd-40d5102a186a4221b9bdcf0dbd9382e2.png?v=1683881002767',
+        src: 'https://bizweb.dktcdn.net/thumb/thumb/100/482/001/products/14-f8969d6bf3ec45f59e2ca4c7ec89aafd-40d5102a186a4221b9bdcf0dbd9382e2.png?v=1683881002767',
+      },
+      {
+        width: '50',
+        height: '50',
+        dataSrc:
+          'https://bizweb.dktcdn.net/thumb/thumb/100/482/001/products/13-4519a09cbdae414f9122644a6b6bfb96-fa078fcea5854567a8f84bcbd5b42f92.png?v=1683881002767',
+        src: 'https://bizweb.dktcdn.net/thumb/thumb/100/482/001/products/13-4519a09cbdae414f9122644a6b6bfb96-fa078fcea5854567a8f84bcbd5b42f92.png?v=1683881002767',
+      },
+    ],
+    group: 3,
+  },
+  {
+    id: 87900753,
+    uri: 'ghe-tron-den-cao-cap',
+    name: 'Ghế trơn đen cao cấp',
+    price: {
+      current: 2100000,
+      prev: 2230000,
+    },
+    vendor: 'F1GENZ',
+    tag: 'F1GENZMall',
+    images: [
+      {
+        width: '480',
+        height: '480',
+        src: 'https://bizweb.dktcdn.net/thumb/large/100/482/001/products/by-hipvan-axel-chair-black-carbon-2-d2489b15a8ef4e2eaec286e0da37e083-800511dcee2d42c2b583f344225d2c27.png?v=1683880993983',
+      },
+      {
+        width: '480',
+        height: '480',
+        src: 'https://bizweb.dktcdn.net/thumb/large/100/482/001/products/s-by-hipvan-axel-chair-black-grey-7-cdfac9061f414105a7109de0dbf752e8-a72d724a7d924849a2d80e107a4cb8d0.png?v=1683880993983',
+      },
+    ],
+    thumbs: [
+      {
+        width: '50',
+        height: '50',
+        dataSrc:
+          'https://bizweb.dktcdn.net/thumb/thumb/100/482/001/products/s-by-hipvan-axel-chair-black-grey-7-cdfac9061f414105a7109de0dbf752e8-a72d724a7d924849a2d80e107a4cb8d0.png?v=1683880993983',
+        src: 'https://bizweb.dktcdn.net/thumb/thumb/100/482/001/products/s-by-hipvan-axel-chair-black-grey-7-cdfac9061f414105a7109de0dbf752e8-a72d724a7d924849a2d80e107a4cb8d0.png?v=1683880993983',
+      },
+      {
+        width: '50',
+        height: '50',
+        dataSrc:
+          'https://bizweb.dktcdn.net/thumb/thumb/100/482/001/products/hipvan-axel-chair-black-grey-7-1-8e6d216590ba4b8fa8fe5bb81c622313-bbf7e9b397ed4964b2be6dec723f9167.png?v=1683880993983',
+        src: 'https://bizweb.dktcdn.net/thumb/thumb/100/482/001/products/hipvan-axel-chair-black-grey-7-1-8e6d216590ba4b8fa8fe5bb81c622313-bbf7e9b397ed4964b2be6dec723f9167.png?v=1683880993983',
+      },
+      {
+        width: '50',
+        height: '50',
+        dataSrc:
+          'https://bizweb.dktcdn.net/thumb/thumb/100/482/001/products/s-by-hipvan-axel-chair-black-grey-6-4042709ec2f14f9fbebb3b6782490f2d-5a04e64f338d42b9a47a2b271a5b9bdb.png?v=1683880993983',
+        src: 'https://bizweb.dktcdn.net/thumb/thumb/100/482/001/products/s-by-hipvan-axel-chair-black-grey-6-4042709ec2f14f9fbebb3b6782490f2d-5a04e64f338d42b9a47a2b271a5b9bdb.png?v=1683880993983',
+      },
+    ],
     group: 3,
   },
 
-  // group 4
+  // group 4 - bàn ăn
 
   {
     id: 87903117,
@@ -1048,7 +1365,7 @@ export const products = [
       {
         width: '480',
         height: '480',
-        src: 'https://bizweb.dktcdn.net/thumb/large/100/482/001/products/haynes-side-eb449953bc504af8b229608740009e1e-09179b37ea52432db6dd468dabf180f9.png?v=1683881074473',
+        src: 'https://bizweb.dktcdn.net/thumb/large/100/482/001/products/2-2deb4589b2de4f16862a5ce8908eab92-0a6d229b7c954737ad3e86821423fc80.png?v=1683880923067',
       },
     ],
     thumbs: [
@@ -1077,5 +1394,246 @@ export const products = [
     hotTrend: true,
     flashSale: true,
     group: 4,
+  },
+  {
+    id: 87899137,
+    name: 'Bàn ăn 4 chân cao cấp',
+    uri: 'ban-an-4-chan-cao-cap',
+    images: [
+      {
+        width: 480,
+        height: 480,
+        src: 'https://bizweb.dktcdn.net/thumb/large/100/482/001/products/1-279c18d961424754a83cefcb8265f7da-26532009efc9498698848a917b01b363.png?v=1683880923067',
+      },
+      {
+        width: '480',
+        height: '480',
+        src: 'https://bizweb.dktcdn.net/thumb/large/100/482/001/products/2-2deb4589b2de4f16862a5ce8908eab92-0a6d229b7c954737ad3e86821423fc80.png?v=1683880923067',
+      },
+    ],
+    thumbs: [
+      {
+        width: '50',
+        height: '50',
+        dataSrc:
+          'https://bizweb.dktcdn.net/thumb/thumb/100/482/001/products/2-2deb4589b2de4f16862a5ce8908eab92-0a6d229b7c954737ad3e86821423fc80.png?v=1683880923067',
+        src: 'https://bizweb.dktcdn.net/thumb/thumb/100/482/001/products/2-2deb4589b2de4f16862a5ce8908eab92-0a6d229b7c954737ad3e86821423fc80.png?v=1683880923067',
+      },
+      {
+        width: '50',
+        height: '50',
+        dataSrc:
+          'https://bizweb.dktcdn.net/thumb/thumb/100/482/001/products/3-422bbc35a1884281a26b5772222f3388-eb226959e4a1431f911b353796688e5f.png?v=1683880923067',
+        src: 'https://bizweb.dktcdn.net/thumb/thumb/100/482/001/products/3-422bbc35a1884281a26b5772222f3388-eb226959e4a1431f911b353796688e5f.png?v=1683880923067',
+      },
+      {
+        width: '50',
+        height: '50',
+        dataSrc:
+          'https://bizweb.dktcdn.net/thumb/thumb/100/482/001/products/4-cb3516f04a8649cc9588074be6267627-6dae0b8598764b45b56f5f0e5ef21426.png?v=1683880923067',
+        src: 'https://bizweb.dktcdn.net/thumb/thumb/100/482/001/products/4-cb3516f04a8649cc9588074be6267627-6dae0b8598764b45b56f5f0e5ef21426.png?v=1683880923067',
+      },
+    ],
+    tag: 'Hot',
+    price: {
+      current: 11990000,
+      prev: 13990000,
+    },
+    group: 2,
+  },
+
+  // group5 - Kệ treo tường
+
+  {
+    id: 87900201,
+    uri: 'ke-treo-tuong-f1genz-xu-huong-moi',
+    name: 'Kệ treo tường F1GENZ xu hướng mới',
+    images: [
+      {
+        width: '480',
+        height: '480',
+        src: 'https://bizweb.dktcdn.net/thumb/large/100/482/001/products/1-49867a86910c43c5a94628aa1218d5d6-5bf6d14c4fd045aba8cc706eeebee014.png?v=1683880970047',
+      },
+      {
+        width: '480',
+        height: '480',
+        src: 'https://bizweb.dktcdn.net/thumb/large/100/482/001/products/2-49ec9593fef549b4a08a9310ba25133b-797482d4b07b469490b8f57592345c9b.png?v=1683880970047',
+      },
+    ],
+    thumbs: [
+      {
+        width: '50',
+        height: '50',
+        dataSrc:
+          'https://bizweb.dktcdn.net/thumb/thumb/100/482/001/products/2-49ec9593fef549b4a08a9310ba25133b-797482d4b07b469490b8f57592345c9b.png?v=1683880970047',
+        src: 'https://bizweb.dktcdn.net/thumb/thumb/100/482/001/products/2-49ec9593fef549b4a08a9310ba25133b-797482d4b07b469490b8f57592345c9b.png?v=1683880970047',
+      },
+      {
+        width: '50',
+        height: '50',
+        dataSrc:
+          'https://bizweb.dktcdn.net/thumb/thumb/100/482/001/products/3-b2a3689da67c4fd2a440b62b43575cd0-58f0a37645344e948ddb93fd2bdbeb65.png?v=1683880970047',
+        src: 'https://bizweb.dktcdn.net/thumb/thumb/100/482/001/products/3-b2a3689da67c4fd2a440b62b43575cd0-58f0a37645344e948ddb93fd2bdbeb65.png?v=1683880970047',
+      },
+      {
+        width: '50',
+        height: '50',
+        dataSrc:
+          'https://bizweb.dktcdn.net/thumb/thumb/100/482/001/products/4-c3a269aaa7a14d69b300190380715864-c80a455d689f480ba64617fb9ad9c367.png?v=1683880970047',
+        src: 'https://bizweb.dktcdn.net/thumb/thumb/100/482/001/products/4-c3a269aaa7a14d69b300190380715864-c80a455d689f480ba64617fb9ad9c367.png?v=1683880970047',
+      },
+    ],
+    price: {
+      current: 679000,
+      prev: 779000,
+    },
+    vendor: 'F1GENZ',
+    tag: 'Saleoff',
+    flashSale: true,
+    group: 5,
+  },
+  {
+    id: 87900124,
+    uri: 'ke-treo-tuong-cao-cap',
+    name: 'Kệ treo tường cao cấp',
+    images: [
+      {
+        width: '480',
+        height: '480',
+        src: 'https://bizweb.dktcdn.net/thumb/large/100/482/001/products/1-5eef04a246654d3fb10d444a6996b0dd-f56a314a734a4efa80e0c2a8ff945bb9.png?v=1683880966707',
+      },
+      {
+        width: '480',
+        height: '480',
+        src: 'https://bizweb.dktcdn.net/thumb/large/100/482/001/products/2-786c4d2d49724d538fd3be88415403f0-2565e48f5c3646688b7e12c7bc75126e.png?v=1683880966707',
+      },
+    ],
+    thumbs: [
+      {
+        width: '50',
+        height: '50',
+        dataSrc:
+          'https://bizweb.dktcdn.net/thumb/thumb/100/482/001/products/2-786c4d2d49724d538fd3be88415403f0-2565e48f5c3646688b7e12c7bc75126e.png?v=1683880966707',
+        src: 'https://bizweb.dktcdn.net/thumb/thumb/100/482/001/products/2-786c4d2d49724d538fd3be88415403f0-2565e48f5c3646688b7e12c7bc75126e.png?v=1683880966707',
+      },
+      {
+        width: '50',
+        height: '50',
+        dataSrc:
+          'https://bizweb.dktcdn.net/thumb/thumb/100/482/001/products/3-cb434824e48446c68ec6c57679ab9ee7-c2d792a65d2149f09fa1c40c8b864e1a.png?v=1683880966707',
+        src: 'https://bizweb.dktcdn.net/thumb/thumb/100/482/001/products/3-cb434824e48446c68ec6c57679ab9ee7-c2d792a65d2149f09fa1c40c8b864e1a.png?v=1683880966707',
+      },
+      {
+        width: '50',
+        height: '50',
+        dataSrc:
+          'https://bizweb.dktcdn.net/thumb/thumb/100/482/001/products/4-7deeba3142e34969b659538fa48eedcc-b0ac3dfede164fcfb151ff5aa4c4293c.png?v=1683880966707',
+        src: 'https://bizweb.dktcdn.net/thumb/thumb/100/482/001/products/4-7deeba3142e34969b659538fa48eedcc-b0ac3dfede164fcfb151ff5aa4c4293c.png?v=1683880966707',
+      },
+    ],
+    price: {
+      current: 980000,
+      prev: 1129000,
+    },
+    vendor: 'F1GENZ',
+    tag: 'Quà tặng',
+    flashSale: true,
+    group: 5,
+  },
+  {
+    id: 87900014,
+    uri: 'ke-treo-tuong-cao-cap-hinh-luoi',
+    name: 'Kệ treo tường cao cấp hình lưới',
+    images: [
+      {
+        width: '480',
+        height: '480',
+        src: 'https://bizweb.dktcdn.net/thumb/large/100/482/001/products/1-6115b1d6540a4e6297a76ede1b4aaca1-6d135f9f66f74bb18c913fc345f68562.png?v=1683880961847',
+      },
+      {
+        width: '480',
+        height: '480',
+        src: 'https://bizweb.dktcdn.net/thumb/large/100/482/001/products/2-18622e30413b43748b8417a30e6a451a-83f17795f1af4f17afbf3f67466c7774.png?v=1683880961847',
+      },
+    ],
+    thumbs: [
+      {
+        width: '50',
+        height: '50',
+        dataSrc:
+          'https://bizweb.dktcdn.net/thumb/thumb/100/482/001/products/2-18622e30413b43748b8417a30e6a451a-83f17795f1af4f17afbf3f67466c7774.png?v=1683880961847',
+        src: 'https://bizweb.dktcdn.net/thumb/thumb/100/482/001/products/2-18622e30413b43748b8417a30e6a451a-83f17795f1af4f17afbf3f67466c7774.png?v=1683880961847',
+      },
+      {
+        width: '50',
+        height: '50',
+        dataSrc:
+          'https://bizweb.dktcdn.net/thumb/thumb/100/482/001/products/3-35fd63dbe12f415ba42daf1764fe89d5-e5902f979a8b4ae4adec5c69140abde9.png?v=1683880961847',
+        src: 'https://bizweb.dktcdn.net/thumb/thumb/100/482/001/products/3-35fd63dbe12f415ba42daf1764fe89d5-e5902f979a8b4ae4adec5c69140abde9.png?v=1683880961847',
+      },
+      {
+        width: '50',
+        height: '50',
+        dataSrc:
+          'https://bizweb.dktcdn.net/thumb/thumb/100/482/001/products/4-df1e3ec68aee4b2fa88677399db975e7-0cd7466b491448dba28a7e490570ed20.png?v=1683880961847',
+        src: 'https://bizweb.dktcdn.net/thumb/thumb/100/482/001/products/4-df1e3ec68aee4b2fa88677399db975e7-0cd7466b491448dba28a7e490570ed20.png?v=1683880961847',
+      },
+    ],
+    price: {
+      current: 890000,
+      prev: 1120000,
+    },
+    vendor: 'F1GENZ',
+    tag: 'Giá tốt',
+    flashSale: true,
+    group: 5,
+  },
+  {
+    id: 87899926,
+    uri: 'ke-treo-tuong-nghe-thuat-cao-cap',
+    name: 'Kệ treo tường nghệ thuật cao cấp',
+    images: [
+      {
+        width: '480',
+        height: '480',
+        src: 'https://bizweb.dktcdn.net/thumb/large/100/482/001/products/1-5c8749f4094641a3b58160a05d5738e6-793e8f984f6e4bee8fad111a12e54277.png?v=1683880958173',
+      },
+      {
+        width: '480',
+        height: '480',
+        src: 'https://bizweb.dktcdn.net/thumb/large/100/482/001/products/2-a2b1391daa47469db78e14a29ce05a97-aa576835c8bc4ab58d3ebfe0b60f7322.png?v=1683880958173',
+      },
+    ],
+    thumbs: [
+      {
+        width: '50',
+        height: '50',
+        dataSrc:
+          'https://bizweb.dktcdn.net/thumb/thumb/100/482/001/products/2-a2b1391daa47469db78e14a29ce05a97-aa576835c8bc4ab58d3ebfe0b60f7322.png?v=1683880958173',
+        src: 'https://bizweb.dktcdn.net/thumb/thumb/100/482/001/products/2-a2b1391daa47469db78e14a29ce05a97-aa576835c8bc4ab58d3ebfe0b60f7322.png?v=1683880958173',
+      },
+      {
+        width: '50',
+        height: '50',
+        dataSrc:
+          'https://bizweb.dktcdn.net/thumb/thumb/100/482/001/products/3-a326007152cd4c728438ad4006c3c0a8-94f5326c92df41be9f1d2674d8fffb86.png?v=1683880958173',
+        src: 'https://bizweb.dktcdn.net/thumb/thumb/100/482/001/products/3-a326007152cd4c728438ad4006c3c0a8-94f5326c92df41be9f1d2674d8fffb86.png?v=1683880958173',
+      },
+      {
+        width: '50',
+        height: '50',
+        dataSrc:
+          'https://bizweb.dktcdn.net/thumb/thumb/100/482/001/products/4-c693819763d9438abd44e605d3ae8e04-dad615c44efe4c58bf00427c3ca99afa.png?v=1683880958173',
+        src: 'https://bizweb.dktcdn.net/thumb/thumb/100/482/001/products/4-c693819763d9438abd44e605d3ae8e04-dad615c44efe4c58bf00427c3ca99afa.png?v=1683880958173',
+      },
+    ],
+    price: {
+      current: 4129000,
+      prev: 4890000,
+    },
+    vendor: 'F1GENZ',
+    tag: 'NEW',
+    flashSale: true,
+    group: 5,
   },
 ];

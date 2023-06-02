@@ -131,8 +131,8 @@ export const flashSaleEvents = [
   {
     id: 0,
     title: 'Tủ quần áo',
-    start: '06/02/2023 00:00:00',
-    end: '06/02/2023 07:00:00',
+    start: new Date().setHours(0, 0, 0),
+    end: new Date().setHours(7, 0, 0),
     image: {
       src: 'https://theme.hstatic.net/200000036162/1000967879/14/fsale_countdown_label.jpg?v=75',
       dataSrc:
@@ -150,8 +150,8 @@ export const flashSaleEvents = [
   {
     id: 1,
     title: 'Giá treo',
-    start: '06/02/2023 07:00:00',
-    end: '06/02/2023 12:00:00',
+    start: new Date().setHours(7, 0, 0),
+    end: new Date().setHours(12, 0, 0),
     image: {
       src: 'https://theme.hstatic.net/200000036162/1000967879/14/fsale_countdown_label.jpg?v=75',
       dataSrc: 'https://theme.hstatic.net/200000036162/1000967879/14/fsale_countdown_label.jpg?v=75',
@@ -168,8 +168,8 @@ export const flashSaleEvents = [
   {
     id: 2,
     title: 'Kệ treo tường',
-    start: '06/02/2023 12:00:00',
-    end: '06/02/2023 16:00:00',
+    start: new Date().setHours(12, 0, 0),
+    end: new Date().setHours(16, 0, 0),
     image: {
       src: 'https://theme.hstatic.net/200000036162/1000967879/14/fsale_countdown_label.jpg?v=75',
       dataSrc: 'https://theme.hstatic.net/200000036162/1000967879/14/fsale_countdown_label.jpg?v=75',
@@ -186,8 +186,8 @@ export const flashSaleEvents = [
   {
     id: 3,
     title: 'Bàn ăn',
-    start: '06/02/2023 16:00:00',
-    end: '06/02/2023 20:00:00',
+    start: new Date().setHours(16, 0, 0),
+    end: new Date().setHours(20, 0, 0),
     image: {
       src: 'https://theme.hstatic.net/200000036162/1000967879/14/fsale_countdown_label.jpg?v=75',
       dataSrc:
@@ -205,8 +205,8 @@ export const flashSaleEvents = [
   {
     id: 4,
     title: 'Ghế ăn',
-    start: '06/02/2023 20:00:00',
-    end: '06/02/2023 24:00:00',
+    start: new Date().setHours(20, 0, 0),
+    end: new Date().setHours(24, 0, 0),
     image: {
       src: 'https://theme.hstatic.net/200000036162/1000967879/14/fsale_countdown_label.jpg?v=75',
       dataSrc:

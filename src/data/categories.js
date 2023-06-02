@@ -39,4 +39,11 @@ export const categories = [
     banner:
       'https://bizweb.dktcdn.net/100/482/001/themes/906081/assets/home_product_tab_item_banner_5.png?1684771044770',
   },
+  {
+    id: 5,
+    name: 'Kệ treo tường',
+    thumb: '',
+    url: 'ke-treo-tuong',
+    banner: '',
+  },
 ];

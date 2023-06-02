@@ -2,12 +2,12 @@ import Link from 'next/link';
 
 const Footer = () => {
   return (
-    <footer class="footer">
-      <div class="container">
-        <div class="footer-top">
-          <div class="footer-top-item">
+    <footer className="footer">
+      <div className="container">
+        <div className="footer-top">
+          <div className="footer-top-item">
             <h4>Dịch vụ khách hàng</h4>
-            <ul class="footer-top-item-content">
+            <ul className="footer-top-item-content">
               <li>
                 <Link href="/gioi-thieu" title="Giới thiệu">
                   Giới thiệu
@@ -40,9 +40,9 @@ const Footer = () => {
               </li>
             </ul>
           </div>
-          <div class="footer-top-item">
+          <div className="footer-top-item">
             <h4>Thông tin</h4>
-            <ul class="footer-top-item-content">
+            <ul className="footer-top-item-content">
               <li>
                 <Link href="/collections/all" title="Tất cả sản phẩm">
                   Tất cả sản phẩm
@@ -71,9 +71,9 @@ const Footer = () => {
             </ul>
           </div>
 
-          <div class="footer-top-item">
+          <div className="footer-top-item">
             <h4>Về chúng tôi</h4>
-            <ul class="footer-top-item-content">
+            <ul className="footer-top-item-content">
               <li>
                 <Link href="/gioi-thieu" title="Giới thiệu">
                   Giới thiệu
@@ -106,9 +106,9 @@ const Footer = () => {
               </li>
             </ul>
           </div>
-          <div class="footer-top-item">
+          <div className="footer-top-item">
             <h4>Liên hệ</h4>
-            <div class="footer-top-item-content">
+            <div className="footer-top-item-content">
               Chúng tôi hướng tới sự khác biệt trong từng chi tiết, tạo nên ngôn ngữ riêng cho bày trí nội thất, đem đến
               một không gian tinh tế trong từng đường nét. Nhưng trên tất cả, sự tin tưởng của khách hàng là điều F1GENZ
               FURNITURE 2 đề cao nhất, và đây cũng là tôn chỉ hoạt động của công ty. Do đó, đến với chúng tôi, hơn cả
@@ -117,13 +117,13 @@ const Footer = () => {
           </div>
         </div>
       </div>
-      <div class="footer-bot">
-        <div class="container">
-          <div class="copyright">
-            <div class="row align-items-center">
-              <div class="col-md-3 text-md-left  text-center">
-                <div class="logo-footer">
-                  <Link href="//f1genz-furniture.mysapo.net" class="logo" title="F1GENZ Furniture">
+      <div className="footer-bot">
+        <div className="container">
+          <div className="copyright">
+            <div className="row align-items-center">
+              <div className="col-md-3 text-md-left  text-center">
+                <div className="logo-footer">
+                  <Link href="//f1genz-furniture.mysapo.net" className="logo" title="F1GENZ Furniture">
                     <img
                       loading="lazy"
                       width="150"
@@ -134,9 +134,9 @@ const Footer = () => {
                   </Link>
                 </div>
               </div>
-              <div class="col-md-4  text-center"></div>
-              <div class="col-md-5  text-md-right  text-center">
-                <p class="text-copyright mb-0">
+              <div className="col-md-4  text-center"></div>
+              <div className="col-md-5  text-md-right  text-center">
+                <p className="text-copyright mb-0">
                   © 2023 - All rights reserved by
                   <Link target="_blank" href="https://f1genz.com/">
                     F1GENZ TECHNOLOGY CO., LTD.

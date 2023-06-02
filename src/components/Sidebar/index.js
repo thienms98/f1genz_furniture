@@ -2,9 +2,9 @@ import React from 'react';
 
 const Sidebar = () => {
   return (
-    <div class="main-collection-left">
-      <div class="shop-filter-wrap shop-filter-mobile">
-        <div class="head-for-mobile">
+    <div className="main-collection-left">
+      <div className="shop-filter-wrap shop-filter-mobile">
+        <div className="head-for-mobile">
           <strong>Bộ lọc</strong>
           <button type="button" data-type="close-filter-mobile" title="Đóng">
             <svg
@@ -18,7 +18,7 @@ const Sidebar = () => {
               viewBox="0 0 64 64"
               style={{ enableBackground: 'new 0 0 512 512' }}
               xmlSpace="preserve"
-              class=""
+              className=""
             >
               <g>
                 <path
@@ -26,25 +26,25 @@ const Sidebar = () => {
                   d="m4.59 59.41a2 2 0 0 0 2.83 0l24.58-24.58 24.59 24.58a2 2 0 0 0 2.83-2.83l-24.59-24.58 24.58-24.59a2 2 0 0 0 -2.83-2.83l-24.58 24.59-24.59-24.58a2 2 0 0 0 -2.82 2.82l24.58 24.59-24.58 24.59a2 2 0 0 0 0 2.82z"
                   fill="#000000"
                   data-original="#000000"
-                  class=""
+                  className=""
                 ></path>
               </g>
             </svg>
           </button>
         </div>
-        <div class="shop-filter-choose hidden">
+        <div className="shop-filter-choose hidden">
           <label>
             Bạn chọn:
             <button type="button" data-type="shop-filter-choose-remove" title="Bỏ hết">
               Bỏ hết
             </button>
           </label>
-          <ul class="shop-filter-choose-data"></ul>
+          <ul className="shop-filter-choose-data"></ul>
         </div>
-        <div class="shop-filter" data-type="vendor">
+        <div className="shop-filter" data-type="vendor">
           <h4>Thương hiệu sản phẩm</h4>
-          <div class="shop-filter-list">
-            <div class="shop-filter-item">
+          <div className="shop-filter-list">
+            <div className="shop-filter-item">
               <input
                 type="checkbox"
                 id="shop-filter-vendor1"
@@ -58,10 +58,10 @@ const Sidebar = () => {
             </div>
           </div>
         </div>
-        <div class="shop-filter" data-type="type">
+        <div className="shop-filter" data-type="type">
           <h4>Loại sản phẩm</h4>
-          <div class="shop-filter-list">
-            <div class="shop-filter-item">
+          <div className="shop-filter-list">
+            <div className="shop-filter-item">
               <input
                 type="checkbox"
                 id="shop-filter-type1"
@@ -73,7 +73,7 @@ const Sidebar = () => {
               />
               <label for="shop-filter-type1">Bàn</label>
             </div>
-            <div class="shop-filter-item">
+            <div className="shop-filter-item">
               <input
                 type="checkbox"
                 id="shop-filter-type2"
@@ -85,7 +85,7 @@ const Sidebar = () => {
               />
               <label for="shop-filter-type2">Đèn</label>
             </div>
-            <div class="shop-filter-item">
+            <div className="shop-filter-item">
               <input
                 type="checkbox"
                 id="shop-filter-type3"
@@ -97,7 +97,7 @@ const Sidebar = () => {
               />
               <label for="shop-filter-type3">Ghế</label>
             </div>
-            <div class="shop-filter-item">
+            <div className="shop-filter-item">
               <input
                 type="checkbox"
                 id="shop-filter-type4"
@@ -109,7 +109,7 @@ const Sidebar = () => {
               />
               <label for="shop-filter-type4">Giá treo</label>
             </div>
-            <div class="shop-filter-item">
+            <div className="shop-filter-item">
               <input
                 type="checkbox"
                 id="shop-filter-type5"
@@ -121,7 +121,7 @@ const Sidebar = () => {
               />
               <label for="shop-filter-type5">Kệ treo tường</label>
             </div>
-            <div class="shop-filter-item">
+            <div className="shop-filter-item">
               <input
                 type="checkbox"
                 id="shop-filter-type6"
@@ -135,10 +135,10 @@ const Sidebar = () => {
             </div>
           </div>
         </div>
-        <div class="shop-filter" data-type="variant1">
+        <div className="shop-filter" data-type="variant1">
           <h4>Kích thước</h4>
-          <div class="shop-filter-list">
-            <div class="shop-filter-item">
+          <div className="shop-filter-list">
+            <div className="shop-filter-item">
               <input
                 type="checkbox"
                 id="shop-filter-tag-item11"
@@ -150,7 +150,7 @@ const Sidebar = () => {
               />
               <label for="shop-filter-tag-item11">33x40cm</label>
             </div>
-            <div class="shop-filter-item">
+            <div className="shop-filter-item">
               <input
                 type="checkbox"
                 id="shop-filter-tag-item12"
@@ -162,7 +162,7 @@ const Sidebar = () => {
               />
               <label for="shop-filter-tag-item12">40x30cm</label>
             </div>
-            <div class="shop-filter-item">
+            <div className="shop-filter-item">
               <input
                 type="checkbox"
                 id="shop-filter-tag-item13"
@@ -174,7 +174,7 @@ const Sidebar = () => {
               />
               <label for="shop-filter-tag-item13">100x30cm</label>
             </div>
-            <div class="shop-filter-item">
+            <div className="shop-filter-item">
               <input
                 type="checkbox"
                 id="shop-filter-tag-item14"
@@ -188,10 +188,10 @@ const Sidebar = () => {
             </div>
           </div>
         </div>
-        <div class="shop-filter" data-type="variant3">
+        <div className="shop-filter" data-type="variant3">
           <h4>Màu sắc</h4>
-          <div class="shop-filter-list color">
-            <div class="shop-filter-item color xanh">
+          <div className="shop-filter-list color">
+            <div className="shop-filter-item color xanh">
               <input
                 type="checkbox"
                 id="shop-filter-tag-item31"
@@ -205,7 +205,7 @@ const Sidebar = () => {
                 Xanh
               </label>
             </div>
-            <div class="shop-filter-item color do">
+            <div className="shop-filter-item color do">
               <input
                 type="checkbox"
                 id="shop-filter-tag-item32"
@@ -219,7 +219,7 @@ const Sidebar = () => {
                 Đỏ
               </label>
             </div>
-            <div class="shop-filter-item color den">
+            <div className="shop-filter-item color den">
               <input
                 type="checkbox"
                 id="shop-filter-tag-item33"
@@ -233,7 +233,7 @@ const Sidebar = () => {
                 Đen
               </label>
             </div>
-            <div class="shop-filter-item color tim">
+            <div className="shop-filter-item color tim">
               <input
                 type="checkbox"
                 id="shop-filter-tag-item34"
@@ -247,7 +247,7 @@ const Sidebar = () => {
                 Tím
               </label>
             </div>
-            <div class="shop-filter-item color vang">
+            <div className="shop-filter-item color vang">
               <input
                 type="checkbox"
                 id="shop-filter-tag-item35"
@@ -264,10 +264,10 @@ const Sidebar = () => {
           </div>
         </div>
 
-        <div class="shop-filter" data-type="price">
+        <div className="shop-filter" data-type="price">
           <h4>Giá sản phẩm</h4>
-          <div class="shop-filter-list">
-            <div class="shop-filter-item">
+          <div className="shop-filter-list">
+            <div className="shop-filter-item">
               <input
                 type="checkbox"
                 id="shop-filter-price-item1"
@@ -281,7 +281,7 @@ const Sidebar = () => {
                 Dưới 1.000.000₫
               </label>
             </div>
-            <div class="shop-filter-item">
+            <div className="shop-filter-item">
               <input
                 type="checkbox"
                 id="shop-filter-price-item2"
@@ -295,7 +295,7 @@ const Sidebar = () => {
                 Từ 1.000.000₫ - 3.000.000₫
               </label>
             </div>
-            <div class="shop-filter-item">
+            <div className="shop-filter-item">
               <input
                 type="checkbox"
                 id="shop-filter-price-item3"
@@ -309,7 +309,7 @@ const Sidebar = () => {
                 Từ 3.000.000₫ - 5.000.000₫
               </label>
             </div>
-            <div class="shop-filter-item">
+            <div className="shop-filter-item">
               <input
                 type="checkbox"
                 id="shop-filter-price-item4"
@@ -323,7 +323,7 @@ const Sidebar = () => {
                 Từ 5.000.000₫ - 10.000.000₫
               </label>
             </div>
-            <div class="shop-filter-item">
+            <div className="shop-filter-item">
               <input
                 type="checkbox"
                 id="shop-filter-price-item5"

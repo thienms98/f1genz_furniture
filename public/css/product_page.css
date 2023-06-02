@@ -264,6 +264,14 @@
   border-radius: 0.5em;
   z-index: 99;
 }
+body.open-share .main-product .main-product-wrap .main-product-right .main-product-share .main-product-share-popup,
+body.open-share .main-product .main-product-wrap .main-product-right .main-product-share .main-product-share-overplay,
+html.open-share .main-product .main-product-wrap .main-product-right .main-product-share .main-product-share-popup,
+html.open-share .main-product .main-product-wrap .main-product-right .main-product-share .main-product-share-overplay {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+}
 
 @media (max-width: 480px) {
   .main-product-share-popup {

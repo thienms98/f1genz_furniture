@@ -7,16 +7,15 @@
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
 
-  
-  --color_bg: #FFF;
+  --color_bg: #fff;
   --color_bg_item: #f0f1f2 /* F7FAFF */;
   --color_main: #f8571d;
   --color_main2: #333333;
   --color_index_review: #62aefb;
   --color1: #333;
-  --color2: #FFF;
+  --color2: #fff;
   --border_radius: 0;
-  --image_title: url("//bizweb.dktcdn.net/100/482/001/themes/906081/assets/image_title_all.png?1684771044770");
+  --image_title: url('//bizweb.dktcdn.net/100/482/001/themes/906081/assets/image_title_all.png?1684771044770');
 }
 
 @media (prefers-color-scheme: dark) {
@@ -26,23 +25,25 @@
     --background-end-rgb: 0, 0, 0;
   }
 }
-*{
+* {
   padding: 0;
   margin: 0;
   font-size: 17px;
-  font-family: -apple-system , BlinkMacSystemFont, "Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif,
+    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
 }
 
-a{
+a {
   text-decoration: none;
-  color: inherit !important;
+  color: inherit;
 }
 
-button, input{
+button,
+input {
   outline: none;
   border: none;
 }
-ul{
+ul {
   list-style-type: none;
 }
 body {
@@ -54,4 +55,3 @@ body {
     )
     rgb(var(--background-start-rgb)); */
 }
-

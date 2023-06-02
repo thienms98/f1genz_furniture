@@ -24,6 +24,7 @@ const ProductPage = () => {
 
   const productUri = router.query.product;
   const [product, setProduct] = useState();
+  const [amount, setAmount] = useState(1);
 
   const [nav1, setNav1] = useState();
   const [nav2, setNav2] = useState();
@@ -1523,12 +1524,20 @@ const ProductPage = () => {
                   type="button"
                   datatype="main-product-share-overplay"
                   className="main-product-share-overplay"
+                  onClick={() => {
+                    document.body.classList.remove('open-share');
+                    document.body.classList.remove('open-noscroll');
+                  }}
                 ></button>
                 <button
                   type="button"
                   datatype="main-product-share-open-popup"
                   className="main-product-share-cta"
                   title="Chia sẻ"
+                  onClick={() => {
+                    document.body.classList.toggle('open-share');
+                    document.body.classList.toggle('open-noscroll');
+                  }}
                 >
                   <ShareIcon />
                 </button>
@@ -1570,7 +1579,7 @@ const ProductPage = () => {
                     <form>
                       <input
                         value="https://f1genz-furniture.mysapo.net/ban-an-4-chan-gia-dinh-cao-cap"
-                        readonly=""
+                        readOnly=""
                         id="main-product-share-copy"
                       />
                       <button type="button" title="Sao chép" datatype="main-product-share-copy">
@@ -1723,11 +1732,28 @@ const ProductPage = () => {
               <div className="main-product-quantity shop-quantity-wrap">
                 <label>Số lượng</label>
                 <div className="shop-quantity">
-                  <button type="button" datatype="shop-quantity-minus" title="Giảm">
+                  <button
+                    type="button"
+                    datatype="shop-quantity-minus"
+                    title="Giảm"
+                    onclick={() => setAmount(amount - 1 < 1 ? 1 : amount - 1)}
+                  >
                     -
                   </button>
-                  <input type="number" name="quantity" value="1" min="1" readonly="" />
-                  <button type="button" datatype="shop-quantity-plus" title="Tăng">
+                  <input
+                    type="number"
+                    name="quantity"
+                    value={amount}
+                    onChange={(e) => setAmount(e.target.value < 1 ? 1 : e.target.value)}
+                    min="1"
+                    readOnly=""
+                  />
+                  <button
+                    type="button"
+                    datatype="shop-quantity-plus"
+                    title="Tăng"
+                    onClick={() => setAmount(amount + 1)}
+                  >
                     +
                   </button>
                 </div>
@@ -1748,8 +1774,8 @@ const ProductPage = () => {
                       <img
                         className=" ls-is-cached lazyloaded"
                         title="Coupon 1"
-                        src="//bizweb.dktcdn.net/100/482/001/themes/906081/assets/shop_coupon_item_image_1.png?1684771044770"
-                        datasrc="//bizweb.dktcdn.net/100/482/001/themes/906081/assets/shop_coupon_item_image_1.png?1684771044770"
+                        src="https://bizweb.dktcdn.net/100/482/001/themes/906081/assets/shop_coupon_item_image_1.png?1684771044770"
+                        datasrc="https://bizweb.dktcdn.net/100/482/001/themes/906081/assets/shop_coupon_item_image_1.png?1684771044770"
                         alt="cusPro-coupon-1"
                       />
                     </li>
@@ -1757,8 +1783,8 @@ const ProductPage = () => {
                       <img
                         className=" ls-is-cached lazyloaded"
                         title="Coupon 2"
-                        src="//bizweb.dktcdn.net/100/482/001/themes/906081/assets/shop_coupon_item_image_2.png?1684771044770"
-                        datasrc="//bizweb.dktcdn.net/100/482/001/themes/906081/assets/shop_coupon_item_image_2.png?1684771044770"
+                        src="https://bizweb.dktcdn.net/100/482/001/themes/906081/assets/shop_coupon_item_image_2.png?1684771044770"
+                        datasrc="https://bizweb.dktcdn.net/100/482/001/themes/906081/assets/shop_coupon_item_image_2.png?1684771044770"
                         alt="cusPro-coupon-2"
                       />
                     </li>
@@ -1766,8 +1792,8 @@ const ProductPage = () => {
                       <img
                         className=" ls-is-cached lazyloaded"
                         title="Coupon 3"
-                        src="//bizweb.dktcdn.net/100/482/001/themes/906081/assets/shop_coupon_item_image_3.png?1684771044770"
-                        datasrc="//bizweb.dktcdn.net/100/482/001/themes/906081/assets/shop_coupon_item_image_3.png?1684771044770"
+                        src="https://bizweb.dktcdn.net/100/482/001/themes/906081/assets/shop_coupon_item_image_3.png?1684771044770"
+                        datasrc="https://bizweb.dktcdn.net/100/482/001/themes/906081/assets/shop_coupon_item_image_3.png?1684771044770"
                         alt="cusPro-coupon-3"
                       />
                     </li>
@@ -1911,7 +1937,7 @@ const ProductPage = () => {
                       width="1"
                       height="1"
                       alt="Bàn ăn 4 chân gia đình cao cấp"
-                      src="//file.hstatic.net/200000566183/file/123_1ed365727ba94eab835b7ca04ee8c369_master.jpeg"
+                      src="https://file.hstatic.net/200000566183/file/123_1ed365727ba94eab835b7ca04ee8c369_master.jpeg"
                     />
                   </p>
                   <p>
@@ -1926,7 +1952,7 @@ const ProductPage = () => {
                       width="1"
                       height="1"
                       alt="Bàn ăn 4 chân gia đình cao cấp"
-                      src="//file.hstatic.net/200000566183/file/blog-10_11493334d5614e2aa573139dc966f7e2_master.jpeg"
+                      src="https://file.hstatic.net/200000566183/file/blog-10_11493334d5614e2aa573139dc966f7e2_master.jpeg"
                     />
                   </p>
                   <p>
