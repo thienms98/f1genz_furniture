@@ -3,14 +3,17 @@ import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 
-import CloseIcon from '~/static/images/close';
-import PhoneIcon from '~/static/images/phone';
+import CloseIcon from '~/components/icon/close';
+import PhoneIcon from '~/components/icon/phone';
+import { products } from '~/data/products';
 
 const Header = () => {
   const template = ['Bạn cần tìm gì ...?', 'Nhập tên sản phẩm', 'Tìm kiếm sản phẩm ...'];
   const [pos, setPos] = useState([0, 5]);
   const [inc, setInc] = useState(1);
   const [placeholder, setPlaceholder] = useState('Bạn c');
+  const [searchText, setSearchText] = useState('');
+  const [searchData, setSearchData] = useState(null);
 
   const headerMenuSidebarRef = useRef(null);
   const searchRef = useRef(null);
@@ -33,8 +36,13 @@ const Header = () => {
         return template[a].slice(0, b);
       });
     }, 200);
+    if (searchText) clearTimeout(timeout);
     return () => clearTimeout(timeout);
-  }, [placeholder, pos, template]);
+  }, [placeholder, pos, template, searchText]);
+
+  useEffect(() => {
+    setSearchData(products.filter((prod) => prod.name.toLowerCase().includes(searchText.trim().toLowerCase())));
+  }, [searchText]);
 
   return (
     <header className="header">
@@ -51,9 +59,17 @@ const Header = () => {
             </Link>
           </div>
           <div className="header-center">
-            <form className="tool-search" action="/search" ref={searchRef}>
+            <form className={`tool-search ${searchText.trim() ? 'active' : ''}`} action="/search" ref={searchRef}>
               <input type="hidden" name="type" value="product" />
-              <input required="" name="q" autoComplete="off" type="text" placeholder={placeholder} />
+              <input
+                required=""
+                name="q"
+                autoComplete="off"
+                type="text"
+                placeholder={placeholder}
+                value={searchText}
+                onChange={(e) => setSearchText(e.target.value)}
+              />
               <button type="submit" title="Tìm kiếm">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -76,8 +92,31 @@ const Header = () => {
                   ></path>
                 </svg>
               </button>
-              <button className="tool-search-overplay" title="Đóng"></button>
-              <div className="tool-search-smart"></div>
+              <button
+                className="tool-search-overplay"
+                title="Đóng"
+                onClick={() => {
+                  setSearchText('');
+                  setSearchData([]);
+                }}
+              ></button>
+              {searchText.trim() && (
+                <div class="tool-search-smart">
+                  <div class="tool-search-smart-product tool-search-smart-data">
+                    <label>Sản phẩm ({searchData.length})</label>
+                    <ul>
+                      {searchData.map((prod) => (
+                        <li key={prod.id}>
+                          <a href={`/${prod.uri}`} title={prod.name}>
+                            <Image src={prod.images[0].src} width={50} height={50} alt={prod.name} />
+                            <span>{prod.name}</span>
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              )}
             </form>
           </div>
           <div className="header-right">
@@ -153,7 +192,6 @@ const Header = () => {
               data-whatever="@accountLogin"
               title="Tài khoản"
               onClick={() => {
-                console.log(document.body.offsetWidth);
                 if (document.body.offsetWidth < 1200) searchRef.current.classList.toggle('show');
               }}
             >

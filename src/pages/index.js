@@ -9,9 +9,9 @@ import FsaleTimer from '~/components/FsaleTimer';
 import HomeLayout from '~/layouts';
 import Slider from 'react-slick';
 // icon
-import CartIcon from '~/static/images/heart';
-import HeartIcon from '~/static/images/heart';
-import MagnifyingGlassIcon from '~/static/images/heart';
+import CartIcon from '~/components/icon/heart';
+import HeartIcon from '~/components/icon/heart';
+import MagnifyingGlassIcon from '~/components/icon/heart';
 // utils
 import classNames from 'classnames';
 import { homeSlider, homeBanner, flashSaleEvents } from '~/data/home';

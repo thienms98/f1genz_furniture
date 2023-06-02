@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import MagnifyingGlassIcon from '~/static/images/magnifyingGlass';
+import MagnifyingGlassIcon from '~/components/icon/magnifyingGlass';
 
 import NewsLayout from '~/layouts/news';
 

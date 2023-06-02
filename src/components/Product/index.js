@@ -2,9 +2,9 @@ import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 
-import HeartIcon from '~/static/images/heart';
-import CartIcon from '~/static/images/cart';
-import MagnifyingGlassIcon from '~/static/images/magnifyingGlass';
+import HeartIcon from '~/components/icon/heart';
+import CartIcon from '~/components/icon/cart';
+import MagnifyingGlassIcon from '~/components/icon/magnifyingGlass';
 
 const Product = ({ id, name, uri, tag, vendor, price, images, thumbs }) => {
   return (

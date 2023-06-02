@@ -19,7 +19,6 @@ const FsaleTimer = ({ fsale, fsaling }) => {
 
     return () => clearTimeout(counting);
   }, [bait]);
-  console.log(remainingTime(fsale.end));
 
   return (
     <div

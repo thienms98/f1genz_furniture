@@ -1,20 +1,33 @@
 import Head from 'next/head';
 import Link from 'next/link';
 import Image from 'next/image';
+
+import { useRef, useEffect } from 'react';
+
 import Header from '~/components/Header';
 import Footer from '~/components/Footer';
-import CloseIcon from '~/static/images/close';
+import CloseIcon from '~/components/icon/close';
 
 const HomeLayout = (props) => {
+  const bttRef = useRef(null); // btt: back to top
+
+  useEffect(() => {
+    const toggleBtt = () => {
+      if (window.scrollY > 200) bttRef.current.classList.add('active');
+      else bttRef.current.classList.remove('active');
+    };
+    window.addEventListener('scroll', toggleBtt);
+    return () => window.removeEventListener('scroll', toggleBtt);
+  }, []);
   return (
     <>
       <Head>
-        <link rel="stylesheet" href="/css/globals.css" type="text/css" media="all" />
-        <link rel="stylesheet" href="/css/home.css" type="text/css" media="all" />
-        <link rel="stylesheet" href="/css/main.css" type="text/css" media="all" />
-        <link rel="stylesheet" href="/css/plugin.css" type="text/css" media="all" />
-        <link rel="stylesheet" href="/css/product_item.css" type="text/css" media="all" />
-        <link rel="stylesheet" href="/css/styles__ltr.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="/static/css/globals.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="/static/css/home.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="/static/css/main.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="/static/css/plugin.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="/static/css/product_item.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="/static/css/styles__ltr.css" type="text/css" media="all" />
       </Head>
       <Header />
       {props.children}
@@ -91,7 +104,12 @@ const HomeLayout = (props) => {
           Messenger
         </a>
 
-        <button className="back-to-top" title="Back to top">
+        <button
+          className="back-to-top"
+          title="Back to top"
+          ref={bttRef}
+          onClick={() => window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })}
+        >
           <Image
             className="w-100 lazyloaded"
             width="32"

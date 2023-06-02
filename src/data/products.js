@@ -1051,6 +1051,7 @@ export const products = [
         src: 'https://bizweb.dktcdn.net/thumb/thumb/100/482/001/products/4-1e5d1019b5c94f1fa6617862c90678ae-959f902b70a046ea824f3aafc701ef23.png?v=1683881006230',
       },
     ],
+    flashSale: true,
     group: 3,
   },
   {

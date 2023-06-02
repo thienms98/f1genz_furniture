@@ -9,14 +9,14 @@ import { products } from '~/data/products';
 import { news } from '~/data/news';
 import settings from '~/utils/sliderSettings';
 
-import HeartIcon from '~/static/images/heart';
-import MagnifyingGlassIcon from '~/static/images/magnifyingGlass';
-import CartIcon from '~/static/images/cart';
-import ShareIcon from '~/static/images/share';
-import FacebookIcon from '~/static/images/facebook';
-import TwitterIcon from '~/static/images/twitter';
-import LinkedinIcon from '~/static/images/linkedin';
-import WhatsappIcon from '~/static/images/whatsapp';
+import HeartIcon from '~/components/icon/heart';
+import MagnifyingGlassIcon from '~/components/icon/magnifyingGlass';
+import CartIcon from '~/components/icon/cart';
+import ShareIcon from '~/components/icon/share';
+import FacebookIcon from '~/components/icon/facebook';
+import TwitterIcon from '~/components/icon/twitter';
+import LinkedinIcon from '~/components/icon/linkedin';
+import WhatsappIcon from '~/components/icon/whatsapp';
 import Product from '~/components/Product';
 
 const Article = () => {

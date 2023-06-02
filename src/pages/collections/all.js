@@ -6,10 +6,10 @@ import CollectionsLayout from '~/layouts/collections';
 import ReactPaginate from 'react-paginate';
 import Product from '~/components/Product';
 // icon
-import HeartIcon from '~/static/images/heart';
-import CartIcon from '~/static/images/cart';
-import FilterIcon from '~/static/images/filter';
-import MagnifyingGlassIcon from '~/static/images/magnifyingGlass';
+import HeartIcon from '~/components/icon/heart';
+import CartIcon from '~/components/icon/cart';
+import FilterIcon from '~/components/icon/filter';
+import MagnifyingGlassIcon from '~/components/icon/magnifyingGlass';
 import { products } from '~/data/products';
 
 const AllCollection = () => {
