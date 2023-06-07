@@ -6,7 +6,25 @@ const Footer = () => {
     <footer className="footer">
       <div className="container">
         <div className="footer-top">
-          <div className="footer-top-item">
+          {menu[2].children.map((item, index) => (
+            <div key={index} className="footer-top-item">
+              <h4>{item.title}</h4>
+              <ul className="footer-top-item-content">
+                {item.children.map((child, idx) => (
+                  <li key={idx + 1 * index + 1}>
+                    {child.url ? (
+                      <Link href={child.url} title={child.title}>
+                        {child.title}
+                      </Link>
+                    ) : (
+                      child.title
+                    )}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+          {/* <div className="footer-top-item">
             <h4>Dịch vụ khách hàng</h4>
             <ul className="footer-top-item-content">
               {Object.keys(menu.footer['Dịch vụ khách hàng']).map((item) => (
@@ -46,7 +64,7 @@ const Footer = () => {
           <div className="footer-top-item">
             <h4>Liên hệ</h4>
             <div className="footer-top-item-content">{menu.footer['Liên hệ']}</div>
-          </div>
+          </div> */}
         </div>
       </div>
       <div className="footer-bot">

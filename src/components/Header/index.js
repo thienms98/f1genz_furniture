@@ -334,14 +334,14 @@ const Header = () => {
               </span>
               <nav className="header-menu-sidebar text-black" ref={headerMenuSidebarRef}>
                 <ul>
-                  <HeaderMenu data={menu['Danh mục menu']} />
+                  <HeaderMenu data={menu[0].children} />
                 </ul>
               </nav>
             </div>
 
             <div className="header-menu-center">
               <ul className="mb-0">
-                <HeaderMenu data={menu.middleMenu} />
+                <HeaderMenu data={menu[1].children} />
                 {/* <li className="">
                   <Link href="/collections/all" title="Tất cả sản phẩm">
                     Tất cả sản phẩm

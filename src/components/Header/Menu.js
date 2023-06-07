@@ -2,40 +2,37 @@ import Link from 'next/link';
 import React from 'react';
 
 const HeaderMenu = ({ data }) => {
-  console.log(data);
-
   function genMenu(group, menu = 0) {
     menu++;
-    const groupItem = Object.keys(group);
-    return groupItem.map((item) => {
-      if (!group[item])
+    return group.map((child) => {
+      if (!child.children)
         return (
           <li>
-            <Link href="#" title={item}>
-              {item}
+            <Link href="#" title={child.title}>
+              {child.title}
             </Link>
           </li>
         );
       return (
         <li
           className="hasChild"
-          key={item}
+          key={child.title}
           onClick={(e) => {
             e.preventDefault();
             e.target.classList.toggle('active');
           }}
         >
-          {typeof group[item] === 'string' ? (
-            <Link href={group[item]} title={item}>
-              {item}
+          {!child.children ? (
+            <Link href={child.url || '#'} title={child.title}>
+              {child.title}
             </Link>
           ) : (
             <>
-              <Link href="#" title={item}>
-                {item}
+              <Link href="#" title={child.title}>
+                {child.title}
                 <span>›</span>
               </Link>
-              <ul className={'menu' + menu}>{typeof group[item] !== 'string' && genMenu(group[item], menu)}</ul>
+              <ul className={'menu' + menu}>{genMenu(child.children, menu)}</ul>
             </>
           )}
         </li>
