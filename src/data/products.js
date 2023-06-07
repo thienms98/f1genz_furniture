@@ -1440,7 +1440,7 @@ export const products = [
       current: 11990000,
       prev: 13990000,
     },
-    group: 2,
+    group: 4,
   },
 
   // group5 - Kệ treo tường

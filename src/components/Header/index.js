@@ -3,9 +3,12 @@ import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 
+import HeaderMenu from './Menu';
 import CloseIcon from '~/components/icon/close';
 import PhoneIcon from '~/components/icon/phone';
 import { products } from '~/data/products';
+import { menu } from '~/data/menu';
+import classNames from 'classnames';
 
 const Header = () => {
   const template = ['Bạn cần tìm gì ...?', 'Nhập tên sản phẩm', 'Tìm kiếm sản phẩm ...'];
@@ -331,192 +334,15 @@ const Header = () => {
               </span>
               <nav className="header-menu-sidebar text-black" ref={headerMenuSidebarRef}>
                 <ul>
-                  <li
-                    className="hasChild"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      e.target.classList.toggle('active');
-                    }}
-                  >
-                    <Link href="#" title="Sofa và Ghế">
-                      Sofa và Ghế<span>›</span>
-                    </Link>
-                    <ul className="menu1">
-                      <li className="hasChild">
-                        <Link href="/tu-quan-ao" title="Sofa">
-                          Sofa<span>›</span>
-                        </Link>
-                        <ul className="menu2">
-                          <li className="">
-                            <Link href="/den-de-ban" title="Sofa da">
-                              Sofa da
-                            </Link>
-                          </li>
-                          <li className="">
-                            <Link href="/den-de-ban" title="Sofa giường">
-                              Sofa giường
-                            </Link>
-                          </li>
-                          <li className="">
-                            <Link href="/ke-treo-tuong" title="Sofa gỗ">
-                              Sofa gỗ
-                            </Link>
-                          </li>
-                          <li className="">
-                            <Link href="/tu-quan-ao" title="Sofa phòng khách">
-                              Sofa phòng khách
-                            </Link>
-                          </li>
-                          <li className="">
-                            <Link href="/ghe-an" title="Sofa giá rẽ">
-                              Sofa giá rẽ
-                            </Link>
-                          </li>
-                        </ul>
-                      </li>
-                      <li
-                        className="hasChild"
-                        onClick={(e) => {
-                          e.preventDefault();
-                          e.target.classList.toggle('active');
-                        }}
-                      >
-                        <Link href="#" title="Sofa góc">
-                          Sofa góc<span>›</span>
-                        </Link>
-                        <ul className="menu2">
-                          <li className="">
-                            <Link href="/ke-treo-tuong" title="Sofa cao cấp">
-                              Sofa cao cấp
-                            </Link>
-                          </li>
-                          <li className="">
-                            <Link href="/gia-treo" title="Sofa nỉ">
-                              Sofa nỉ
-                            </Link>
-                          </li>
-                          <li className="">
-                            <Link href="/ban-an" title="Sofa chung cư">
-                              Sofa chung cư
-                            </Link>
-                          </li>
-                          <li className="">
-                            <Link href="/den-de-ban" title="Sofa thư giãn">
-                              Sofa thư giãn
-                            </Link>
-                          </li>
-                          <li className="">
-                            <Link href="/ghe-an" title="Sofa văn phòng">
-                              Sofa văn phòng
-                            </Link>
-                          </li>
-                        </ul>
-                      </li>
-                      <li className="hasChild">
-                        <Link href="/ban-an" title="Ghế dài &amp; đôn">
-                          Ghế dài &amp; đôn<span>›</span>
-                        </Link>
-                        <ul className="menu2">
-                          <li className="">
-                            <Link href="/ke-treo-tuong" title="Ghế dài đơn">
-                              Ghế dài đơn
-                            </Link>
-                          </li>
-                          <li className="">
-                            <Link href="/gia-treo" title="Ghế dài 2 đầu">
-                              Ghế dài 2 đầu
-                            </Link>
-                          </li>
-                          <li className="">
-                            <Link href="/ke-treo-tuong" title="Ghế dài massage">
-                              Ghế dài massage
-                            </Link>
-                          </li>
-                          <li className="">
-                            <Link href="/den-de-ban" title="Ghế dài có tựa đầu">
-                              Ghế dài có tựa đầu
-                            </Link>
-                          </li>
-                        </ul>
-                      </li>
-                      <li className="hasChild">
-                        <Link href="/ke-treo-tuong" title="Ghế thư giãn">
-                          Ghế thư giãn<span>›</span>
-                        </Link>
-                        <ul className="menu2">
-                          <li className="">
-                            <Link href="/den-de-ban" title="Ghệ bập bênh">
-                              Ghệ bập bênh
-                            </Link>
-                          </li>
-                          <li className="">
-                            <Link href="/tat-ca-san-pham" title="Ghế xoay 360">
-                              Ghế xoay 360
-                            </Link>
-                          </li>
-                          <li className="">
-                            <Link href="/den-de-ban" title="Ghế massage thư giãn black">
-                              Ghế massage thư giãn black
-                            </Link>
-                          </li>
-                          <li className="">
-                            <Link href="/tu-quan-ao" title="Ghế lười">
-                              Ghế lười
-                            </Link>
-                          </li>
-                        </ul>
-                      </li>
-                    </ul>
-                  </li>
-                  <li className="hasChild">
-                    <Link href="/den-de-ban" title="Bàn">
-                      Bàn<span>›</span>
-                    </Link>
-                    <ul className="menu1">
-                      <li className="">
-                        <Link href="/den-de-ban" title="Bàn ăn">
-                          Bàn ăn
-                        </Link>
-                      </li>
-                      <li className="">
-                        <Link href="/ke-treo-tuong" title="Bàn học">
-                          Bàn học
-                        </Link>
-                      </li>
-                      <li className="">
-                        <Link href="/ban-an" title="Bàn trang điểm">
-                          Bàn trang điểm
-                        </Link>
-                      </li>
-                      <li className="">
-                        <Link href="/ke-treo-tuong" title="Bàn phòng khách">
-                          Bàn phòng khách
-                        </Link>
-                      </li>
-                    </ul>
-                  </li>
-                  <li className="">
-                    <Link href="/ke-treo-tuong" title="Giường ngủ">
-                      Giường ngủ
-                    </Link>
-                  </li>
-                  <li className="">
-                    <Link href="/ke-treo-tuong" title="Tủ và kệ">
-                      Tủ và kệ
-                    </Link>
-                  </li>
-                  <li className="">
-                    <Link href="/ke-treo-tuong" title="Trang trí">
-                      Trang trí
-                    </Link>
-                  </li>
+                  <HeaderMenu data={menu['Danh mục menu']} />
                 </ul>
               </nav>
             </div>
 
             <div className="header-menu-center">
               <ul className="mb-0">
-                <li className="">
+                <HeaderMenu data={menu.middleMenu} />
+                {/* <li className="">
                   <Link href="/collections/all" title="Tất cả sản phẩm">
                     Tất cả sản phẩm
                   </Link>
@@ -545,7 +371,7 @@ const Header = () => {
                   <ul className="menu1">
                     <li className="">
                       <Link
-                        href="https://f1genz-furniture.mysapo.net/tu-quan-ao-3-cua-2-ngan-f1genz-cao-cap-4?view=style1"
+                        href="/tu-quan-ao-3-cua-2-ngan-f1genz-cao-cap-4?view=style1"
                         title="Chi tiết Style 1"
                       >
                         Chi tiết Style 1
@@ -553,7 +379,7 @@ const Header = () => {
                     </li>
                     <li className="">
                       <Link
-                        href="https://f1genz-furniture.mysapo.net/tu-quan-ao-3-cua-2-ngan-f1genz-cao-cap-4?view=style2"
+                        href="/tu-quan-ao-3-cua-2-ngan-f1genz-cao-cap-4?view=style2"
                         title="Chi tiết Style 2"
                       >
                         Chi tiết Style 2
@@ -561,7 +387,7 @@ const Header = () => {
                     </li>
                     <li className="">
                       <Link
-                        href="https://f1genz-furniture.mysapo.net/tu-quan-ao-3-cua-2-ngan-f1genz-cao-cap-4?view=style3"
+                        href="/tu-quan-ao-3-cua-2-ngan-f1genz-cao-cap-4?view=style3"
                         title="Chi tiết Style 3"
                       >
                         Chi tiết Style 3
@@ -578,7 +404,7 @@ const Header = () => {
                   <Link href="/lien-he" title="Liên hệ">
                     Liên hệ
                   </Link>
-                </li>
+                </li> */}
               </ul>
             </div>
             <div className="header-menu-right w-full">

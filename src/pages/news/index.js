@@ -1,6 +1,8 @@
 import React from 'react';
 import Link from 'next/link';
 import MagnifyingGlassIcon from '~/components/icon/magnifyingGlass';
+import { menu } from '~/data/menu';
+import Menu from '~/components/Header/Menu';
 
 import NewsLayout from '~/layouts/news';
 
@@ -9,7 +11,14 @@ const News = () => {
     <NewsLayout>
       <main className="main-layout">
         <div className="main-blog" data-blog-id="611051">
-          <div className="main-blog-breadcrumb" title="Tin tức">
+          <div
+            className="main-blog-breadcrumb"
+            title="Tin tức"
+            style={{
+              backgroundImage:
+                "url('https://bizweb.dktcdn.net/100/482/001/themes/906081/assets/main_blog_breadcrumb_bg.png?1684771044770')",
+            }}
+          >
             <div className="container">
               <div className="section-title-all">
                 <h1>Tin tức</h1>
@@ -50,7 +59,7 @@ const News = () => {
                       <div className="article-item-detail">
                         <h3 className="article-item-detail-name">
                           <Link
-                            href="/kinh-nghiem-lua-chon-noi-that-chung-cu"
+                            href="/news/kinh-nghiem-lua-chon-noi-that-chung-cu"
                             title="Kinh nghiệm lựa chọn nội thất chung cư"
                           >
                             Kinh nghiệm lựa chọn nội thất chung cư
@@ -85,7 +94,7 @@ const News = () => {
                       <div className="article-item-detail">
                         <h3 className="article-item-detail-name">
                           <Link
-                            href="/kinh-nghiem-chon-den-led-trang-tri-noi-that"
+                            href="/news/kinh-nghiem-chon-den-led-trang-tri-noi-that"
                             title="Kinh nghiệm chọn đèn LED trang trí nội thất"
                           >
                             Kinh nghiệm chọn đèn LED trang trí nội thất
@@ -120,7 +129,7 @@ const News = () => {
                       <div className="article-item-detail">
                         <h3 className="article-item-detail-name">
                           <Link
-                            href="/tai-sao-mau-nau-luon-duoc-ua-chuong-trong-thiet-ke-noi-that"
+                            href="/news/tai-sao-mau-nau-luon-duoc-ua-chuong-trong-thiet-ke-noi-that"
                             title="Tại sao màu nâu luôn được ưa chuộng trong thiết kế nội thất?"
                           >
                             Tại sao màu nâu luôn được ưa chuộng trong thiết kế nội thất?
@@ -155,7 +164,7 @@ const News = () => {
                       <div className="article-item-detail">
                         <h3 className="article-item-detail-name">
                           <Link
-                            href="/ghe-armchair-dep-la-gi-cach-de-chon-ghe-armchair-dung-chuan"
+                            href="/news/ghe-armchair-dep-la-gi-cach-de-chon-ghe-armchair-dung-chuan"
                             title="Ghế Armchair đẹp là gì? Cách để chọn ghế Armchair đúng chuẩn!"
                           >
                             Ghế Armchair đẹp là gì? Cách để chọn ghế Armchair đúng chuẩn!
@@ -191,7 +200,7 @@ const News = () => {
                       <div className="article-item-detail">
                         <h3 className="article-item-detail-name">
                           <Link
-                            href="/phong-bep-go-va-xu-huong-thiet-ke-de-chon-dung-san-pham"
+                            href="/news/phong-bep-go-va-xu-huong-thiet-ke-de-chon-dung-san-pham"
                             title="Phòng bếp gỗ và xu hướng thiết kế để chọn đúng sản phẩm"
                           >
                             Phòng bếp gỗ và xu hướng thiết kế để chọn đúng sản phẩm
@@ -226,7 +235,7 @@ const News = () => {
                       <div className="article-item-detail">
                         <h3 className="article-item-detail-name">
                           <Link
-                            href="/tong-hop-nhung-kien-thuc-co-ban-ve-thiet-ke-noi-that"
+                            href="/news/tong-hop-nhung-kien-thuc-co-ban-ve-thiet-ke-noi-that"
                             title="Tổng hợp những kiến thức cơ bản về thiết kế nội thất"
                           >
                             Tổng hợp những kiến thức cơ bản về thiết kế nội thất
@@ -269,7 +278,7 @@ const News = () => {
                       <div className="article-item-detail">
                         <h3 className="article-item-detail-name">
                           <Link
-                            href="/kinh-nghiem-lua-chon-noi-that-chung-cu"
+                            href="/news/kinh-nghiem-lua-chon-noi-that-chung-cu"
                             title="Kinh nghiệm lựa chọn nội thất chung cư"
                           >
                             Kinh nghiệm lựa chọn nội thất chung cư
@@ -304,7 +313,7 @@ const News = () => {
                       <div className="article-item-detail">
                         <h3 className="article-item-detail-name">
                           <Link
-                            href="/kinh-nghiem-chon-den-led-trang-tri-noi-that"
+                            href="/news/kinh-nghiem-chon-den-led-trang-tri-noi-that"
                             title="Kinh nghiệm chọn đèn LED trang trí nội thất"
                           >
                             Kinh nghiệm chọn đèn LED trang trí nội thất
@@ -339,7 +348,7 @@ const News = () => {
                       <div className="article-item-detail">
                         <h3 className="article-item-detail-name">
                           <Link
-                            href="/tai-sao-mau-nau-luon-duoc-ua-chuong-trong-thiet-ke-noi-that"
+                            href="/news/tai-sao-mau-nau-luon-duoc-ua-chuong-trong-thiet-ke-noi-that"
                             title="Tại sao màu nâu luôn được ưa chuộng trong thiết kế nội thất?"
                           >
                             Tại sao màu nâu luôn được ưa chuộng trong thiết kế nội thất?
@@ -374,7 +383,7 @@ const News = () => {
                       <div className="article-item-detail">
                         <h3 className="article-item-detail-name">
                           <Link
-                            href="/ghe-armchair-dep-la-gi-cach-de-chon-ghe-armchair-dung-chuan"
+                            href="/news/ghe-armchair-dep-la-gi-cach-de-chon-ghe-armchair-dung-chuan"
                             title="Ghế Armchair đẹp là gì? Cách để chọn ghế Armchair đúng chuẩn!"
                           >
                             Ghế Armchair đẹp là gì? Cách để chọn ghế Armchair đúng chuẩn!
@@ -396,173 +405,7 @@ const News = () => {
                     <span>Danh mục Blog</span>
                   </div>
                   <ul className="main-blog-right-menu-data">
-                    <li className="hasChild">
-                      <Link href="/den-de-ban" title="Sofa và Ghế">
-                        Sofa và Ghế<span>›</span>
-                      </Link>
-                      <ul className="menu1">
-                        <li className="hasChild">
-                          <Link href="/tu-quan-ao" title="Sofa">
-                            Sofa<span>›</span>
-                          </Link>
-                          <ul className="menu2">
-                            <li className="">
-                              <Link href="/den-de-ban" title="Sofa da">
-                                Sofa da
-                              </Link>
-                            </li>
-                            <li className="">
-                              <Link href="/den-de-ban" title="Sofa giường">
-                                Sofa giường
-                              </Link>
-                            </li>
-                            <li className="">
-                              <Link href="/ke-treo-tuong" title="Sofa gỗ">
-                                Sofa gỗ
-                              </Link>
-                            </li>
-                            <li className="">
-                              <Link href="/tu-quan-ao" title="Sofa phòng khách">
-                                Sofa phòng khách
-                              </Link>
-                            </li>
-                            <li className="">
-                              <Link href="/ghe-an" title="Sofa giá rẽ">
-                                Sofa giá rẽ
-                              </Link>
-                            </li>
-                          </ul>
-                        </li>
-                        <li className="hasChild">
-                          <Link href="/ghe-an" title="Sofa góc">
-                            Sofa góc<span>›</span>
-                          </Link>
-                          <ul className="menu2">
-                            <li className="">
-                              <Link href="/ke-treo-tuong" title="Sofa cao cấp">
-                                Sofa cao cấp
-                              </Link>
-                            </li>
-                            <li className="">
-                              <Link href="/gia-treo" title="Sofa nỉ">
-                                Sofa nỉ
-                              </Link>
-                            </li>
-                            <li className="">
-                              <Link href="/ban-an" title="Sofa chung cư">
-                                Sofa chung cư
-                              </Link>
-                            </li>
-                            <li className="">
-                              <Link href="/den-de-ban" title="Sofa thư giãn">
-                                Sofa thư giãn
-                              </Link>
-                            </li>
-                            <li className="">
-                              <Link href="/ghe-an" title="Sofa văn phòng">
-                                Sofa văn phòng
-                              </Link>
-                            </li>
-                          </ul>
-                        </li>
-                        <li className="hasChild">
-                          <Link href="/ban-an" title="Ghế dài &amp; đôn">
-                            Ghế dài &amp; đôn<span>›</span>
-                          </Link>
-                          <ul className="menu2">
-                            <li className="">
-                              <Link href="/ke-treo-tuong" title="Ghế dài đơn">
-                                Ghế dài đơn
-                              </Link>
-                            </li>
-                            <li className="">
-                              <Link href="/gia-treo" title="Ghế dài 2 đầu">
-                                Ghế dài 2 đầu
-                              </Link>
-                            </li>
-                            <li className="">
-                              <Link href="/ke-treo-tuong" title="Ghế dài massage">
-                                Ghế dài massage
-                              </Link>
-                            </li>
-                            <li className="">
-                              <Link href="/den-de-ban" title="Ghế dài có tựa đầu">
-                                Ghế dài có tựa đầu
-                              </Link>
-                            </li>
-                          </ul>
-                        </li>
-                        <li className="hasChild">
-                          <Link href="/ke-treo-tuong" title="Ghế thư giãn">
-                            Ghế thư giãn<span>›</span>
-                          </Link>
-                          <ul className="menu2">
-                            <li className="">
-                              <Link href="/den-de-ban" title="Ghệ bập bênh">
-                                Ghệ bập bênh
-                              </Link>
-                            </li>
-                            <li className="">
-                              <Link href="/tat-ca-san-pham" title="Ghế xoay 360">
-                                Ghế xoay 360
-                              </Link>
-                            </li>
-                            <li className="">
-                              <Link href="/den-de-ban" title="Ghế massage thư giãn black">
-                                Ghế massage thư giãn black
-                              </Link>
-                            </li>
-                            <li className="">
-                              <Link href="/tu-quan-ao" title="Ghế lười">
-                                Ghế lười
-                              </Link>
-                            </li>
-                          </ul>
-                        </li>
-                      </ul>
-                    </li>
-                    <li className="hasChild">
-                      <Link href="/den-de-ban" title="Bàn">
-                        Bàn<span>›</span>
-                      </Link>
-                      <ul className="menu1">
-                        <li className="">
-                          <Link href="/den-de-ban" title="Bàn ăn">
-                            Bàn ăn
-                          </Link>
-                        </li>
-                        <li className="">
-                          <Link href="/ke-treo-tuong" title="Bàn học">
-                            Bàn học
-                          </Link>
-                        </li>
-                        <li className="">
-                          <Link href="/ban-an" title="Bàn trang điểm">
-                            Bàn trang điểm
-                          </Link>
-                        </li>
-                        <li className="">
-                          <Link href="/ke-treo-tuong" title="Bàn phòng khách">
-                            Bàn phòng khách
-                          </Link>
-                        </li>
-                      </ul>
-                    </li>
-                    <li className="">
-                      <Link href="/ke-treo-tuong" title="Giường ngủ">
-                        Giường ngủ
-                      </Link>
-                    </li>
-                    <li className="">
-                      <Link href="/ke-treo-tuong" title="Tủ và kệ">
-                        Tủ và kệ
-                      </Link>
-                    </li>
-                    <li className="">
-                      <Link href="/ke-treo-tuong" title="Trang trí">
-                        Trang trí
-                      </Link>
-                    </li>
+                    <Menu data={menu['Danh mục menu']} />
                   </ul>
                 </div>
                 <div className="main-blog-right-banner">

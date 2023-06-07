@@ -13,8 +13,8 @@ const HomeLayout = (props) => {
 
   useEffect(() => {
     const toggleBtt = () => {
-      if (window.scrollY > 200) bttRef.current.classList.add('active');
-      else bttRef.current.classList.remove('active');
+      if (window.scrollY > 200) bttRef.current?.classList.add('active');
+      else bttRef.current?.classList.remove('active');
     };
     window.addEventListener('scroll', toggleBtt);
     return () => window.removeEventListener('scroll', toggleBtt);
@@ -166,26 +166,17 @@ const HomeLayout = (props) => {
             </Link>
             <ul className="menu1">
               <li className="">
-                <Link
-                  href="https://f1genz-furniture.mysapo.net/tu-quan-ao-3-cua-2-ngan-f1genz-cao-cap-4?view=style1"
-                  title="Chi tiết Style 1"
-                >
+                <Link href="/tu-quan-ao-3-cua-2-ngan-f1genz-cao-cap-4?view=style1" title="Chi tiết Style 1">
                   Chi tiết Style 1
                 </Link>
               </li>
               <li className="">
-                <Link
-                  href="https://f1genz-furniture.mysapo.net/tu-quan-ao-3-cua-2-ngan-f1genz-cao-cap-4?view=style2"
-                  title="Chi tiết Style 2"
-                >
+                <Link href="/tu-quan-ao-3-cua-2-ngan-f1genz-cao-cap-4?view=style2" title="Chi tiết Style 2">
                   Chi tiết Style 2
                 </Link>
               </li>
               <li className="">
-                <Link
-                  href="https://f1genz-furniture.mysapo.net/tu-quan-ao-3-cua-2-ngan-f1genz-cao-cap-4?view=style3"
-                  title="Chi tiết Style 3"
-                >
+                <Link href="/tu-quan-ao-3-cua-2-ngan-f1genz-cao-cap-4?view=style3" title="Chi tiết Style 3">
                   Chi tiết Style 3
                 </Link>
               </li>

@@ -782,7 +782,7 @@ export default function Home() {
             </div>
             <div className="home-product-tab-body">
               <div className="home-product-tab-body-item active">
-                <Slider {...settings} slidesToShow={4}>
+                <Slider {...settings} slidesToShow={4} slidesToScroll={4}>
                   {products
                     .filter((prod) => prod.group === prodTab)
                     .map((product) => {

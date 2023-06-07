@@ -11,14 +11,17 @@ import CartIcon from '~/components/icon/cart';
 import FilterIcon from '~/components/icon/filter';
 import MagnifyingGlassIcon from '~/components/icon/magnifyingGlass';
 import { products } from '~/data/products';
+import { categories } from '~/data/categories';
 
-const AllCollection = () => {
+const AllCollection = ({ collectionId = [], collectionName = 'Tất cả sản phẩm' }) => {
+  console.log(collectionId);
   const offset = 20;
   const [page, setPage] = useState(1);
   const [sort, setSort] = useState('');
 
   // filter options
-  const [type, setType] = useState([]);
+  const [type, setType] = useState([...collectionId.map((id) => id.toString())]);
+  console.log(type);
   const [priceRange, setPriceRange] = useState([]);
 
   const [dataProducts, setDataProducts] = useState([...products].slice(0, offset));
@@ -84,9 +87,9 @@ const AllCollection = () => {
       <main className="main-layout">
         <div className="main-collection" data-id="">
           <div
-            title="Tất cả sản phẩm"
+            title={collectionName}
             className="main-collection-breadcrumb lazyloaded"
-            data-bg="//bizweb.dktcdn.net/100/482/001/themes/906081/assets/main_collection_breadcrumb_bg.png?1684771044770"
+            data-bg="https://bizweb.dktcdn.net/100/482/001/themes/906081/assets/main_collection_breadcrumb_bg.png?1684771044770"
             style={{
               backgroundImage:
                 'url("https://bizweb.dktcdn.net/100/482/001/themes/906081/assets/main_collection_breadcrumb_bg.png?1684771044770")',
@@ -94,7 +97,7 @@ const AllCollection = () => {
           >
             <div className="container">
               <div className="section-title-all">
-                <h1>Tất cả sản phẩm</h1>
+                <h1>{collectionName}</h1>
               </div>
               <div className="breadcrumb-wrap">
                 <ol className="breadcrumb">
@@ -103,7 +106,7 @@ const AllCollection = () => {
                   </li>
 
                   <li className="breadcrumb-item active">
-                    <span>Tất cả sản phẩm</span>
+                    <span>{collectionName}</span>
                   </li>
                 </ol>
               </div>
@@ -170,84 +173,22 @@ const AllCollection = () => {
                   <div className="shop-filter" data-type="type">
                     <h4>Loại sản phẩm</h4>
                     <div className="shop-filter-list">
-                      <div className="shop-filter-item">
-                        <input
-                          type="checkbox"
-                          id="shop-filter-type1"
-                          data-group="type"
-                          data-field="product_type"
-                          data-text="Bàn"
-                          value={4}
-                          onClick={handleType}
-                          data-operator="OR"
-                        />
-                        <label for="shop-filter-type1">Bàn</label>
-                      </div>
-                      <div className="shop-filter-item">
-                        <input
-                          type="checkbox"
-                          id="shop-filter-type2"
-                          data-group="type"
-                          data-field="product_type"
-                          data-text="Đèn"
-                          value={2}
-                          onClick={handleType}
-                          data-operator="OR"
-                        />
-                        <label for="shop-filter-type2">Đèn</label>
-                      </div>
-                      <div className="shop-filter-item">
-                        <input
-                          type="checkbox"
-                          id="shop-filter-type3"
-                          data-group="type"
-                          data-field="product_type"
-                          data-text="Ghế"
-                          value={3}
-                          onClick={handleType}
-                          data-operator="OR"
-                        />
-                        <label for="shop-filter-type3">Ghế</label>
-                      </div>
-                      <div className="shop-filter-item">
-                        <input
-                          type="checkbox"
-                          id="shop-filter-type4"
-                          data-group="type"
-                          data-field="product_type"
-                          data-text="Giá treo"
-                          onClick={handleType}
-                          value={1}
-                          data-operator="OR"
-                        />
-                        <label for="shop-filter-type4">Giá treo</label>
-                      </div>
-                      <div className="shop-filter-item">
-                        <input
-                          type="checkbox"
-                          id="shop-filter-type5"
-                          data-group="type"
-                          data-field="product_type"
-                          data-text="Kệ treo tường"
-                          value={5}
-                          onClick={handleType}
-                          data-operator="OR"
-                        />
-                        <label for="shop-filter-type5">Kệ treo tường</label>
-                      </div>
-                      <div className="shop-filter-item">
-                        <input
-                          type="checkbox"
-                          id="shop-filter-type6"
-                          data-group="type"
-                          data-field="product_type"
-                          data-text="Tủ quần áo"
-                          value={0}
-                          onClick={handleType}
-                          data-operator="OR"
-                        />
-                        <label for="shop-filter-type6">Tủ quần áo</label>
-                      </div>
+                      {categories.map((ctgr) => (
+                        <div className="shop-filter-item" key={ctgr.id}>
+                          <input
+                            type="checkbox"
+                            id={'shop-filter-type' + ctgr.id}
+                            // data-group="type"
+                            // data-field="product_type"
+                            // data-operator="OR"
+                            data-text={ctgr.name}
+                            value={ctgr.id.toString()}
+                            onClick={handleType}
+                            checked={type.includes(ctgr.id.toString())}
+                          />
+                          <label for={'shop-filter-type' + ctgr.id}>{ctgr.name}</label>
+                        </div>
+                      ))}
                     </div>
                   </div>
                   <div className="shop-filter" data-type="variant1">
@@ -508,7 +449,7 @@ const AllCollection = () => {
                     nextLabel="next >"
                     onPageChange={(event) => setPage(event.selected + 1)}
                     pageRangeDisplayed={5}
-                    pageCount={Math.ceil(products.length / 20)}
+                    pageCount={Math.floor(dataProducts.length / 20) + 1}
                     previousLabel="< previous"
                     renderOnZeroPageCount={null}
                     className="shop-pagination"

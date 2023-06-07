@@ -183,7 +183,14 @@ const Article = () => {
             </div>
           </div>
         </div>
-        <div className="main-article-breadcrumb" title="Kinh nghiệm lựa chọn nội thất chung cư">
+        <div
+          className="main-article-breadcrumb"
+          title="Kinh nghiệm lựa chọn nội thất chung cư"
+          style={{
+            backgroundImage:
+              "url('https://bizweb.dktcdn.net/100/482/001/themes/906081/assets/main_blog_breadcrumb_bg.png?1684771044770')",
+          }}
+        >
           <div className="container">
             <div className="section-title-all">
               <h1>Kinh nghiệm lựa chọn nội thất chung cư</h1>

@@ -1788,7 +1788,7 @@ footer.footer .footer-bot .footer-bot-item img {
   margin: 0;
 }
 .breadcrumb-wrap ol .breadcrumb-item.active {
-  color: var(--color2);
+  /* color: var(--color2); */
 }
 .shop-menu-hot {
   font-weight: bold;

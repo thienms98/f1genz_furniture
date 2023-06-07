@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { menu } from '~/data/menu';
 
 const Footer = () => {
   return (
@@ -8,112 +9,43 @@ const Footer = () => {
           <div className="footer-top-item">
             <h4>Dịch vụ khách hàng</h4>
             <ul className="footer-top-item-content">
-              <li>
-                <Link href="/gioi-thieu" title="Giới thiệu">
-                  Giới thiệu
-                </Link>
-              </li>
-              <li>
-                <Link href="/chinh-sach-doi-tra" title="Chính sách đổi trả">
-                  Chính sách đổi trả
-                </Link>
-              </li>
-              <li>
-                <Link href="/chinh-sach-bao-mat" title="Chính sách bảo mật">
-                  Chính sách bảo mật
-                </Link>
-              </li>
-              <li>
-                <Link href="/" title="Chính sách khiếu nại">
-                  Chính sách khiếu nại
-                </Link>
-              </li>
-              <li>
-                <Link href="/dieu-khoan-dich-vu" title="Điều khoản dịch vụ">
-                  Điều khoản dịch vụ
-                </Link>
-              </li>
-              <li>
-                <Link href="/lien-he" title="Liên hệ">
-                  Liên hệ
-                </Link>
-              </li>
+              {Object.keys(menu.footer['Dịch vụ khách hàng']).map((item) => (
+                <li key={item}>
+                  <Link href={menu.footer['Dịch vụ khách hàng'][item]} title={item}>
+                    {item}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
           <div className="footer-top-item">
             <h4>Thông tin</h4>
             <ul className="footer-top-item-content">
-              <li>
-                <Link href="/collections/all" title="Tất cả sản phẩm">
-                  Tất cả sản phẩm
-                </Link>
-              </li>
-              <li>
-                <Link href="/" title="Nội thất phòng khách">
-                  Nội thất phòng khách
-                </Link>
-              </li>
-              <li>
-                <Link href="/" title="Nội thất phòng ngủ">
-                  Nội thất phòng ngủ
-                </Link>
-              </li>
-              <li>
-                <Link href="/" title="Nội thất phòng bếp">
-                  Nội thất phòng bếp
-                </Link>
-              </li>
-              <li>
-                <Link href="/" title="Nội thất thông minh">
-                  Nội thất thông minh
-                </Link>
-              </li>
+              {Object.keys(menu.footer['Thông tin']).map((item) => (
+                <li key={item}>
+                  <Link href={menu.footer['Thông tin'][item]} title={item}>
+                    {item}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 
           <div className="footer-top-item">
             <h4>Về chúng tôi</h4>
             <ul className="footer-top-item-content">
-              <li>
-                <Link href="/gioi-thieu" title="Giới thiệu">
-                  Giới thiệu
-                </Link>
-              </li>
-              <li>
-                <Link href="/chinh-sach-doi-tra" title="Chính sách đổi trả">
-                  Chính sách đổi trả
-                </Link>
-              </li>
-              <li>
-                <Link href="/chinh-sach-bao-mat" title="Chính sách bảo mật">
-                  Chính sách bảo mật
-                </Link>
-              </li>
-              <li>
-                <Link href="/" title="Chính sách khiếu nại">
-                  Chính sách khiếu nại
-                </Link>
-              </li>
-              <li>
-                <Link href="/dieu-khoan-dich-vu" title="Điều khoản dịch vụ">
-                  Điều khoản dịch vụ
-                </Link>
-              </li>
-              <li>
-                <Link href="/lien-he" title="Liên hệ">
-                  Liên hệ
-                </Link>
-              </li>
+              {Object.keys(menu.footer['Về chúng tôi']).map((item) => (
+                <li key={item}>
+                  <Link href={menu.footer['Về chúng tôi'][item]} title={item}>
+                    {item}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
           <div className="footer-top-item">
             <h4>Liên hệ</h4>
-            <div className="footer-top-item-content">
-              Chúng tôi hướng tới sự khác biệt trong từng chi tiết, tạo nên ngôn ngữ riêng cho bày trí nội thất, đem đến
-              một không gian tinh tế trong từng đường nét. Nhưng trên tất cả, sự tin tưởng của khách hàng là điều F1GENZ
-              FURNITURE 2 đề cao nhất, và đây cũng là tôn chỉ hoạt động của công ty. Do đó, đến với chúng tôi, hơn cả
-              một không gian hoàn mỹ, khách...
-            </div>
+            <div className="footer-top-item-content">{menu.footer['Liên hệ']}</div>
           </div>
         </div>
       </div>
